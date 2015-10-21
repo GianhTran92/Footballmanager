@@ -103,8 +103,6 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
                     edtLeagueName.setFocusable(true);
                     tvLeagueName.setVisibility(View.INVISIBLE);
                     edtLeagueName.setVisibility(View.VISIBLE);
-
-
                 }
             });
             itemView.setOnClickListener(this);
