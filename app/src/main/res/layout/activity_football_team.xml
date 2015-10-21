@@ -1,12 +1,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/rlFootballTeamTop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@android:color/holo_blue_light">
+
+        <ImageView
+            android:id="@+id/imgViewBackFromFootballTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:contentDescription="@string/hello_world"
+            android:src="@drawable/ic_back_white" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/circleImgViewLeagueLogoTeam"
+            android:layout_width="@dimen/recycler.team.league.logo.size"
+            android:layout_height="@dimen/recycler.team.league.logo.size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:src="@drawable/img_league"
+            app:civ_border_color="@android:color/background_light"
+            app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+        <TextView
+            android:id="@+id/tvLeagueNameTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/circleImgViewLeagueLogoTeam"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/custom_banner"
+            android:padding="5dp"
+            android:text="FA CUP"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewFootballTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlFootballTeamTop"
+        android:layout_marginTop="@dimen/dialog.new.league.content.padding" />
+
+    <ImageView
+        android:id="@+id/imgViewAddFootballTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity.button.add.new.league.margin"
+        android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/icon_add" />
+
 
 </RelativeLayout>
