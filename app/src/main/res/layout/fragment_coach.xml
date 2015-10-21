@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="vn.asiantech.intership.myapplication.ui.player.CoachFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewCoachAvatar"
+        android:layout_width="@dimen/activity_player_coach_avatar_size"
+        android:layout_height="@dimen/activity_player_coach_avatar_size"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_toRightOf="@+id/tvCoachName"
+        android:src="@drawable/img_coach"
+        app:civ_border_color="@android:color/holo_red_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+    <TextView
+        android:id="@+id/tvCoachName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/secondary_text_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvCoachName"
+        android:layout_alignRight="@+id/tvCoachName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text="@string/edt_text_coach"
+        android:textColor="@android:color/holo_red_light" />
+
+    <ImageView
+        android:id="@+id/imgViewCoachDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_settings_black_18dp" />
+
+</RelativeLayout>
