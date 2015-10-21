@@ -36,9 +36,9 @@
             android:layout_below="@+id/circleImgViewLeagueLogoTeam"
             android:layout_centerHorizontal="true"
             android:background="@drawable/custom_banner"
-            android:padding="5dp"
-            android:text="FA CUP"
-            android:textSize="20sp" />
+            android:padding="@dimen/activity_football_team_top_padding"
+            android:textSize="@dimen/activity_player_team_name_text_size"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

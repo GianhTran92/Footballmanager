@@ -2,15 +2,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="vn.asiantech.intership.myapplication.ui.player.PlayerActivity">
+    tools:context="vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rlPlayerTop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@android:color/holo_red_light">
+
+        <ImageView
+            android:id="@+id/imgViewBackFromFootballTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:contentDescription="@string/hello_world"
+            android:src="@drawable/ic_back_white" />
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/circleImgViewFootballTeamLogoPlayer"
+            android:layout_width="@dimen/recycler.team.league.logo.size"
+            android:layout_height="@dimen/recycler.team.league.logo.size"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:src="@drawable/img_mu_logo"
+            app:civ_border_color="@android:color/background_light"
+            app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+        <TextView
+            android:id="@+id/tvFootballTeamNamePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:background="@drawable/custom_banner"
+            android:padding="@dimen/activity_football_team_top_padding"
+            android:textSize="@dimen/activity_player_team_name_text_size" />
+
+        <TextView
+            android:id="@+id/tvDescriptionPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/background_light"
+            android:textStyle="italic"
+            android:layout_below="@+id/tvFootballTeamNamePlayer"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlContentCoachInfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlPlayerTop"
+        android:background="@drawable/custom_shape_white">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/circleImgViewCoachAvatar"
+            android:layout_width="@dimen/activity_player_coach_avatar_size"
+            android:layout_height="@dimen/activity_player_coach_avatar_size"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:layout_toRightOf="@+id/tvCoachName"
+            android:src="@drawable/img_coach"
+            app:civ_border_color="@android:color/holo_red_light"
+            app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+        <TextView
+            android:id="@+id/tvCoachName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/secondary_text_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/tvCoachName"
+            android:layout_alignRight="@+id/tvCoachName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:text="@string/edt_text_coach"
+            android:textColor="@android:color/holo_red_light" />
+
+        <ImageView
+            android:id="@+id/imgViewCoachDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/recycler.item.content.margin"
+            android:contentDescription="@string/hello_world"
+            android:src="@drawable/ic_settings_black_18dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/rlContentCoachInfor"
+        android:layout_marginTop="@dimen/dialog.new.league.content.padding" />
+
+    <ImageView
+        android:id="@+id/imgViewAddPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity.button.add.new.league.margin"
+        android:layout_marginEnd="@dimen/activity.button.add.new.league.margin"
+        android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/icon_add" />
+
 
 </RelativeLayout>

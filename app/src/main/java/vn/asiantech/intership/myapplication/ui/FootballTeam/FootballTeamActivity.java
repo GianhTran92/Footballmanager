@@ -25,8 +25,6 @@ import java.util.List;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
-import vn.asiantech.intership.myapplication.model.League;
-import vn.asiantech.intership.myapplication.ui.league.LeagueRecyclerAdapter;
 
 @EActivity(R.layout.activity_football_team)
 public class FootballTeamActivity extends AppCompatActivity {

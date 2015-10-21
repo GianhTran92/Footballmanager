@@ -18,7 +18,7 @@ public class Player extends SugarRecord {
     @Column(name = "height")
     Float height;
     @Column(name = "birthday")
-    Date bird;
+    String birthday;
     @Column(name = "number")
     int number;
     @Column(name = "position")
@@ -28,17 +28,17 @@ public class Player extends SugarRecord {
     @Column(name = "Avatar")
     String avatar;
     @Column(name = "teamid")
-    Long teamId;
+    long teamId;
 
     public Player() {
     }
 
-    public Player(Long teamId, String name, Float weight, Float height, Date bird, int number, Position.POSITISON positison, String country, String avatar) {
+    public Player(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
         this.teamId = teamId;
         this.name = name;
         this.weight = weight;
         this.height = height;
-        this.bird = bird;
+        this.birthday = bird;
         this.number = number;
         this.positison = positison;
         this.country = country;
@@ -69,12 +69,12 @@ public class Player extends SugarRecord {
         this.height = height;
     }
 
-    public Date getBird() {
-        return bird;
+    public String getBird() {
+        return birthday;
     }
 
-    public void setBird(Date bird) {
-        this.bird = bird;
+    public void setBird(String bird) {
+        this.birthday = bird;
     }
 
     public int getNumber() {
@@ -109,11 +109,11 @@ public class Player extends SugarRecord {
         this.avatar = avatar;
     }
 
-    public Long getTeamId() {
+    public long getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(Long teamId) {
+    public void setTeamId(long teamId) {
         this.teamId = teamId;
     }
 }

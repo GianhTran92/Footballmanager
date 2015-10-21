@@ -19,8 +19,8 @@
         android:layout_width="@dimen/custom.league.item.weight"
         android:layout_height="@dimen/edt_edit_height"
         android:layout_centerHorizontal="true"
-        android:inputType="text"
         android:layout_margin="@dimen/recycler.item.content.margin"
+        android:inputType="text"
         android:textSize="@dimen/edt.text.size" />
 
     <TextView
@@ -28,8 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/recycler.item.content.margin"
-        android:text="Manchertes" />
+        android:layout_margin="@dimen/recycler.item.content.margin" />
 
     <EditText
         android:id="@+id/edtDescriptionFootballTeam"
@@ -37,8 +36,8 @@
         android:layout_height="@dimen/edt_edit_height"
         android:layout_below="@+id/edtFootballTeamName"
         android:layout_centerHorizontal="true"
-        android:inputType="text"
         android:layout_margin="@dimen/recycler.item.content.margin"
+        android:inputType="text"
         android:textSize="@dimen/edt.text.size" />
 
     <TextView
@@ -47,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvFootballTeamName"
         android:layout_centerHorizontal="true"
-        android:text="day la mot doi bong truyen thong"
         android:textColor="@android:color/background_light"
         android:textStyle="italic" />
 

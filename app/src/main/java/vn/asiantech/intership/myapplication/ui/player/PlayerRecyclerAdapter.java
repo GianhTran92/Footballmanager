@@ -1,0 +1,78 @@
+package vn.asiantech.intership.myapplication.ui.player;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import vn.asiantech.intership.myapplication.R;
+import vn.asiantech.intership.myapplication.model.Player;
+
+/**
+ * Created by igianhtran on 21/10/2015.
+ */
+public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAdapter.PlayerRecyclerHolder> {
+    List<Player> mPlayers = new ArrayList<>();
+    Context mContext;
+
+    public PlayerRecyclerAdapter(List<Player> listData, Context context) {
+        this.mPlayers = listData;
+        this.mContext = context;
+    }
+
+    public void updateList(List<Player> listData) {
+        this.mPlayers = listData;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public PlayerRecyclerHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        View itemView = layoutInflater.inflate(R.layout.custom_player_recycler, viewGroup, false);
+        return new PlayerRecyclerHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(PlayerRecyclerHolder holder, int i) {
+        holder.tvPlayerName.setText(mPlayers.get(i).getName());
+        //TODO get old from birthday
+        holder.tvPlayerOld.setText(mPlayers.get(i).getBird());
+        holder.tvPlayerPosition.setText(mPlayers.get(i).getPositison().toString());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mPlayers.size();
+    }
+
+    public class PlayerRecyclerHolder extends RecyclerView.ViewHolder {
+        CircleImageView circleImgViewAvatar;
+        TextView tvPlayerName;
+        TextView tvPlayerOld;
+        ImageView imgViewPlayerDetail;
+        TextView tvPlayerPosition;
+
+        public PlayerRecyclerHolder(View itemView) {
+            super(itemView);
+            circleImgViewAvatar = (CircleImageView) itemView.findViewById(R.id.circleImgViewAvatar);
+            tvPlayerName = (TextView) itemView.findViewById(R.id.tvPlayerName);
+            tvPlayerOld= (TextView) itemView.findViewById(R.id.tvPlayerOld);
+            tvPlayerPosition = (TextView) itemView.findViewById(R.id.tvPlayerPosition);
+            imgViewPlayerDetail = (ImageView) itemView.findViewById(R.id.imgViewPlayerDetail);
+            imgViewPlayerDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO used interface to move another activity
+                }
+            });
+
+        }
+    }
+}
