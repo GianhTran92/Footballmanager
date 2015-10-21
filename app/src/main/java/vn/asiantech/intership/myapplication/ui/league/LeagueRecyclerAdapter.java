@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,24 +48,70 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
     @Override
     public void onBindViewHolder(LeagueRecyclerHolder holder, int position) {
         // TODO upload image for logo
-        holder.circleImageViewLeagueLogo.setImageResource(R.drawable.img_mu_logo);
+        holder.circleImageViewLeagueLogo.setImageResource(R.drawable.img_league);
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
+        holder.edtLeagueName.setVisibility(View.INVISIBLE);
+
     }
 
     public class LeagueRecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CircleImageView circleImageViewLeagueLogo;
+        EditText edtLeagueName;
+        ImageView imgViewEditLeague;
+        ImageView imgViewSubmitEditLeague;
+        ImageView imgViewCancelEditLeague;
         TextView tvLeagueName;
-        ImageView imgViewLeagueDetail;
+
 
         public LeagueRecyclerHolder(View itemView) {
             super(itemView);
             circleImageViewLeagueLogo = (CircleImageView) itemView.findViewById(R.id.circleImgViewLeagueLogoItem);
+            edtLeagueName = (EditText) itemView.findViewById(R.id.edtLeagueName);
             tvLeagueName = (TextView) itemView.findViewById(R.id.tvLeagueName);
-            imgViewLeagueDetail = (ImageView) itemView.findViewById(R.id.imgViewLeagueDetail);
+            imgViewSubmitEditLeague = (ImageView) itemView.findViewById(R.id.imgViewSubmitEditLeague);
+            imgViewSubmitEditLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!edtLeagueName.getText().toString().equals("")) {
+                        mLeagues.get(getPosition()).setName(edtLeagueName.getText().toString());
+                        updateList(mLeagues);
+
+
+                    } else {
+                        edtLeagueName.setError(context.getString(R.string.error_field_not_be_empty1));
+                    }
+
+                }
+            });
+            imgViewCancelEditLeague = (ImageView) itemView.findViewById(R.id.imgViewCancelEditLeague);
+            imgViewCancelEditLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imgViewSubmitEditLeague.setVisibility(View.INVISIBLE);
+                    imgViewCancelEditLeague.setVisibility(View.INVISIBLE);
+                    imgViewEditLeague.setVisibility(View.VISIBLE);
+                    updateList(mLeagues);
+                }
+            });
+            imgViewEditLeague = (ImageView) itemView.findViewById(R.id.imgViewEditLeague);
+            imgViewEditLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    imgViewSubmitEditLeague.setVisibility(View.VISIBLE);
+                    imgViewCancelEditLeague.setVisibility(View.VISIBLE);
+                    imgViewEditLeague.setVisibility(View.INVISIBLE);
+                    edtLeagueName.setFocusable(true);
+                    tvLeagueName.setVisibility(View.INVISIBLE);
+                    edtLeagueName.setVisibility(View.VISIBLE);
+
+
+                }
+            });
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    // TODO delete league from database
                     mLeagues.remove(getPosition());
                     updateList(mLeagues);
                     return false;
@@ -78,5 +125,8 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             // TODO used interface to move another activity
 
         }
+
     }
+
+
 }

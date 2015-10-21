@@ -10,4 +10,6 @@
     <string name="button.cancel">cancel</string>
     <string name="text.view.league.name">League Name</string>
     <string name="error.field.not.be.empty">this field not be empty</string>
+    <string name="error.field.not.be.empty1">this field must not be empty</string>
+    <string name="message.enter.new.league.name">enter new league name</string>
 </resources>

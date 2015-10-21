@@ -75,6 +75,7 @@ public class LeagueActivity extends AppCompatActivity {
                     League league = new League(edtLeagueName.getText().toString(), null);
                     mLeagues.add(league);
                     mLeagueRecyclerAdapter.updateList(mLeagues);
+                    dialog.dismiss();
                 } else {
                     edtLeagueName.setError(getString(R.string.error_field_not_be_empty));
                 }

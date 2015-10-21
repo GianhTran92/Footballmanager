@@ -15,8 +15,6 @@
     <RelativeLayout
         android:id="@+id/llContentNewLeague"
         android:layout_below="@+id/circleImgViewLeagueLogo"
-        android:layout_marginLeft="@dimen/dialog.img.view.logo.magin"
-        android:layout_marginRight="@dimen/dialog.img.view.logo.magin"
         android:layout_marginBottom="@dimen/dialog.img.view.logo.magin"
         android:layout_marginTop="@dimen/recycler.item.content.margin"
         android:background="@drawable/custom_shape"
@@ -33,6 +31,7 @@
         <EditText
             android:id="@+id/edtLeagueName"
             android:inputType="text"
+            android:layout_marginTop="@dimen/dialog.new.league.content.padding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button

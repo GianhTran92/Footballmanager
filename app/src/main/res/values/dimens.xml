@@ -9,4 +9,6 @@
     <dimen name="recycler.league.logo.size">100dp</dimen>
     <dimen name="dialog.img.view.logo.magin">40dp</dimen>
     <dimen name="dialog.new.league.content.padding">10dp</dimen>
+    <dimen name="activity.button.add.new.league.margin">5dp</dimen>
+    <dimen name="custom.league.item.weight">200dp</dimen>
 </resources>
