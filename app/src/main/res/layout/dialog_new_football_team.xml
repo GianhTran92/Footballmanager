@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewFootballTeamLogoNew"
+        android:layout_width="@dimen/recycler.league.logo.size"
+        android:layout_height="@dimen/recycler.league.logo.size"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/img_mu_logo"
+        android:layout_marginTop="@dimen/dialog.img.view.logo.magin"
+        app:civ_border_color="@android:color/holo_red_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+    <RelativeLayout
+        android:id="@+id/llContentNewFootballTeam"
+        android:layout_below="@+id/circleImgViewFootballTeamLogoNew"
+        android:layout_marginBottom="@dimen/dialog.img.view.logo.magin"
+        android:layout_marginTop="@dimen/recycler.item.content.margin"
+        android:background="@drawable/custom_shape_pink"
+        android:padding="@dimen/dialog.new.league.content.padding"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvAddFootballTeamName"
+            android:text="@string/tv.text.football.team.name"
+            android:textColor="@android:color/background_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtAddFootballTeamName"
+            android:inputType="text"
+            android:layout_below="@+id/tvAddFootballTeamName"
+            android:layout_marginTop="@dimen/dialog.add.new.team.edt.margin.top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvAddDescripsiton"
+            android:text="@string/tv.text.football.description"
+            android:layout_below="@+id/edtAddFootballTeamName"
+            android:textColor="@android:color/background_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtAddDescription"
+            android:inputType="text"
+            android:layout_below="@+id/tvAddDescripsiton"
+            android:layout_marginTop="@dimen/dialog.add.new.team.edt.margin.top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnSubmitAddFootballTeam"
+            android:text="@string/button.submit"
+            android:background="@drawable/custom_button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/edtAddDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnCancelAddFootballTeam"
+            android:text="@string/button.cancel"
+            android:background="@drawable/custom_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/edtAddDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -11,4 +11,8 @@
     <dimen name="dialog.new.league.content.padding">10dp</dimen>
     <dimen name="activity.button.add.new.league.margin">5dp</dimen>
     <dimen name="custom.league.item.weight">200dp</dimen>
+    <dimen name="recycler.team.league.logo.size">100dp</dimen>
+    <dimen name="edt.text.size">15sp</dimen>
+    <dimen name="edt_edit_height">15dp</dimen>
+    <dimen name="dialog.add.new.team.edt.margin.top">5dp</dimen>
 </resources>
