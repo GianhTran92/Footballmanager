@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vn.asiantech.intership.footballdemo.ui.league.LeagueActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:id="@+id/imgViewAddLeague"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/hello_world"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
+        android:layout_marginBottom="@dimen/activity.button.add.new.league.margin"
+        android:src="@drawable/icon_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

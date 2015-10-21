@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/recycler.item.content.margin"
+    android:background="@drawable/custom_shape">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewLeagueLogoItem"
+        android:layout_width="@dimen/recycler.item.league.logo.size"
+        android:layout_height="@dimen/recycler.item.league.logo.size"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:src="@drawable/img_league"
+        app:civ_border_color="@android:color/background_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+    <TextView
+        android:id="@+id/tvLeagueName"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/edtLeagueName"
+        android:layout_width="@dimen/custom.league.item.weight"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/secondary_text_light"
+        android:editable="false"
+        android:inputType="text" />
+
+    <ImageView
+        android:id="@+id/imgViewSubmitEditLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_verified_user_white_18dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imgViewCancelEditLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/recycler.item.content.margin"
+        android:layout_toLeftOf="@+id/imgViewSubmitEditLeague"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_delete_white_18dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imgViewEditLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_edit_white_24dp" />
+
+
+</RelativeLayout>
