@@ -15,7 +15,9 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
+import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
+import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 
 /**
  * Created by igianhtran on 20/10/2015.
@@ -118,7 +120,10 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    // TODO used interface to move another activity
+                    PlayerActivity_.intent(mContext)
+                            .extra(Common.KEY_FOOTBALL_TEAM_NAME,mFootballTeams.get(getPosition()).getName())
+                            .start();
                 }
             });
         }

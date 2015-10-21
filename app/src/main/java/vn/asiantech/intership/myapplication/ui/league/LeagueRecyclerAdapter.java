@@ -14,18 +14,20 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
+import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.League;
+import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity_;
 
 /**
  * Created by igianhtran on 20/10/2015.
  */
 public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAdapter.LeagueRecyclerHolder> {
     List<League> mLeagues = new ArrayList<>();
-    Context context;
+    Context mContext;
 
     public LeagueRecyclerAdapter(List<League> listData, Context context) {
         this.mLeagues = listData;
-        this.context = context;
+        this.mContext = context;
     }
 
     public void updateList(List<League> listData) {
@@ -78,7 +80,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
 
 
                     } else {
-                        edtLeagueName.setError(context.getString(R.string.error_field_not_be_empty1));
+                        edtLeagueName.setError(mContext.getString(R.string.error_field_not_be_empty1));
                     }
 
                 }
@@ -121,6 +123,9 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
         @Override
         public void onClick(View v) {
             // TODO used interface to move another activity
+            FootballTeamActivity_.intent(mContext)
+                    .extra(Common.KEY_LEAGUE_NAME,mLeagues.get(getPosition()).getName())
+                    .start();
 
         }
 

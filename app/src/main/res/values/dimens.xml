@@ -15,4 +15,7 @@
     <dimen name="edt.text.size">15sp</dimen>
     <dimen name="edt_edit_height">15dp</dimen>
     <dimen name="dialog.add.new.team.edt.margin.top">5dp</dimen>
+    <dimen name="activity_football_team_top_padding">5dp</dimen>
+    <dimen name="activity_player_team_name_text_size">15sp</dimen>
+    <dimen name="activity_player_coach_avatar_size">50dp</dimen>
 </resources>

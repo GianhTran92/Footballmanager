@@ -5,4 +5,5 @@ package vn.asiantech.intership.myapplication.common;
  */
 public class Common {
     public static final String KEY_LEAGUE_NAME = "league_name";
+    public static final String KEY_FOOTBALL_TEAM_NAME = "football_team_name";
 }

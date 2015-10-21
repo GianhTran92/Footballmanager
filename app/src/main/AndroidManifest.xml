@@ -26,8 +26,12 @@
             android:label="@string/title_activity_football_team" >
         </activity>
         <activity
-            android:name=".ui.player.PlayerActivity"
+            android:name=".ui.player.PlayerActivity_"
             android:label="@string/title_activity_player" >
+        </activity>
+        <activity
+            android:name=".ui.player.NewPlayerActivity"
+            android:label="@string/title_activity_new_player" >
         </activity>
     </application>
 

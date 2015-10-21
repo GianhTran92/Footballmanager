@@ -16,7 +16,7 @@ public class Coach extends SugarRecord {
     @Column(name = "birthday")
     String birthday;
     @Column(name = "teamid")
-    Long teamId;
+    long teamId;
     @Column(name = "country")
     String country;
     @Column(name = "avatar")
@@ -25,7 +25,7 @@ public class Coach extends SugarRecord {
     public Coach() {
     }
 
-    public Coach(String name, String birth, Long teamId, String country, String avatar) {
+    public Coach(String name, String birth, long teamId, String country, String avatar) {
         this.name = name;
         this.birthday = birth;
         this.teamId = teamId;
@@ -49,11 +49,11 @@ public class Coach extends SugarRecord {
         this.birthday = birthday;
     }
 
-    public Long getTeamId() {
+    public long getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(Long teamId) {
+    public void setTeamId(long teamId) {
         this.teamId = teamId;
     }
 
