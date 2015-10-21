@@ -5,4 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_football_manager">FootballManager</string>
     <string name="title_activity_league">LeagueActivity</string>
+    <string name="title_activity_football_team">FootballTeamActivity</string>
+    <string name="button.submit">submit</string>
+    <string name="button.cancel">cancel</string>
+    <string name="text.view.league.name">League Name</string>
+    <string name="error.field.not.be.empty">this field not be empty</string>
 </resources>

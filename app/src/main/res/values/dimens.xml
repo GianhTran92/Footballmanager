@@ -6,4 +6,7 @@
     <dimen name="recycler.item.league.logo.size">40dp</dimen>
     <dimen name="recycler.item.league.logo.border">2dp</dimen>
     <dimen name="recycler.item.content.margin">5dp</dimen>
+    <dimen name="recycler.league.logo.size">100dp</dimen>
+    <dimen name="dialog.img.view.logo.magin">40dp</dimen>
+    <dimen name="dialog.new.league.content.padding">10dp</dimen>
 </resources>

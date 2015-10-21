@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/recycler.item.content.margin"
-
     android:background="@drawable/custom_shape">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +10,7 @@
         android:layout_width="@dimen/recycler.item.league.logo.size"
         android:layout_height="@dimen/recycler.item.league.logo.size"
         android:layout_margin="@dimen/recycler.item.content.margin"
-        android:src="@drawable/img_mu_logo"
+        android:src="@drawable/img_league"
         app:civ_border_color="@android:color/background_light"
         app:civ_border_width="@dimen/recycler.item.league.logo.border" />
 
@@ -20,6 +19,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+    <ImageView
+        android:id="@+id/imgViewLeagueDetail"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_favorite_white_18dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/recycler.item.content.margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>
