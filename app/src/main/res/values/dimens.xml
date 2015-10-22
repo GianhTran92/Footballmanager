@@ -21,4 +21,5 @@
     <dimen name="fragment.layer.detail.avatar.size">90dp</dimen>
     <dimen name="fragment.player.detail.tv.margin.left">80dp</dimen>
     <dimen name="fragment.player.detail.tvs.margin.left">20dp</dimen>
+    <dimen name="custom.league.recycler.margin.left.and.right">1dp</dimen>
 </resources>

@@ -11,7 +11,7 @@
         android:background="@android:color/holo_red_light">
 
         <ImageView
-            android:id="@+id/imgViewBackFromFootballTeam"
+            android:id="@+id/imgViewBackFromPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -80,7 +80,7 @@
         android:layout_marginEnd="@dimen/activity.button.add.new.league.margin"
         android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
         android:contentDescription="@string/hello_world"
-        android:src="@drawable/icon_add" />
+        android:src="@drawable/ic_add_red" />
 
 
 </RelativeLayout>

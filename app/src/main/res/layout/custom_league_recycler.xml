@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/recycler.item.content.margin"
+    android:layout_marginLeft="@dimen/custom.league.recycler.margin.left.and.right"
+    android:layout_marginRight="@dimen/custom.league.recycler.margin.left.and.right"
     android:background="@drawable/custom_shape">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"

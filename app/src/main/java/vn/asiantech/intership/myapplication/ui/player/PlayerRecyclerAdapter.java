@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,6 +74,7 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
                 @Override
                 public void onClick(View v) {
                     // TODO used interface to move another activity
+                    imgViewPlayerDetail.startAnimation(AnimationUtils.loadAnimation(mListPlayerFragment.getActivity(), R.anim.abc_popup_enter));
                     mListPlayerFragment.replaceFragment(R.id.frameContain, PlayerDetailFragment_.builder().build(), "PlayerDetailFragment_", null);
                 }
             });

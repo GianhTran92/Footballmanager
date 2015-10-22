@@ -49,8 +49,12 @@ public class PlayerActivity extends AppCompatActivity {
     @ViewById(R.id.imgViewAddPlayer)
     ImageView mImgViewAddPlayer;
 
-    @Click(R.id.imgViewBackFromFootballTeam)
+    @ViewById(R.id.imgViewBackFromPlayer)
+    ImageView mImgViewBackFromPlayer;
+
+    @Click(R.id.imgViewBackFromPlayer)
     void doBack() {
+        mImgViewBackFromPlayer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         this.finish();
     }
 
