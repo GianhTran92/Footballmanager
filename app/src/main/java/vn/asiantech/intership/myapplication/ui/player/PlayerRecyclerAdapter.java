@@ -17,14 +17,17 @@ import vn.asiantech.intership.myapplication.model.Player;
 
 /**
  * Created by igianhtran on 21/10/2015.
+ * Edited by gianhtran on 22/10/2015
  */
 public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAdapter.PlayerRecyclerHolder> {
     List<Player> mPlayers = new ArrayList<>();
     Context mContext;
+    ListPlayerFragment mListPlayerFragment;
 
-    public PlayerRecyclerAdapter(List<Player> listData, Context context) {
+    public PlayerRecyclerAdapter(List<Player> listData, Context context, ListPlayerFragment listPlayerFragment) {
         this.mPlayers = listData;
         this.mContext = context;
+        this.mListPlayerFragment = listPlayerFragment;
     }
 
     public void updateList(List<Player> listData) {
@@ -63,13 +66,14 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
             super(itemView);
             circleImgViewAvatar = (CircleImageView) itemView.findViewById(R.id.circleImgViewAvatar);
             tvPlayerName = (TextView) itemView.findViewById(R.id.tvPlayerName);
-            tvPlayerOld= (TextView) itemView.findViewById(R.id.tvPlayerOld);
+            tvPlayerOld = (TextView) itemView.findViewById(R.id.tvPlayerOld);
             tvPlayerPosition = (TextView) itemView.findViewById(R.id.tvPlayerPosition);
             imgViewPlayerDetail = (ImageView) itemView.findViewById(R.id.imgViewPlayerDetail);
             imgViewPlayerDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // TODO used interface to move another activity
+                    mListPlayerFragment.replaceFragment(R.id.frameContain, PlayerDetailFragment_.builder().build(), "PlayerDetailFragment_", null);
                 }
             });
 

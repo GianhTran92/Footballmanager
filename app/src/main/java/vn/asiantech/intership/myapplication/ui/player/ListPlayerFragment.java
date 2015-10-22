@@ -24,6 +24,7 @@ import vn.asiantech.intership.myapplication.model.Position;
 
 /**
  * A simple {@link Fragment} subclass.
+ * created by gianhtran on 2015/10/21
  */
 
 @EFragment(R.layout.fragment_list_player)
@@ -32,13 +33,15 @@ public class ListPlayerFragment extends BaseFragment {
     RecyclerView.LayoutManager mLayoutManager;
     PlayerRecyclerAdapter mPlayerRecyclerAdapter;
     Context mContext = getActivity();
+    ListPlayerFragment listPlayerFragment = this;
     @ViewById(R.id.recyclerViewPlayer)
     RecyclerView mRecyclerViewPlayer;
 
     @AfterViews
-    void afterView(){
+    void afterView() {
         setAdapter();
     }
+
     public List<Player> createDemoData() {
         List<Player> listData = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
@@ -53,7 +56,7 @@ public class ListPlayerFragment extends BaseFragment {
         mPlayers = createDemoData();
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewPlayer.setLayoutManager(mLayoutManager);
-        mPlayerRecyclerAdapter = new PlayerRecyclerAdapter(mPlayers, mContext);
+        mPlayerRecyclerAdapter = new PlayerRecyclerAdapter(mPlayers, mContext,listPlayerFragment);
         mRecyclerViewPlayer.setAdapter(mPlayerRecyclerAdapter);
     }
 }

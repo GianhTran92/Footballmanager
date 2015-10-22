@@ -6,30 +6,39 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
- *
- * created by gianhtran on 2015/10/21
+ * <p/>
+ * create by gianhtran on 2015/10/22
  */
-@EFragment(R.layout.fragment_coach_detail)
-public class CoachDetailFragment extends BaseFragment {
+@EFragment(R.layout.fragment_edit_coach)
+public class EditCoachFragment extends BaseFragment {
+    @ViewById(R.id.edtEditCoachName)
+    EditText mEdtEditCoachName;
 
-    @Click(R.id.imgViewBackFromCoachDetailFragment)
-    void doBack() {
+    @ViewById(R.id.edtEditCoachBirthday)
+    EditText mEdtEditCoachBirthday;
+
+    @Click(R.id.imgViewCancelEditCoach)
+    void doCancel() {
         replaceFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment", null);
+
+
     }
 
-    @Click(R.id.imgViewEditCoach)
-    void doEdit(){
-        replaceFragment(R.id.rlContentCoachInfor, EditCoachFragment_.builder().build(), "EditCoachFragment", null);
+    @Click(R.id.imgViewSubmitEditCoach)
+    void doSubmit() {
 
     }
 
@@ -37,5 +46,6 @@ public class CoachDetailFragment extends BaseFragment {
     void afterView() {
 
     }
+
 
 }

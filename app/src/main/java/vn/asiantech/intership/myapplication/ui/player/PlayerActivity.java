@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -60,16 +61,16 @@ public class PlayerActivity extends AppCompatActivity {
         mTvFootballTeamNamePlayer.setText(mFootballTeamName);
         mTvDescriptionPlayer.setText("this is demo description");
         addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
-        addFragment(R.id.rlContentCoachInfor,CoachFragment_.builder().build(),"CoachFragment");
+        addFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment");
 
     }
-
 
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
         mFootballTeamName = intent.getStringExtra(Common.KEY_FOOTBALL_TEAM_NAME);
     }
+
     public void addFragment(@IdRes int containerViewId,
                             @NonNull Fragment fragment,
                             @NonNull String fragmentTag) {

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,6 +75,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             imgViewSubmitEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewSubmitEditLeague.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.abc_popup_enter));
                     if (!edtLeagueName.getText().toString().equals("")) {
                         mLeagues.get(getPosition()).setName(edtLeagueName.getText().toString());
                         updateList(mLeagues);
@@ -89,6 +91,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             imgViewCancelEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewCancelEditLeague.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.abc_popup_enter));
                     imgViewSubmitEditLeague.setVisibility(View.INVISIBLE);
                     imgViewCancelEditLeague.setVisibility(View.INVISIBLE);
                     imgViewEditLeague.setVisibility(View.VISIBLE);
@@ -99,6 +102,8 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             imgViewEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewEditLeague.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.abc_popup_enter));
+
                     imgViewSubmitEditLeague.setVisibility(View.VISIBLE);
                     imgViewCancelEditLeague.setVisibility(View.VISIBLE);
                     imgViewEditLeague.setVisibility(View.INVISIBLE);
@@ -124,7 +129,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
         public void onClick(View v) {
             // TODO used interface to move another activity
             FootballTeamActivity_.intent(mContext)
-                    .extra(Common.KEY_LEAGUE_NAME,mLeagues.get(getPosition()).getName())
+                    .extra(Common.KEY_LEAGUE_NAME, mLeagues.get(getPosition()).getName())
                     .start();
 
         }

@@ -10,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -43,8 +45,12 @@ public class FootballTeamActivity extends AppCompatActivity {
         showDialogAddNewLeague();
     }
 
+    @ViewById(R.id.imgViewBackFromFootballTeam)
+    ImageView mImgViewBackFromFootballTeam;
+
     @Click(R.id.imgViewBackFromFootballTeam)
     void doBack() {
+        mImgViewBackFromFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         this.finish();
     }
 
@@ -82,6 +88,7 @@ public class FootballTeamActivity extends AppCompatActivity {
     public void showDialogAddNewLeague() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_new_football_team);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
         final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
         Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);

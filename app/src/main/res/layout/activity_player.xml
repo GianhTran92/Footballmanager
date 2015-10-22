@@ -35,19 +35,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textStyle="bold"
             android:background="@drawable/custom_banner"
             android:padding="@dimen/activity_football_team_top_padding"
-            android:textSize="@dimen/activity_player_team_name_text_size" />
+            android:textSize="@dimen/activity_player_team_name_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDescriptionPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/background_light"
-            android:textStyle="italic"
             android:layout_below="@+id/tvFootballTeamNamePlayer"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/background_light"
+            android:textStyle="italic" />
 
     </RelativeLayout>
 
@@ -59,15 +59,14 @@
         android:background="@drawable/custom_shape_white">
 
 
-
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/frameContain"
-        android:layout_below="@+id/rlContentCoachInfor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        android:layout_marginTop="@dimen/dialog.new.league.content.padding"
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlContentCoachInfor">
+        android:layout_marginTop="@dimen/dialog.new.league.content.padding"</RelativeLayout>
 
 
     <ImageView

@@ -20,6 +20,7 @@ import vn.asiantech.intership.myapplication.model.Coach;
 
 /**
  * A simple {@link Fragment} subclass.
+ * created by gianhtran on 2015/10/21
  */
 @EFragment(R.layout.fragment_coach)
 public class CoachFragment extends BaseFragment {
@@ -30,7 +31,7 @@ public class CoachFragment extends BaseFragment {
 
     @Click(R.id.imgViewCoachDetail)
     void showDetailCoach() {
-        replaceFragment(R.id.rlContentCoachInfor,CoachDetailFragment_.builder().build(),"CoachDetailFragment",null);
+        replaceFragment(R.id.rlContentCoachInfor, CoachDetailFragment_.builder().build(), "CoachDetailFragment", null);
     }
 
     @AfterViews

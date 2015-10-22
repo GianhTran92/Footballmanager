@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -34,8 +36,12 @@ public class LeagueActivity extends AppCompatActivity {
     @ViewById(R.id.recyclerViewLeague)
     RecyclerView mRecyclerViewLeague;
 
+    @ViewById(R.id.imgViewAddLeague)
+    ImageView mImgViewAddLeague;
+
     @Click(R.id.imgViewAddLeague)
     void addNewLeague() {
+        mImgViewAddLeague.startAnimation(AnimationUtils.loadAnimation(this, R.anim.set_anim));
         showDialogAddNewLeague();
     }
 
@@ -65,6 +71,7 @@ public class LeagueActivity extends AppCompatActivity {
     public void showDialogAddNewLeague() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_new_league);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
         final EditText edtLeagueName = (EditText) dialog.findViewById(R.id.edtLeagueName);
         Button btnSubmit = (Button) dialog.findViewById(R.id.btnSubmitAddLeague);
