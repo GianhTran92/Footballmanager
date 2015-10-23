@@ -11,7 +11,7 @@
         android:background="@android:color/holo_red_light">
 
         <ImageView
-            android:id="@+id/imgViewBackFromFootballTeam"
+            android:id="@+id/imgViewBackFromPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -35,19 +35,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textStyle="bold"
             android:background="@drawable/custom_banner"
             android:padding="@dimen/activity_football_team_top_padding"
-            android:textSize="@dimen/activity_player_team_name_text_size" />
+            android:textSize="@dimen/activity_player_team_name_text_size"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDescriptionPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/background_light"
-            android:textStyle="italic"
             android:layout_below="@+id/tvFootballTeamNamePlayer"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/background_light"
+            android:textStyle="italic" />
 
     </RelativeLayout>
 
@@ -58,51 +58,16 @@
         android:layout_below="@+id/rlPlayerTop"
         android:background="@drawable/custom_shape_white">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/circleImgViewCoachAvatar"
-            android:layout_width="@dimen/activity_player_coach_avatar_size"
-            android:layout_height="@dimen/activity_player_coach_avatar_size"
-            android:layout_margin="@dimen/recycler.item.content.margin"
-            android:layout_toRightOf="@+id/tvCoachName"
-            android:src="@drawable/img_coach"
-            app:civ_border_color="@android:color/holo_red_light"
-            app:civ_border_width="@dimen/recycler.item.league.logo.border" />
-
-        <TextView
-            android:id="@+id/tvCoachName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/secondary_text_light" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tvCoachName"
-            android:layout_alignRight="@+id/tvCoachName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:text="@string/edt_text_coach"
-            android:textColor="@android:color/holo_red_light" />
-
-        <ImageView
-            android:id="@+id/imgViewCoachDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="@dimen/recycler.item.content.margin"
-            android:contentDescription="@string/hello_world"
-            android:src="@drawable/ic_settings_black_18dp" />
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewPlayer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlContentCoachInfor"
-        android:layout_marginTop="@dimen/dialog.new.league.content.padding" />
+    <RelativeLayout
+        android:id="@+id/frameContain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlContentCoachInfor">
+        android:layout_marginTop="@dimen/dialog.new.league.content.padding"</RelativeLayout>
+
 
     <ImageView
         android:id="@+id/imgViewAddPlayer"
@@ -115,7 +80,7 @@
         android:layout_marginEnd="@dimen/activity.button.add.new.league.margin"
         android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
         android:contentDescription="@string/hello_world"
-        android:src="@drawable/icon_add" />
+        android:src="@drawable/ic_add_red" />
 
 
 </RelativeLayout>

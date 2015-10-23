@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="vn.asiantech.intership.myapplication.ui.player.EditCoachFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewCoachAvatarEdit"
+        android:layout_width="@dimen/activity_player_coach_avatar_size"
+        android:layout_height="@dimen/activity_player_coach_avatar_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:src="@drawable/img_coach"
+        app:civ_border_color="@android:color/holo_red_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+    <EditText
+        android:id="@+id/edtEditCoachName"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/circleImgViewCoachAvatarEdit"
+        android:gravity="center"
+        android:hint="@string/edt.edit.coach.birth"
+        android:textSize="@dimen/abc_text_size_small_material" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtEditCoachName"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/circleImgViewCoachAvatarEdit"
+        android:text="@string/tv.edit.coach.name" />
+
+    <EditText
+        android:id="@+id/edtEditCoachBirthday"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/edtEditCoachName"
+        android:gravity="center"
+        android:hint="@string/edt.edit.coach.name"
+        android:inputType="date"
+        android:textSize="@dimen/abc_text_size_small_material" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtEditCoachBirthday"
+        android:layout_below="@+id/edtEditCoachBirthday"
+        android:layout_marginTop="@dimen/activity_football_team_top_padding"
+        android:text="birthday" />
+
+    <ImageView
+        android:id="@+id/imgViewSubmitEditCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_done_black_18dp" />
+
+    <ImageView
+        android:id="@+id/imgViewCancelEditCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imgViewSubmitEditCoach"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_highlight_remove_black_18dp" />
+
+
+</RelativeLayout>

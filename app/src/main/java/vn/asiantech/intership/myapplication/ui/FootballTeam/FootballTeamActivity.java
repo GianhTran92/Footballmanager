@@ -7,11 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -37,19 +41,30 @@ public class FootballTeamActivity extends AppCompatActivity {
     TextView mTvLeagueName;
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
+    @ViewById(R.id.imgViewAddFootballTeam)
+    ImageView mImgViewAddFootballTeam;
 
     @Click(R.id.imgViewAddFootballTeam)
     void addNewFootballTeam() {
+        mImgViewAddFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         showDialogAddNewLeague();
     }
 
+    @ViewById(R.id.rlFootballTeamTop)
+    RelativeLayout mRlFootballTeamTop;
+
+    @ViewById(R.id.imgViewBackFromFootballTeam)
+    ImageView mImgViewBackFromFootballTeam;
+
     @Click(R.id.imgViewBackFromFootballTeam)
     void doBack() {
+        mImgViewBackFromFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         this.finish();
     }
 
     @AfterViews
     void afterView() {
+        reSizeHeader();
         getDataFromLeagueActivity();
         mTvLeagueName.setText(mLeagueName);
         setAdapter();
@@ -82,6 +97,7 @@ public class FootballTeamActivity extends AppCompatActivity {
     public void showDialogAddNewLeague() {
         final Dialog dialog = new Dialog(mContext);
         dialog.setContentView(R.layout.dialog_new_football_team);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
         final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
         Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
@@ -111,4 +127,9 @@ public class FootballTeamActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void reSizeHeader() {
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
+        params.height = getResources().getDisplayMetrics().widthPixels / 4 * 2;
+        mRlFootballTeamTop.setLayoutParams(params);
+    }
 }

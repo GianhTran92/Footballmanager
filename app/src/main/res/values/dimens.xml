@@ -18,4 +18,8 @@
     <dimen name="activity_football_team_top_padding">5dp</dimen>
     <dimen name="activity_player_team_name_text_size">15sp</dimen>
     <dimen name="activity_player_coach_avatar_size">50dp</dimen>
+    <dimen name="fragment.layer.detail.avatar.size">90dp</dimen>
+    <dimen name="fragment.player.detail.tv.margin.left">80dp</dimen>
+    <dimen name="fragment.player.detail.tvs.margin.left">20dp</dimen>
+    <dimen name="custom.league.recycler.margin.left.and.right">1dp</dimen>
 </resources>

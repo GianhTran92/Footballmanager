@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,6 +78,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
                     tvFootballTeamName.setVisibility(View.INVISIBLE);
                     tvDescriptionFootballTeam.setVisibility(View.INVISIBLE);
                     edtFootballTeamName.setVisibility(View.VISIBLE);
@@ -90,6 +92,8 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewSubmitEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewSubmitEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
+
                     if (!edtFootballTeamName.getText().toString().equals("")) {
                         mFootballTeams.get(getPosition()).setName(edtFootballTeamName.getText().toString());
                         mFootballTeams.get(getPosition()).setDescripstion(edtDescriptionFootballTeam.getText().toString());
@@ -105,6 +109,8 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewCancelEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    imgViewCancelEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
+
                     updateList(mFootballTeams);
 
                 }
@@ -122,7 +128,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                 public void onClick(View v) {
                     // TODO used interface to move another activity
                     PlayerActivity_.intent(mContext)
-                            .extra(Common.KEY_FOOTBALL_TEAM_NAME,mFootballTeams.get(getPosition()).getName())
+                            .extra(Common.KEY_FOOTBALL_TEAM_NAME, mFootballTeams.get(getPosition()).getName())
                             .start();
                 }
             });

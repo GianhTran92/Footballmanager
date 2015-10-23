@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="vn.asiantech.intership.myapplication.ui.player.CoachDetailFragment">
+
+    <ImageView
+        android:id="@+id/imgViewBackFromCoachDetailFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:src="@drawable/ic_call_received_black_18dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewCoachAvatarDetail"
+        android:layout_width="@dimen/activity_player_coach_avatar_size"
+        android:layout_height="@dimen/activity_player_coach_avatar_size"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_toRightOf="@+id/imgViewBackFromCoachDetailFragment"
+        android:src="@drawable/img_coach"
+        app:civ_border_color="@android:color/holo_red_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+    <TextView
+        android:id="@+id/tvCoachNameDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_toRightOf="@id/circleImgViewCoachAvatarDetail"
+        android:text="gianh tran"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCoachBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_toRightOf="@+id/circleImgViewCoachAvatarDetail"
+        android:text="20/10/2015" />
+
+    <TextView
+        android:id="@+id/tvCoachCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/recycler.item.content.margin"
+        android:layout_alignBottom="@+id/circleImgViewCoachAvatarDetail"
+        android:layout_toRightOf="@id/circleImgViewCoachAvatarDetail"
+        android:text="USB" />
+
+    <ImageView
+        android:id="@+id/imgViewEditCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_settings_black_18dp" />
+
+</RelativeLayout>
