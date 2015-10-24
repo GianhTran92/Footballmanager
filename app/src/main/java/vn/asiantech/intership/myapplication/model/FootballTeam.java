@@ -21,7 +21,7 @@ public class FootballTeam extends SugarRecord {
     public FootballTeam() {
     }
 
-    public FootballTeam(String name, Long leagueId, String descripstion, String logo) {
+    public FootballTeam(String name, long leagueId, String descripstion, String logo) {
         this.name = name;
         this.leagueId = leagueId;
         this.descripstion = descripstion;
@@ -36,11 +36,11 @@ public class FootballTeam extends SugarRecord {
         this.name = name;
     }
 
-    public Long getLeagueId() {
+    public long getLeagueId() {
         return leagueId;
     }
 
-    public void setLeagueId(Long leagueId) {
+    public void setLeagueId(long leagueId) {
         this.leagueId = leagueId;
     }
 

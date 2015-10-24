@@ -1,5 +1,6 @@
 package vn.asiantech.intership.myapplication.ui.FootballTeam;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,10 +28,10 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
  */
 public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
     List<FootballTeam> mFootballTeams = new ArrayList<>();
-    Context mContext;
+    FootballTeamActivity mFootballTeamActivity;
 
-    public FootballTeamRecyclerAdapter(List<FootballTeam> listData, Context context) {
-        this.mContext = context;
+    public FootballTeamRecyclerAdapter(List<FootballTeam> listData, FootballTeamActivity footballTeamActivity) {
+        this.mFootballTeamActivity = footballTeamActivity;
         this.mFootballTeams = listData;
     }
 
@@ -63,8 +65,6 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
         TextView tvFootballTeamName;
         TextView tvDescriptionFootballTeam;
         ImageView imgViewEditFootballTeam;
-        ImageView imgViewCancelEditFootballTeam;
-        ImageView imgViewSubmitEditFootballTeam;
         EditText edtDescriptionFootballTeam;
         EditText edtFootballTeamName;
 
@@ -79,51 +79,16 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
-                    tvFootballTeamName.setVisibility(View.INVISIBLE);
-                    tvDescriptionFootballTeam.setVisibility(View.INVISIBLE);
-                    imgViewEditFootballTeam.setVisibility(View.INVISIBLE);
-                    edtFootballTeamName.setVisibility(View.VISIBLE);
-                    edtFootballTeamName.setText(tvFootballTeamName.getText().toString());
-                    edtDescriptionFootballTeam.setVisibility(View.VISIBLE);
-                    edtDescriptionFootballTeam.setText(tvDescriptionFootballTeam.getText().toString());
-                    imgViewSubmitEditFootballTeam.setVisibility(View.VISIBLE);
-                    imgViewCancelEditFootballTeam.setVisibility(View.VISIBLE);
+                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity, R.anim.rotate_anim));
+                    showDialogEditFootballTeam();
 
                 }
             });
-            imgViewSubmitEditFootballTeam = (ImageView) itemView.findViewById(R.id.imgViewSubmitEditFootballTeam);
-            imgViewSubmitEditFootballTeam.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imgViewSubmitEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
 
-                    if (!edtFootballTeamName.getText().toString().equals("")) {
-                        mFootballTeams.get(getPosition()).setName(edtFootballTeamName.getText().toString());
-                        mFootballTeams.get(getPosition()).setDescripstion(edtDescriptionFootballTeam.getText().toString());
-                        updateList(mFootballTeams);
-
-                    } else {
-                        edtFootballTeamName.setError(mContext.getString(R.string.error_field_not_be_empty1));
-                    }
-
-                }
-            });
-            imgViewCancelEditFootballTeam = (ImageView) itemView.findViewById(R.id.imgViewCancelEditFootballTeam);
-            imgViewCancelEditFootballTeam.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    imgViewCancelEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
-
-                    updateList(mFootballTeams);
-
-                }
-            });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    mFootballTeams.remove(getPosition());
-                    updateList(mFootballTeams);
+                    showDialogConfirmDelete(mFootballTeams.get(getPosition()));
                     return false;
                 }
             });
@@ -131,13 +96,69 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                 @Override
                 public void onClick(View v) {
                     // TODO used interface to move another activity
-                    PlayerActivity_.intent(mContext)
+                    PlayerActivity_.intent(mFootballTeamActivity)
                             .extra(Common.KEY_FOOTBALL_TEAM_NAME, mFootballTeams.get(getPosition()).getName())
                             .start();
                 }
             });
         }
 
-    }
+        public void showDialogEditFootballTeam() {
+            final Dialog dialog = new Dialog(mFootballTeamActivity);
+            dialog.setContentView(R.layout.dialog_new_football_team);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
+            final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
+            final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
+            Button btnCancelAddFootballTeam = (Button) dialog.findViewById(R.id.btnCancelAddFootballTeam);
+            Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
+
+            edtAddFootballTeamName.setText(tvFootballTeamName.getText());
+            edtAddDescription.setText(tvDescriptionFootballTeam.getText());
+
+            btnSubmitAddFootballTeam.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!edtAddFootballTeamName.getText().toString().equals("")) {
+                        mFootballTeamActivity.editFootballTeam(mFootballTeams.get(getPosition()), edtAddFootballTeamName.getText().toString(), edtAddDescription.getText().toString(), "img_mu");
+                        dialog.dismiss();
+                    } else {
+                        edtAddFootballTeamName.setError(mFootballTeamActivity.getString(R.string.error_field_not_be_empty));
+                    }
+                }
+            });
+            btnCancelAddFootballTeam.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+        public void showDialogConfirmDelete(final FootballTeam footballTeam) {
+            final Dialog dialog = new Dialog(mFootballTeamActivity);
+            dialog.setContentView(R.layout.dialog_confirm_delete);
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialog.setTitle("are you sure to delete?");
+
+            Button btnSubmitDelete = (Button) dialog.findViewById(R.id.btnSubmitDelete);
+            Button btnCancelDelete = (Button) dialog.findViewById(R.id.btnCancelDelete);
+
+            btnSubmitDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mFootballTeamActivity.deleteFootballTeam(footballTeam);
+                    dialog.dismiss();
+                }
+            });
+            btnCancelDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+
+                }
+            });
+            dialog.show();
+        }
+    }
 }

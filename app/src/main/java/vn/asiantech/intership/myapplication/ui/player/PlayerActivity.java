@@ -46,9 +46,6 @@ public class PlayerActivity extends AppCompatActivity {
     @ViewById(R.id.tvFootballTeamNamePlayer)
     TextView mTvFootballTeamNamePlayer;
 
-    @ViewById(R.id.imgViewAddPlayer)
-    ImageView mImgViewAddPlayer;
-
     @ViewById(R.id.imgViewBackFromPlayer)
     ImageView mImgViewBackFromPlayer;
 

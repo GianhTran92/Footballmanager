@@ -108,7 +108,7 @@ public class LeagueActivity extends AppCompatActivity {
 
     public void showDialogAddNewLeague() {
 
-        final Dialog dialog = new Dialog(this);
+        final Dialog dialog = new Dialog(this.getContext());
         dialog.setContentView(R.layout.dialog_new_league);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
@@ -120,7 +120,7 @@ public class LeagueActivity extends AppCompatActivity {
                 if (!edtLeagueName.getText().toString().equals("")) {
                     League league = new League(edtLeagueName.getText().toString(), null);
                     league.save();
-
+                    updateData();
                     dialog.dismiss();
                 } else {
                     edtLeagueName.setError(getString(R.string.error_field_not_be_empty));
