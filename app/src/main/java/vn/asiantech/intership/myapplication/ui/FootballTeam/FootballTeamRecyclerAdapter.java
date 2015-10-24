@@ -97,7 +97,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                 public void onClick(View v) {
                     // TODO used interface to move another activity
                     PlayerActivity_.intent(mFootballTeamActivity)
-                            .extra(Common.KEY_FOOTBALL_TEAM_NAME, mFootballTeams.get(getPosition()).getName())
+                            .extra(Common.KEY_FOOTBALL_TEAM_ID, mFootballTeams.get(getPosition()).getId())
                             .start();
                 }
             });

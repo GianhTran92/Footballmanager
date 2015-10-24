@@ -2,6 +2,7 @@ package vn.asiantech.intership.myapplication.ui.player;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.Coach;
+import vn.asiantech.intership.myapplication.model.FootballTeam;
 import vn.asiantech.intership.myapplication.model.Player;
 import vn.asiantech.intership.myapplication.model.Position;
 
@@ -37,14 +39,10 @@ import vn.asiantech.intership.myapplication.model.Position;
 public class PlayerActivity extends AppCompatActivity {
 
     String mFootballTeamName;
+    long mFootballTeamId;
 
-
-    @ViewById(R.id.tvDescriptionPlayer)
-    TextView mTvDescriptionPlayer;
     @ViewById(R.id.circleImgViewFootballTeamLogoPlayer)
     CircleImageView mCircleImgViewFootballTeamLogoPlayer;
-    @ViewById(R.id.tvFootballTeamNamePlayer)
-    TextView mTvFootballTeamNamePlayer;
 
     @ViewById(R.id.imgViewBackFromPlayer)
     ImageView mImgViewBackFromPlayer;
@@ -59,8 +57,6 @@ public class PlayerActivity extends AppCompatActivity {
     @AfterViews
     void afterView() {
         getDataFromLeagueActivity();
-        mTvFootballTeamNamePlayer.setText(mFootballTeamName);
-        mTvDescriptionPlayer.setText("this is demo description");
         addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
         addFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment");
 
@@ -69,7 +65,8 @@ public class PlayerActivity extends AppCompatActivity {
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
-        mFootballTeamName = intent.getStringExtra(Common.KEY_FOOTBALL_TEAM_NAME);
+        mFootballTeamId = intent.getLongExtra(Common.KEY_FOOTBALL_TEAM_ID, 0l);
+        LoadFootballTeamById loadFootballTeamById = new LoadFootballTeamById(mFootballTeamId,this);
     }
 
     public void addFragment(@IdRes int containerViewId,
@@ -81,6 +78,33 @@ public class PlayerActivity extends AppCompatActivity {
                 .disallowAddToBackStack()
                 .commit();
 
+    }
+
+    /**
+     * Using AsyncTask to load FootballTeam by ID and show on UI
+     */
+    public class LoadFootballTeamById extends AsyncTask<Void, Void, FootballTeam> {
+        long mFootballTeamId;
+        PlayerActivity mPlayerActivity;
+
+        public LoadFootballTeamById(long id, PlayerActivity playerActivity) {
+            this.mFootballTeamId = id;
+            this.mPlayerActivity = playerActivity;
+        }
+
+        @Override
+        protected FootballTeam doInBackground(Void... params) {
+            return FootballTeam.findById(FootballTeam.class, mFootballTeamId);
+        }
+
+        @Override
+        protected void onPostExecute(FootballTeam footballTeam) {
+            super.onPostExecute(footballTeam);
+            TextView mTvFootballTeamNamePlayer = (TextView) mPlayerActivity.findViewById(R.id.tvFootballTeamNamePlayer);
+            TextView mTvDescriptionPlayer = (TextView) mPlayerActivity.findViewById(R.id.tvDescriptionPlayer);
+            mTvFootballTeamNamePlayer.setText(footballTeam.getName());
+            mTvDescriptionPlayer.setText(footballTeam.getDescripstion());
+        }
     }
 
 }

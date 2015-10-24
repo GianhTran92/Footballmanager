@@ -20,6 +20,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -34,8 +35,7 @@ public class FootballTeamActivity extends AppCompatActivity {
     League mLeague;
     RecyclerView.LayoutManager mLayoutManager;
     long mLeagueId;
-    @ViewById(R.id.tvLeagueNameTeam)
-    TextView mTvLeagueName;
+
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
     @ViewById(R.id.fLoatingBtnAddFootballTeam)
@@ -66,65 +66,23 @@ public class FootballTeamActivity extends AppCompatActivity {
         mRecyclerViewFootballTeam.setLayoutManager(mLayoutManager);
         reSizeHeader();
         getDataFromLeagueActivity();
-        mTvLeagueName.setText(mLeague.getName());
     }
 
+    /**
+     * this method to get data from leagueActivity and show it on UI
+     */
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
         mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID, 0l);
-        mLeague = League.findById(League.class, mLeagueId);
+        LoadLeagueById loadLeagueById = new LoadLeagueById(mLeagueId,this);
+        loadLeagueById.execute();
     }
-
-//    public List<FootballTeam> createDemoData() {
-//        List<FootballTeam> listData = new ArrayList<>();
-//        for (int i = 0; i < 20; i++) {
-//            FootballTeam footballTeam = new FootballTeam("manchester united " + i, 1l, "description " + i, null);
-//            listData.add(footballTeam);
-//        }
-//
-//        return listData;
-//    }
 
     public void setAdapter(List<FootballTeam> footballTeams) {
         mFootballTeamRecyclerAdapter = new FootballTeamRecyclerAdapter(footballTeams, this);
         mRecyclerViewFootballTeam.setAdapter(mFootballTeamRecyclerAdapter);
     }
 
-    /**
-     * method show dialog to add new FootballTeam
-     */
-    public void showDialogAddNewFootballTeam() {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_new_football_team);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
-        final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
-        Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
-        Button btnCancelAddFootballTeam = (Button) dialog.findViewById(R.id.btnCancelAddFootballTeam);
-
-        btnSubmitAddFootballTeam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!edtAddFootballTeamName.getText().toString().equals("")) {
-                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(),mLeagueId, edtAddDescription.getText().toString(), "img_mu");
-                    footballTeam.save();
-                    updateData();
-                    dialog.dismiss();
-
-                } else {
-                    edtAddFootballTeamName.setError(getString(R.string.error_field_not_be_empty));
-                }
-            }
-        });
-
-        btnCancelAddFootballTeam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
 
     public void reSizeHeader() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
@@ -133,7 +91,32 @@ public class FootballTeamActivity extends AppCompatActivity {
     }
 
     /**
-     * using AsyncTask to load data
+     * Using AsyncTask to load data of League from LeagueActivity by Id and show on UI
+     */
+    public class LoadLeagueById extends AsyncTask<Void, Void, League> {
+        long mLeagueId;
+        FootballTeamActivity mFootballTeamActivity;
+
+        public LoadLeagueById(long leagueId,FootballTeamActivity footballTeamActivity) {
+            this.mLeagueId = leagueId;
+            this.mFootballTeamActivity = footballTeamActivity;
+        }
+
+        @Override
+        protected League doInBackground(Void... params) {
+            return League.findById(League.class,mLeagueId);
+        }
+
+        @Override
+        protected void onPostExecute(League league) {
+            super.onPostExecute(league);
+            TextView mTvLeagueName = (TextView) mFootballTeamActivity.findViewById(R.id.tvLeagueNameTeam);
+            mTvLeagueName.setText(league.getName());
+        }
+    }
+
+    /**
+     * using AsyncTask to load data and set to adapter
      */
     public class loadData extends AsyncTask<Void, Void, List<FootballTeam>> {
         long leagueId;
@@ -147,8 +130,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?",String.valueOf(mLeagueId));
-//            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", String.valueOf(mLeagueId));
             return footballTeams;
         }
 
@@ -160,7 +142,7 @@ public class FootballTeamActivity extends AppCompatActivity {
     }
 
     /**
-     * Using AsyncTask to update list
+     * Using AsyncTask to reload date and update list
      */
     public class updateData extends AsyncTask<Void, Void, List<FootballTeam>> {
         long mLeagueId;
@@ -173,7 +155,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?",String.valueOf(mLeagueId));
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?", String.valueOf(mLeagueId));
 //            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
             return footballTeams;
         }
@@ -209,5 +191,41 @@ public class FootballTeamActivity extends AppCompatActivity {
         footballTeam.setDescripstion(description);
         footballTeam.save();
         updateData();
+    }
+
+    /**
+     * method show dialog to add new FootballTeam
+     */
+    public void showDialogAddNewFootballTeam() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_new_football_team);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
+        final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
+        Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
+        Button btnCancelAddFootballTeam = (Button) dialog.findViewById(R.id.btnCancelAddFootballTeam);
+
+        btnSubmitAddFootballTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!edtAddFootballTeamName.getText().toString().equals("")) {
+                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(), mLeagueId, edtAddDescription.getText().toString(), "img_mu");
+                    footballTeam.save();
+                    updateData();
+                    dialog.dismiss();
+
+                } else {
+                    edtAddFootballTeamName.setError(getString(R.string.error_field_not_be_empty));
+                }
+            }
+        });
+
+        btnCancelAddFootballTeam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
