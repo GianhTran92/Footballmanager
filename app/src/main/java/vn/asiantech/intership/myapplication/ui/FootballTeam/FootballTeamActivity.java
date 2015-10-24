@@ -39,12 +39,9 @@ public class FootballTeamActivity extends AppCompatActivity {
     TextView mTvLeagueName;
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
-    @ViewById(R.id.imgViewAddFootballTeam)
-    ImageView mImgViewAddFootballTeam;
 
-    @Click(R.id.imgViewAddFootballTeam)
+    @Click(R.id.fLoatingBtnAddFootballTeam)
     void addNewFootballTeam() {
-        mImgViewAddFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         showDialogAddNewLeague();
     }
 
@@ -71,7 +68,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
-        mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID,0l);
+        mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID, 0l);
         mLeague = League.findById(League.class, mLeagueId);
     }
 

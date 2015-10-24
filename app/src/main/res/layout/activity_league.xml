@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="vn.asiantech.intership.footballdemo.ui.league.LeagueActivity">
     <RelativeLayout
         android:id="@+id/rlLeagueTop"
@@ -32,16 +33,18 @@
         android:layout_marginTop="@dimen/recycler.item.content.margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/imgViewAddLeague"
-        android:layout_alignParentBottom="true"
-        android:contentDescription="@string/hello_world"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
-        android:layout_marginBottom="@dimen/activity.button.add.new.league.margin"
-        android:src="@drawable/ic_add_red"
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fLoatingBtnAddLeague"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        fab:fab_shadow="true"
+        android:layout_margin="@dimen/floating.button.action.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_add_red_floating"
+        fab:fab_type="mini" />
 
 </RelativeLayout>
