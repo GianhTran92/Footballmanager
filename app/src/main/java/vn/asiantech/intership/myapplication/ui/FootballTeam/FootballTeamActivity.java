@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -39,6 +41,8 @@ public class FootballTeamActivity extends AppCompatActivity {
     TextView mTvLeagueName;
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
+    @ViewById(R.id.fLoatingBtnAddFootballTeam)
+    FloatingActionButton mFLoatingBtnAddFootballTeam;
 
     @Click(R.id.fLoatingBtnAddFootballTeam)
     void addNewFootballTeam() {
@@ -59,6 +63,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     @AfterViews
     void afterView() {
+        mFLoatingBtnAddFootballTeam.attachToRecyclerView(mRecyclerViewFootballTeam);
         reSizeHeader();
         getDataFromLeagueActivity();
         mTvLeagueName.setText(mLeague.getName());

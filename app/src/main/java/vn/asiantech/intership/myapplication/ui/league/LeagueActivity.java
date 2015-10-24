@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -64,6 +66,9 @@ public class LeagueActivity extends AppCompatActivity {
         loadDataByLayout(mLayoutManager);
     }
 
+    @ViewById(R.id.fLoatingBtnAddLeague)
+    FloatingActionButton mFLoatingBtnAddLeague;
+
     @Click(R.id.fLoatingBtnAddLeague)
     void addNewLeague() {
         showDialogAddNewLeague();
@@ -71,6 +76,7 @@ public class LeagueActivity extends AppCompatActivity {
 
     @AfterViews
     void afterView() {
+        mFLoatingBtnAddLeague.attachToRecyclerView(mRecyclerViewLeague);
         mLayoutManager = new LinearLayoutManager(LeagueActivity.this);
         mImgViewSet1Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
