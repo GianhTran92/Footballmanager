@@ -147,8 +147,8 @@ public class FootballTeamActivity extends AppCompatActivity {
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-            //List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", league.getId().toString());
-            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?",String.valueOf(mLeagueId));
+//            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
             return footballTeams;
         }
 
@@ -173,8 +173,8 @@ public class FootballTeamActivity extends AppCompatActivity {
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-//            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", league.getId().toString());
-            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?",String.valueOf(mLeagueId));
+//            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
             return footballTeams;
         }
 
@@ -203,10 +203,9 @@ public class FootballTeamActivity extends AppCompatActivity {
         updateData();
     }
 
-    public void editFootballTeam(FootballTeam footballTeam, String name, long leagueId, String description, String logo) {
+    public void editFootballTeam(FootballTeam footballTeam, String name, String description, String logo) {
         footballTeam.setName(name);
         footballTeam.setLogo(logo);
-        footballTeam.setLeagueId(leagueId);
         footballTeam.setDescripstion(description);
         footballTeam.save();
         updateData();

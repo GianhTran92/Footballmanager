@@ -13,9 +13,9 @@ import vn.asiantech.intership.myapplication.model.League;
  */
 public class BaseApp extends SugarApp {
 
-//
+
 //    public void createDummyLeagueData(){
-//        for (int i = 0; i < 20; i++) {
+//        for (int i = 0; i < 2; i++) {
 //            League league = new League("FA CUP" + i, "img_league");
 //            league.save();
 //        }
@@ -23,7 +23,7 @@ public class BaseApp extends SugarApp {
 //    public void createDummyFootballTeamData(){
 //        List<League> leagues = League.listAll(League.class);
 //        for(League league : leagues) {
-//            for (int i = 1; i< 20 ; i ++) {
+//            for (int i = 1; i< 2 ; i ++) {
 //                FootballTeam footballTeam = new FootballTeam(league.getName()+ " Team " + i , league.getId(),league.getName()+ " Team descripstion " + i, "img_mu");
 //                footballTeam.save();
 //            }
@@ -34,5 +34,7 @@ public class BaseApp extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
+//        createDummyLeagueData();
+//        createDummyFootballTeamData();
     }
 }

@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -37,8 +40,17 @@ public class ListPlayerFragment extends BaseFragment {
     @ViewById(R.id.recyclerViewPlayer)
     RecyclerView mRecyclerViewPlayer;
 
+    @ViewById(R.id.fLoatingBtnAddPlayer)
+    FloatingActionButton mFLoatingBtnAddPlayer;
+
+    @Click(R.id.fLoatingBtnAddPlayer)
+    void addPlayer(){
+
+    }
+
     @AfterViews
     void afterView() {
+        mFLoatingBtnAddPlayer.attachToRecyclerView(mRecyclerViewPlayer);
         setAdapter();
     }
 

@@ -66,21 +66,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rlContentCoachInfor">
-        android:layout_marginTop="@dimen/dialog.new.league.content.padding"</RelativeLayout>
+        android:layout_marginTop="@dimen/dialog.new.league.content.padding">
 
+    </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imgViewAddPlayer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/activity.button.add.new.league.margin"
-        android:layout_marginEnd="@dimen/activity.button.add.new.league.margin"
-        android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
-        android:contentDescription="@string/hello_world"
-        android:src="@drawable/ic_add_red" />
 
 
 </RelativeLayout>
