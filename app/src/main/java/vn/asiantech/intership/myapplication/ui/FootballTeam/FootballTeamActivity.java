@@ -4,12 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -29,14 +25,16 @@ import java.util.List;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
+import vn.asiantech.intership.myapplication.model.League;
 
 @EActivity(R.layout.activity_football_team)
 public class FootballTeamActivity extends AppCompatActivity {
     FootballTeamRecyclerAdapter mFootballTeamRecyclerAdapter;
     List<FootballTeam> mFootballTeams;
+    League mLeague;
     RecyclerView.LayoutManager mLayoutManager;
     Context mContext = this;
-    String mLeagueName;
+    long mLeagueId;
     @ViewById(R.id.tvLeagueNameTeam)
     TextView mTvLeagueName;
     @ViewById(R.id.recyclerViewFootballTeam)
@@ -66,14 +64,15 @@ public class FootballTeamActivity extends AppCompatActivity {
     void afterView() {
         reSizeHeader();
         getDataFromLeagueActivity();
-        mTvLeagueName.setText(mLeagueName);
+        mTvLeagueName.setText(mLeague.getName());
         setAdapter();
 
     }
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
-        mLeagueName = intent.getStringExtra(Common.KEY_LEAGUE_NAME);
+        mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID,0l);
+        mLeague = League.findById(League.class, mLeagueId);
     }
 
     public List<FootballTeam> createDemoData() {

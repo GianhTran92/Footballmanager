@@ -22,6 +22,7 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 
 /**
  * Created by igianhtran on 20/10/2015.
+ * Edited by gianhtran on 23/10/2015
  */
 public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
     List<FootballTeam> mFootballTeams = new ArrayList<>();
@@ -81,11 +82,14 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                     imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
                     tvFootballTeamName.setVisibility(View.INVISIBLE);
                     tvDescriptionFootballTeam.setVisibility(View.INVISIBLE);
+                    imgViewEditFootballTeam.setVisibility(View.INVISIBLE);
                     edtFootballTeamName.setVisibility(View.VISIBLE);
+                    edtFootballTeamName.setText(tvFootballTeamName.getText().toString());
                     edtDescriptionFootballTeam.setVisibility(View.VISIBLE);
+                    edtDescriptionFootballTeam.setText(tvDescriptionFootballTeam.getText().toString());
                     imgViewSubmitEditFootballTeam.setVisibility(View.VISIBLE);
                     imgViewCancelEditFootballTeam.setVisibility(View.VISIBLE);
-                    imgViewEditFootballTeam.setVisibility(View.INVISIBLE);
+
                 }
             });
             imgViewSubmitEditFootballTeam = (ImageView) itemView.findViewById(R.id.imgViewSubmitEditFootballTeam);

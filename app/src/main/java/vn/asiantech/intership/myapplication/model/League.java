@@ -6,6 +6,7 @@ import com.orm.dsl.Table;
 
 /**
  * Created by igianhtran on 20/10/2015.
+ * Edit by gianhtran on 23/10/2015
  */
 
 @Table(name = "league")
@@ -40,7 +41,4 @@ public class League extends SugarRecord {
         this.logo = logo;
     }
 
-    public Long getId() {
-        return getId();
-    }
 }
