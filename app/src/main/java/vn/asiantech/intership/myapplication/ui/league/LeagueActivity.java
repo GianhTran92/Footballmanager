@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -64,17 +66,17 @@ public class LeagueActivity extends AppCompatActivity {
         loadDataByLayout(mLayoutManager);
     }
 
-    @ViewById(R.id.imgViewAddLeague)
-    ImageView mImgViewAddLeague;
+    @ViewById(R.id.fLoatingBtnAddLeague)
+    FloatingActionButton mFLoatingBtnAddLeague;
 
-    @Click(R.id.imgViewAddLeague)
+    @Click(R.id.fLoatingBtnAddLeague)
     void addNewLeague() {
-        mImgViewAddLeague.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         showDialogAddNewLeague();
     }
 
     @AfterViews
     void afterView() {
+        mFLoatingBtnAddLeague.attachToRecyclerView(mRecyclerViewLeague);
         mLayoutManager = new LinearLayoutManager(LeagueActivity.this);
         mImgViewSet1Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
@@ -96,7 +98,7 @@ public class LeagueActivity extends AppCompatActivity {
 
     public void setAdapter(List<League> mLeagues, LeagueActivity leagueActivity, RecyclerView.LayoutManager layoutManager) {
         mRecyclerViewLeague.setLayoutManager(layoutManager);
-        mLeagueRecyclerAdapter = new LeagueRecyclerAdapter(mLeagues,leagueActivity);
+        mLeagueRecyclerAdapter = new LeagueRecyclerAdapter(mLeagues, leagueActivity);
         mRecyclerViewLeague.setAdapter(mLeagueRecyclerAdapter);
     }
 
@@ -184,11 +186,13 @@ public class LeagueActivity extends AppCompatActivity {
             recyclerAdapter.updateList(leagues);
         }
     }
+
     public void deleteLeague(League league) {
         league.delete();
         updateData();
     }
-    public void editLeague(League league,String name,String logo) {
+
+    public void editLeague(League league, String name, String logo) {
         league.setName(name);
         league.setLogo(logo);
         league.save();

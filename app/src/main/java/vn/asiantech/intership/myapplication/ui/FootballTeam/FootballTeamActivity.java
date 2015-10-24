@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -39,12 +41,11 @@ public class FootballTeamActivity extends AppCompatActivity {
     TextView mTvLeagueName;
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
-    @ViewById(R.id.imgViewAddFootballTeam)
-    ImageView mImgViewAddFootballTeam;
+    @ViewById(R.id.fLoatingBtnAddFootballTeam)
+    FloatingActionButton mFLoatingBtnAddFootballTeam;
 
-    @Click(R.id.imgViewAddFootballTeam)
+    @Click(R.id.fLoatingBtnAddFootballTeam)
     void addNewFootballTeam() {
-        mImgViewAddFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
         showDialogAddNewLeague();
     }
 
@@ -62,6 +63,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     @AfterViews
     void afterView() {
+        mFLoatingBtnAddFootballTeam.attachToRecyclerView(mRecyclerViewFootballTeam);
         reSizeHeader();
         getDataFromLeagueActivity();
         mTvLeagueName.setText(mLeague.getName());
@@ -71,7 +73,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
-        mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID,0l);
+        mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID, 0l);
         mLeague = League.findById(League.class, mLeagueId);
     }
 
