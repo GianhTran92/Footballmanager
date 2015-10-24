@@ -26,10 +26,10 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
  */
 public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
     List<FootballTeam> mFootballTeams = new ArrayList<>();
-    Context mContext;
+    FootballTeamActivity mFootballTeamActivity;
 
-    public FootballTeamRecyclerAdapter(List<FootballTeam> listData, Context context) {
-        this.mContext = context;
+    public FootballTeamRecyclerAdapter(List<FootballTeam> listData, FootballTeamActivity footballTeamActivity) {
+        this.mFootballTeamActivity = footballTeamActivity;
         this.mFootballTeams = listData;
     }
 
@@ -79,7 +79,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
+                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity, R.anim.rotate_anim));
                     tvFootballTeamName.setVisibility(View.INVISIBLE);
                     tvDescriptionFootballTeam.setVisibility(View.INVISIBLE);
                     imgViewEditFootballTeam.setVisibility(View.INVISIBLE);
@@ -96,7 +96,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewSubmitEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewSubmitEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
+                    imgViewSubmitEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity, R.anim.rotate_anim));
 
                     if (!edtFootballTeamName.getText().toString().equals("")) {
                         mFootballTeams.get(getPosition()).setName(edtFootballTeamName.getText().toString());
@@ -104,7 +104,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                         updateList(mFootballTeams);
 
                     } else {
-                        edtFootballTeamName.setError(mContext.getString(R.string.error_field_not_be_empty1));
+                        edtFootballTeamName.setError(mFootballTeamActivity.getString(R.string.error_field_not_be_empty1));
                     }
 
                 }
@@ -113,7 +113,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             imgViewCancelEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewCancelEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.rotate_anim));
+                    imgViewCancelEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity, R.anim.rotate_anim));
 
                     updateList(mFootballTeams);
 
@@ -131,7 +131,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                 @Override
                 public void onClick(View v) {
                     // TODO used interface to move another activity
-                    PlayerActivity_.intent(mContext)
+                    PlayerActivity_.intent(mFootballTeamActivity)
                             .extra(Common.KEY_FOOTBALL_TEAM_NAME, mFootballTeams.get(getPosition()).getName())
                             .start();
                 }

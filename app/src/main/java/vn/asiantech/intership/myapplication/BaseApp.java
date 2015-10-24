@@ -2,6 +2,9 @@ package vn.asiantech.intership.myapplication;
 
 import com.orm.SugarApp;
 
+import java.util.List;
+
+import vn.asiantech.intership.myapplication.model.FootballTeam;
 import vn.asiantech.intership.myapplication.model.League;
 
 /**
@@ -11,11 +14,21 @@ import vn.asiantech.intership.myapplication.model.League;
 public class BaseApp extends SugarApp {
 
 //
-//    public void createDummyData(){
+//    public void createDummyLeagueData(){
 //        for (int i = 0; i < 20; i++) {
 //            League league = new League("FA CUP" + i, "img_league");
 //            league.save();
 //        }
+//    }
+//    public void createDummyFootballTeamData(){
+//        List<League> leagues = League.listAll(League.class);
+//        for(League league : leagues) {
+//            for (int i = 1; i< 20 ; i ++) {
+//                FootballTeam footballTeam = new FootballTeam(league.getName()+ " Team " + i , league.getId(),league.getName()+ " Team descripstion " + i, "img_mu");
+//                footballTeam.save();
+//            }
+//        }
+//
 //    }
 
     @Override

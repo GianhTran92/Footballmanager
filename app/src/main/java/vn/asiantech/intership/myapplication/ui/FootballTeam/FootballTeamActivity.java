@@ -1,8 +1,8 @@
 package vn.asiantech.intership.myapplication.ui.FootballTeam;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +21,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vn.asiantech.intership.myapplication.R;
@@ -32,10 +31,8 @@ import vn.asiantech.intership.myapplication.model.League;
 @EActivity(R.layout.activity_football_team)
 public class FootballTeamActivity extends AppCompatActivity {
     FootballTeamRecyclerAdapter mFootballTeamRecyclerAdapter;
-    List<FootballTeam> mFootballTeams;
     League mLeague;
     RecyclerView.LayoutManager mLayoutManager;
-    Context mContext = this;
     long mLeagueId;
     @ViewById(R.id.tvLeagueNameTeam)
     TextView mTvLeagueName;
@@ -46,7 +43,7 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     @Click(R.id.fLoatingBtnAddFootballTeam)
     void addNewFootballTeam() {
-        showDialogAddNewLeague();
+        showDialogAddNewFootballTeam();
     }
 
     @ViewById(R.id.rlFootballTeamTop)
@@ -63,12 +60,13 @@ public class FootballTeamActivity extends AppCompatActivity {
 
     @AfterViews
     void afterView() {
+        loadData();
         mFLoatingBtnAddFootballTeam.attachToRecyclerView(mRecyclerViewFootballTeam);
+        mLayoutManager = new LinearLayoutManager(FootballTeamActivity.this);
+        mRecyclerViewFootballTeam.setLayoutManager(mLayoutManager);
         reSizeHeader();
         getDataFromLeagueActivity();
         mTvLeagueName.setText(mLeague.getName());
-        setAdapter();
-
     }
 
     public void getDataFromLeagueActivity() {
@@ -77,26 +75,26 @@ public class FootballTeamActivity extends AppCompatActivity {
         mLeague = League.findById(League.class, mLeagueId);
     }
 
-    public List<FootballTeam> createDemoData() {
-        List<FootballTeam> listData = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            FootballTeam footballTeam = new FootballTeam("manchester united " + i, 1l, "description " + i, null);
-            listData.add(footballTeam);
-        }
+//    public List<FootballTeam> createDemoData() {
+//        List<FootballTeam> listData = new ArrayList<>();
+//        for (int i = 0; i < 20; i++) {
+//            FootballTeam footballTeam = new FootballTeam("manchester united " + i, 1l, "description " + i, null);
+//            listData.add(footballTeam);
+//        }
+//
+//        return listData;
+//    }
 
-        return listData;
-    }
-
-    public void setAdapter() {
-        mFootballTeams = createDemoData();
-        mLayoutManager = new LinearLayoutManager(FootballTeamActivity.this);
-        mRecyclerViewFootballTeam.setLayoutManager(mLayoutManager);
-        mFootballTeamRecyclerAdapter = new FootballTeamRecyclerAdapter(mFootballTeams, mContext);
+    public void setAdapter(List<FootballTeam> footballTeams) {
+        mFootballTeamRecyclerAdapter = new FootballTeamRecyclerAdapter(footballTeams, this);
         mRecyclerViewFootballTeam.setAdapter(mFootballTeamRecyclerAdapter);
     }
 
-    public void showDialogAddNewLeague() {
-        final Dialog dialog = new Dialog(mContext);
+    /**
+     * method show dialog to add new FootballTeam
+     */
+    public void showDialogAddNewFootballTeam() {
+        final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_new_football_team);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
@@ -108,9 +106,9 @@ public class FootballTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!edtAddFootballTeamName.getText().toString().equals("")) {
-                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(), 1l, edtAddDescription.getText().toString(), null);
-                    mFootballTeams.add(footballTeam);
-                    mFootballTeamRecyclerAdapter.updateList(mFootballTeams);
+                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(),mLeagueId, edtAddDescription.getText().toString(), "img_mu");
+                    footballTeam.save();
+                    updateData();
                     dialog.dismiss();
 
                 } else {
@@ -132,5 +130,85 @@ public class FootballTeamActivity extends AppCompatActivity {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels / 4 * 2;
         mRlFootballTeamTop.setLayoutParams(params);
+    }
+
+    /**
+     * using AsyncTask to load data
+     */
+    public class loadData extends AsyncTask<Void, Void, List<FootballTeam>> {
+        long leagueId;
+        FootballTeamActivity footballTeamActivity;
+
+
+        public loadData(long leagueId, FootballTeamActivity footballTeamActivity) {
+            this.leagueId = leagueId;
+            this.footballTeamActivity = footballTeamActivity;
+        }
+
+        @Override
+        protected List<FootballTeam> doInBackground(Void... params) {
+            //List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", league.getId().toString());
+            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
+            return footballTeams;
+        }
+
+        @Override
+        protected void onPostExecute(List<FootballTeam> footballTeams) {
+            super.onPostExecute(footballTeams);
+            footballTeamActivity.setAdapter(footballTeams);
+        }
+    }
+
+    /**
+     * Using AsyncTask to update list
+     */
+    public class updateData extends AsyncTask<Void, Void, List<FootballTeam>> {
+        long mLeagueId;
+        FootballTeamRecyclerAdapter footballTeamRecyclerAdapter;
+
+        public updateData(long leagueId, FootballTeamRecyclerAdapter footballTeamRecyclerAdapter) {
+            this.mLeagueId = leagueId;
+            this.footballTeamRecyclerAdapter = footballTeamRecyclerAdapter;
+        }
+
+        @Override
+        protected List<FootballTeam> doInBackground(Void... params) {
+//            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", league.getId().toString());
+            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
+            return footballTeams;
+        }
+
+        @Override
+        protected void onPostExecute(List<FootballTeam> footballTeams) {
+            super.onPostExecute(footballTeams);
+            footballTeamRecyclerAdapter.updateList(footballTeams);
+        }
+    }
+
+    /**
+     * All method to manager data
+     */
+    public void loadData() {
+        loadData loadData = new loadData(mLeagueId, this);
+        loadData.execute();
+    }
+
+    public void updateData() {
+        updateData updateData = new updateData(mLeagueId, mFootballTeamRecyclerAdapter);
+        updateData.execute();
+    }
+
+    public void deleteFootballTeam(FootballTeam footballTeam) {
+        footballTeam.delete();
+        updateData();
+    }
+
+    public void editFootballTeam(FootballTeam footballTeam, String name, long leagueId, String description, String logo) {
+        footballTeam.setName(name);
+        footballTeam.setLogo(logo);
+        footballTeam.setLeagueId(leagueId);
+        footballTeam.setDescripstion(description);
+        footballTeam.save();
+        updateData();
     }
 }
