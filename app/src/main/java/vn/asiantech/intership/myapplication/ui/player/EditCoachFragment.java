@@ -16,6 +16,8 @@ import org.androidannotations.annotations.ViewById;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
+import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.model.Coach;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,8 +34,9 @@ public class EditCoachFragment extends BaseFragment {
 
     @Click(R.id.imgViewCancelEditCoach)
     void doCancel() {
-        replaceFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment", null);
-
+        replaceFragment(R.id.rlContentCoachInfor,
+                CoachFragment_.builder().build()
+                , "CoachFragment", null);
 
     }
 
@@ -44,6 +47,7 @@ public class EditCoachFragment extends BaseFragment {
 
     @AfterViews
     void afterView() {
+
 
     }
 

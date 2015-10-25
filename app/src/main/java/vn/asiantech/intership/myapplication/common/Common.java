@@ -5,8 +5,10 @@ package vn.asiantech.intership.myapplication.common;
  * Edit by gianhtran on 23/10/2015
  */
 public class Common {
-    public static final String KEY_LEAGUE_NAME = "league_name";
-    public static final String KEY_FOOTBALL_TEAM_NAME = "football_team_name";
     public static final String KEY_LEAGUE_ID = "league_id";
     public static final String KEY_FOOTBALL_TEAM_ID = "football_team_id";
+    public static final String KEY_COACH_NAME = "football_team_id";
+    public static final String KEY_COACH_BIRTHDAY = "football_team_id";
+    public static final String KEY_COACH_AVATAR = "football_team_id";
+    public static final String KEY_COACH_COUNTRY= "football_team_id";
 }

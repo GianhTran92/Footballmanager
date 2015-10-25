@@ -38,8 +38,6 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
 public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener{
     LeagueRecyclerAdapter mLeagueRecyclerAdapter;
     RecyclerView.LayoutManager mLayoutManager;
-    LoadLeagueData mLoadLeagueData;
-    UpdateLeagueData mUpdateLeagueData;
 
     @ViewById(R.id.recyclerViewLeague)
     RecyclerView mRecyclerViewLeague;
@@ -62,7 +60,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     @Click(R.id.imgViewSet3Line)
     void setGridLayout() {
         mImgViewSet3Line.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
-        mLayoutManager = new GridLayoutManager(LeagueActivity.this, 2, LinearLayoutManager.VERTICAL, true);
+        mLayoutManager = new GridLayoutManager(LeagueActivity.this, 2, LinearLayoutManager.VERTICAL,true);
         mImgViewSet1Line.setVisibility(View.VISIBLE);
         mImgViewSet3Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
@@ -85,7 +83,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     }
 
     public void loadDataByLayout(RecyclerView.LayoutManager layoutManager) {
-        mLoadLeagueData = new LoadLeagueData(this, layoutManager);
+        LoadLeagueData mLoadLeagueData = new LoadLeagueData(this, layoutManager);
         mLoadLeagueData.execute();
     }
 
@@ -94,7 +92,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     }
 
     public void updateData() {
-        mUpdateLeagueData = new UpdateLeagueData(mLeagueRecyclerAdapter);
+        UpdateLeagueData mUpdateLeagueData = new UpdateLeagueData(mLeagueRecyclerAdapter);
         mUpdateLeagueData.execute();
     }
 

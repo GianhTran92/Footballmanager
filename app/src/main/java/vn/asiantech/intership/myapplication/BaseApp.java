@@ -41,11 +41,15 @@ public class BaseApp extends SugarApp {
             for (int i = 0; i < 10; i++) {
                 if (i % 2 == 0) {
                     Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 40f, 100f, "0000/00/00", i, Position.POSITISON.CentreBack, "Viet Nam", "img_messi");
+                    player.save();
                 } else {
                     Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 45f, 90f, "1111/11/11", i, Position.POSITISON.GoalKeeper, "Thai Lan", "img_messi");
+                    player.save();
                 }
             }
-            Coach coach = new Coach(footballTeam.getName() + " Coach ", "0000/00/00", footballTeam.getId(), "no country", "img_coach");
+            Coach coach = new Coach(footballTeam.getName() + "Coach", "0000/00/00", footballTeam.getId(), "no country", "img_coach");
+            coach.save();
+
         }
     }
 

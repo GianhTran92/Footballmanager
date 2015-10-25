@@ -164,7 +164,6 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
             List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?", String.valueOf(mLeagueId));
-//            List<FootballTeam> footballTeams = FootballTeam.listAll(FootballTeam.class);
             return footballTeams;
         }
 
