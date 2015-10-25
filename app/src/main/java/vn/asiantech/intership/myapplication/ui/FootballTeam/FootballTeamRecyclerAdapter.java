@@ -30,6 +30,12 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
     List<FootballTeam> mFootballTeams = new ArrayList<>();
     FootballTeamActivity mFootballTeamActivity;
 
+    public interface OnCallPlayerActivity {
+        void onCall(FootballTeam footballTeam);
+    }
+
+    OnCallPlayerActivity mOnCallPlayerActivity;
+
     public FootballTeamRecyclerAdapter(List<FootballTeam> listData, FootballTeamActivity footballTeamActivity) {
         this.mFootballTeamActivity = footballTeamActivity;
         this.mFootballTeams = listData;
@@ -53,6 +59,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
         holder.tvDescriptionFootballTeam.setText(mFootballTeams.get(position).getDescripstion());
         holder.edtFootballTeamName.setVisibility(View.INVISIBLE);
         holder.edtDescriptionFootballTeam.setVisibility(View.INVISIBLE);
+        mOnCallPlayerActivity = mFootballTeamActivity;
     }
 
     @Override
@@ -95,10 +102,7 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO used interface to move another activity
-                    PlayerActivity_.intent(mFootballTeamActivity)
-                            .extra(Common.KEY_FOOTBALL_TEAM_ID, mFootballTeams.get(getPosition()).getId())
-                            .start();
+                    mOnCallPlayerActivity.onCall(mFootballTeams.get(getPosition()));
                 }
             });
         }

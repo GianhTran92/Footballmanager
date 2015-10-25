@@ -28,6 +28,12 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
     List<League> mLeagues = new ArrayList<>();
     LeagueActivity mLeagueActivity;
 
+    public interface OnCallFootballTeamActivityListener {
+        void onCall(League league);
+    }
+
+    OnCallFootballTeamActivityListener mOnCallFootballTeamActivityListener;
+
     public LeagueRecyclerAdapter(List<League> listData, LeagueActivity leagueActivity) {
         this.mLeagues = listData;
         this.mLeagueActivity = leagueActivity;
@@ -56,6 +62,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
         holder.circleImageViewLeagueLogo.setImageResource(R.drawable.img_league);
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
         holder.edtLeagueName.setVisibility(View.INVISIBLE);
+        mOnCallFootballTeamActivityListener =  mLeagueActivity;
 
     }
 
@@ -149,11 +156,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
 
         @Override
         public void onClick(View v) {
-            // TODO using interface to move another activity
-            FootballTeamActivity_.intent(mLeagueActivity)
-                    .extra(Common.KEY_LEAGUE_ID, mLeagues.get(getPosition()).getId())
-                    .start();
-
+            mOnCallFootballTeamActivityListener.onCall(mLeagues.get(getPosition()));
         }
 
         public void enableEdit() {

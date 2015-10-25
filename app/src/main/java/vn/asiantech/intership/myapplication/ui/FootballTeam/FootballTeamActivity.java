@@ -28,9 +28,10 @@ import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
 import vn.asiantech.intership.myapplication.model.League;
+import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 
 @EActivity(R.layout.activity_football_team)
-public class FootballTeamActivity extends AppCompatActivity {
+public class FootballTeamActivity extends AppCompatActivity implements FootballTeamRecyclerAdapter.OnCallPlayerActivity{
     FootballTeamRecyclerAdapter mFootballTeamRecyclerAdapter;
     League mLeague;
     RecyclerView.LayoutManager mLayoutManager;
@@ -88,6 +89,13 @@ public class FootballTeamActivity extends AppCompatActivity {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels / 4 * 2;
         mRlFootballTeamTop.setLayoutParams(params);
+    }
+
+    @Override
+    public void onCall(FootballTeam footballTeam) {
+        PlayerActivity_.intent(this)
+                .extra(Common.KEY_FOOTBALL_TEAM_ID,footballTeam.getId())
+                .start();
     }
 
     /**

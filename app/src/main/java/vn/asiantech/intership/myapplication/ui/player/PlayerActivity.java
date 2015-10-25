@@ -67,6 +67,7 @@ public class PlayerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mFootballTeamId = intent.getLongExtra(Common.KEY_FOOTBALL_TEAM_ID, 0l);
         LoadFootballTeamById loadFootballTeamById = new LoadFootballTeamById(mFootballTeamId,this);
+        loadFootballTeamById.execute();
     }
 
     public void addFragment(@IdRes int containerViewId,

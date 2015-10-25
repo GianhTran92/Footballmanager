@@ -26,14 +26,16 @@ import java.util.List;
 
 
 import vn.asiantech.intership.myapplication.R;
+import vn.asiantech.intership.myapplication.common.Common;
 import vn.asiantech.intership.myapplication.model.League;
+import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity_;
 
 /**
  * created by igianhtran on 20/10/2015
  */
 
 @EActivity(R.layout.activity_league)
-public class LeagueActivity extends AppCompatActivity {
+public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener{
     LeagueRecyclerAdapter mLeagueRecyclerAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     LoadLeagueData mLoadLeagueData;
@@ -138,6 +140,13 @@ public class LeagueActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onCall(League league) {
+        FootballTeamActivity_.intent(this)
+                .extra(Common.KEY_LEAGUE_ID,league.getId())
+                .start();
     }
 
     /**
