@@ -50,12 +50,10 @@ public class PlayerActivity extends AppCompatActivity {
         getDataFromLeagueActivity();
         Bundle bundle = new Bundle();
         bundle.putLong(Common.KEY_FOOTBALL_TEAM_ID, mFootballTeamId);
-        ListPlayerFragment listPlayerFragment = new ListPlayerFragment();
-        listPlayerFragment.setArguments(bundle);
-
-        // send data truc tiep toi using method getFootballTeamId
-        addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
         // dend data using bundle
+        ListPlayerFragment_.builder().build().setArguments(bundle);
+        addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
+        // send data truc tiep toi using method getFootballTeamId
         addFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment");
 
     }

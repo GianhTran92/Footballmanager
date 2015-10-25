@@ -35,7 +35,7 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
  */
 
 @EActivity(R.layout.activity_league)
-public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener{
+public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener {
     LeagueRecyclerAdapter mLeagueRecyclerAdapter;
     RecyclerView.LayoutManager mLayoutManager;
 
@@ -60,7 +60,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     @Click(R.id.imgViewSet3Line)
     void setGridLayout() {
         mImgViewSet3Line.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
-        mLayoutManager = new GridLayoutManager(LeagueActivity.this, 2, LinearLayoutManager.VERTICAL,true);
+        mLayoutManager = new GridLayoutManager(LeagueActivity.this, 2, LinearLayoutManager.VERTICAL,false);
         mImgViewSet1Line.setVisibility(View.VISIBLE);
         mImgViewSet3Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
@@ -143,7 +143,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     @Override
     public void onCall(League league) {
         FootballTeamActivity_.intent(this)
-                .extra(Common.KEY_LEAGUE_ID,league.getId())
+                .extra(Common.KEY_LEAGUE_ID, league.getId())
                 .start();
     }
 
@@ -162,7 +162,8 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
         @Override
         protected List<League> doInBackground(Void... params) {
-            return League.listAll(League.class);
+            List<League> leagues = League.listAll(League.class);
+            return leagues;
         }
 
         @Override
@@ -185,7 +186,8 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
         @Override
         protected List<League> doInBackground(Void... params) {
-            return League.listAll(League.class);
+            List<League> leagues = League.listAll(League.class);
+            return leagues;
         }
 
         @Override
