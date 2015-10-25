@@ -80,7 +80,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
                     imgViewSubmitEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
                     if (!edtLeagueName.getText().toString().equals("")) {
                         mLeagueActivity.editLeague(mLeagues.get(getPosition()), edtLeagueName.getText().toString(), "img_league");
-
+                        enableEdit();
 
                     } else {
                         edtLeagueName.setError(mLeagueActivity.getString(R.string.error_field_not_be_empty1));
@@ -93,9 +93,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
                 @Override
                 public void onClick(View v) {
                     imgViewCancelEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
-                    imgViewSubmitEditLeague.setVisibility(View.INVISIBLE);
-                    imgViewCancelEditLeague.setVisibility(View.INVISIBLE);
-                    imgViewEditLeague.setVisibility(View.VISIBLE);
+                    enableEdit();
                     updateList(mLeagues);
                 }
             });
@@ -104,14 +102,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
                 @Override
                 public void onClick(View v) {
                     imgViewEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
-
-                    imgViewSubmitEditLeague.setVisibility(View.VISIBLE);
-                    imgViewCancelEditLeague.setVisibility(View.VISIBLE);
-                    imgViewEditLeague.setVisibility(View.INVISIBLE);
-                    edtLeagueName.setFocusable(true);
-                    tvLeagueName.setVisibility(View.INVISIBLE);
-                    edtLeagueName.setVisibility(View.VISIBLE);
-                    edtLeagueName.setText(tvLeagueName.getText().toString());
+                    disableEdit();
                 }
             });
             itemView.setOnClickListener(this);
@@ -164,6 +155,24 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
                     .start();
 
         }
+
+        public void enableEdit() {
+            imgViewSubmitEditLeague.setVisibility(View.INVISIBLE);
+            imgViewCancelEditLeague.setVisibility(View.INVISIBLE);
+            imgViewEditLeague.setVisibility(View.VISIBLE);
+            tvLeagueName.setVisibility(View.VISIBLE);
+        }
+
+        public void disableEdit() {
+            imgViewSubmitEditLeague.setVisibility(View.VISIBLE);
+            imgViewCancelEditLeague.setVisibility(View.VISIBLE);
+            imgViewEditLeague.setVisibility(View.INVISIBLE);
+            edtLeagueName.setFocusable(true);
+            tvLeagueName.setVisibility(View.INVISIBLE);
+            edtLeagueName.setVisibility(View.VISIBLE);
+            edtLeagueName.setText(tvLeagueName.getText().toString());
+        }
+
 
     }
 
