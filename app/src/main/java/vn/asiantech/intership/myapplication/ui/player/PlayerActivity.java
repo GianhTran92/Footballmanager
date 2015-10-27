@@ -21,15 +21,16 @@ import org.androidannotations.annotations.ViewById;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.model.Coach;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
 
 /**
  * created by gianhtran on 21/10/2015
  */
 @EActivity(R.layout.activity_player)
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity implements CoachFragment.OnSendCoachData{
 
-    String mFootballTeamName;
+    Coach mCoach;
     long mFootballTeamId;
 
     @ViewById(R.id.circleImgViewFootballTeamLogoPlayer)
@@ -44,7 +45,6 @@ public class PlayerActivity extends AppCompatActivity {
         this.finish();
     }
 
-
     @AfterViews
     void afterView() {
         getDataFromLeagueActivity();
@@ -55,7 +55,6 @@ public class PlayerActivity extends AppCompatActivity {
         addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
         // send data truc tiep toi using method getFootballTeamId
         addFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment");
-
     }
 
     /**
@@ -65,10 +64,19 @@ public class PlayerActivity extends AppCompatActivity {
     public long getFootballTeamId(){
         return mFootballTeamId;
     }
+
+    /**
+     * Fragment can access this method to get coach object
+     * @return
+     */
+
+    public Coach getCoach(){
+        return mCoach;
+    }
+
     public PlayerActivity getActivity(){
         return this;
     }
-
 
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
@@ -88,9 +96,15 @@ public class PlayerActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void processFinish(Coach coach) {
+        mCoach = coach;
+    }
+
     /**
      * Using AsyncTask to load FootballTeam by ID and show on UI
      */
+
     public class LoadFootballTeamById extends AsyncTask<Void, Void, FootballTeam> {
         long mFootballTeamId;
         PlayerActivity mPlayerActivity;
@@ -108,8 +122,10 @@ public class PlayerActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(FootballTeam footballTeam) {
             super.onPostExecute(footballTeam);
-            TextView mTvFootballTeamNamePlayer = (TextView) mPlayerActivity.findViewById(R.id.tvFootballTeamNamePlayer);
-            TextView mTvDescriptionPlayer = (TextView) mPlayerActivity.findViewById(R.id.tvDescriptionPlayer);
+            TextView mTvFootballTeamNamePlayer =
+                    (TextView) mPlayerActivity.findViewById(R.id.tvFootballTeamNamePlayer);
+            TextView mTvDescriptionPlayer =
+                    (TextView) mPlayerActivity.findViewById(R.id.tvDescriptionPlayer);
             mTvFootballTeamNamePlayer.setText(footballTeam.getName());
             mTvDescriptionPlayer.setText(footballTeam.getDescripstion());
         }

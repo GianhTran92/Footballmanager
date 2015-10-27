@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btnAddLayerByList"
+        android:layout_alignParentTop="true"
+        android:text="@string/button.choice.player.text"
+        android:background="@drawable/custom_shape_pink"
+        android:layout_margin="@dimen/activity.button.add.new.league.margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnAddNewPlayer"
+        android:text="@string/button.new.player.text"
+        android:layout_below="@+id/btnAddLayerByList"
+        android:background="@drawable/custom_shape"
+        android:visibility="gone"
+        android:layout_margin="@dimen/activity.button.add.new.league.margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewPlayerFree"
+        android:layout_below="@+id/btnAddNewPlayer"
+        android:visibility="gone"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/rlContentNewPlayer"
+        android:layout_below="@+id/btnAddNewPlayer"
+        android:padding="@dimen/recycler.item.content.margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edtNewPlayerName"
+            android:hint="player name"
+            android:gravity="center"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtNewPlayerBirthday"
+            android:gravity="center"
+            android:layout_below="@+id/edtNewPlayerName"
+            android:hint="Player birthday"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtNewPlayerHeight"
+            android:gravity="center"
+            android:layout_below="@+id/edtNewPlayerBirthday"
+            android:hint="Player height"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtNewPlayerWeight"
+            android:gravity="center"
+            android:layout_below="@+id/edtNewPlayerHeight"
+            android:hint="Player height"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/edtNewPlayerNumber"
+            android:gravity="center"
+            android:layout_below="@+id/edtNewPlayerWeight"
+            android:hint="Player number"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/spnNewPlayerCountry"
+            android:layout_below="@+id/edtNewPlayerNumber"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/activity.button.add.new.league.margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <Spinner
+            android:id="@+id/spnNewPlayerPosition"
+            android:layout_below="@+id/edtNewPlayerNumber"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity.button.add.new.league.margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/circleImgViewNewPlayerAvatar"
+            android:layout_below="@+id/spnNewPlayerPosition"
+            android:layout_width="@dimen/recycler.item.league.logo.size"
+            android:layout_height="@dimen/recycler.item.league.logo.size"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity.button.add.new.league.margin"
+            android:src="@drawable/img_mu_logo"
+            app:civ_border_color="@android:color/background_light"
+            app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+        <Button
+            android:id="@+id/btnSubmitNewPlayer"
+            android:text="@string/button.submit"
+            android:background="@drawable/custom_shape_pink"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spnNewPlayerPosition"
+            android:layout_margin="@dimen/activity.button.add.new.league.margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnCancelNewPlayer"
+            android:background="@drawable/custom_shape"
+            android:text="@string/button.cancel"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/btnSubmitNewPlayer"
+            android:layout_height="wrap_content" />
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

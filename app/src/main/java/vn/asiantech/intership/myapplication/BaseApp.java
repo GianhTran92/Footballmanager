@@ -16,7 +16,7 @@ import vn.asiantech.intership.myapplication.model.Position;
  */
 public class BaseApp extends SugarApp {
 
-
+//
 //    public void createDummyLeagueData() {
 //        for (int i = 0; i < 2; i++) {
 //            League league = new League("FA CUP" + i, "img_league");
@@ -40,10 +40,10 @@ public class BaseApp extends SugarApp {
 //        for (FootballTeam footballTeam : footballTeams) {
 //            for (int i = 0; i < 10; i++) {
 //                if (i % 2 == 0) {
-//                    Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 40f, 100f, "0000/00/00", i, Position.POSITISON.CentreBack, "Viet Nam", "img_messi");
+//                    Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 40f, 100f, "0000/00/00", i, Position.POSITISON.GK, "Viet Nam", "img_messi");
 //                    player.save();
 //                } else {
-//                    Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 45f, 90f, "1111/11/11", i, Position.POSITISON.GoalKeeper, "Thai Lan", "img_messi");
+//                    Player player = new Player(footballTeam.getId(), footballTeam.getName() + " player " + i, 45f, 90f, "1111/11/11", i, Position.POSITISON.CM, "Thai Lan", "img_messi");
 //                    player.save();
 //                }
 //            }

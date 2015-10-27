@@ -45,6 +45,20 @@ public class Player extends SugarRecord {
         this.avatar = avatar;
     }
 
+    public Player(Player player) {
+        this.setTeamId(player.getTeamId());
+        this.setId(player.getId());
+        this.setName(player.getName());
+        this.setHeight(player.getHeight());
+        this.setWeight(player.getWeight());
+        this.setBird(player.getBird());
+        this.setNumber(player.getNumber());
+        this.setPositison(player.getPositison());
+        this.setCountry(player.getCountry());
+        this.setAvatar(player.getAvatar());
+
+    }
+
     public String getName() {
         return name;
     }

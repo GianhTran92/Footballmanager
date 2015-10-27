@@ -25,6 +25,13 @@ import vn.asiantech.intership.myapplication.model.Coach;
  */
 @EFragment(R.layout.fragment_coach)
 public class CoachFragment extends BaseFragment implements LoadCoachAsyncResponse {
+
+    public interface OnSendCoachData {
+        void processFinish(Coach coach);
+    }
+
+    OnSendCoachData delegate;
+
     @ViewById(R.id.circleImgViewCoachAvatar)
     CircleImageView mCircleImgViewCoachAvatar;
     @ViewById(R.id.tvCoachName)
@@ -33,17 +40,13 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
 
     @Click(R.id.imgViewCoachDetail)
     void showDetailCoach() {
-//        Bundle bundle = new Bundle();
-//        bundle.putString(Common.KEY_COACH_NAME,mCoach.getName());
-//        bundle.putString(Common.KEY_COACH_BIRTHDAY,mCoach.getBirthday());
-//        bundle.putLong(Common.KEY_FOOTBALL_TEAM_ID, mCoach.getTeamId());
-//        bundle.putString(Common.KEY_COACH_COUNTRY, mCoach.getCountry());
-//        CoachDetailFragment_.builder().build().setArguments(bundle);
+        delegate.processFinish(mCoach);
         replaceFragment(R.id.rlContentCoachInfor, CoachDetailFragment_.builder().build(), "CoachDetailFragment", null);
     }
 
     @AfterViews
     void afterView() {
+        delegate = (PlayerActivity) getActivity();
         PlayerActivity playerActivity = (PlayerActivity) getActivity();
         LoadDataByFootBallTeamId loadDataByFootBallTeamId = new LoadDataByFootBallTeamId(playerActivity.getFootballTeamId());
         loadDataByFootBallTeamId.delegate = this;
@@ -79,6 +82,16 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
             super.onPostExecute(coaches);
             delegate.processFinish(coaches.get(0));
         }
+    }
+
+    public void sendDataUsingBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Common.KEY_COACH_NAME, mCoach.getName());
+        bundle.putString(Common.KEY_COACH_BIRTHDAY, mCoach.getBirthday());
+        bundle.putLong(Common.KEY_COACH_TEAMID, mCoach.getTeamId());
+        bundle.putString(Common.KEY_COACH_AVATAR, mCoach.getAvatar());
+        bundle.putString(Common.KEY_COACH_COUNTRY, mCoach.getCountry());
+        CoachDetailFragment_.builder().build().setArguments(bundle);
     }
 
 }

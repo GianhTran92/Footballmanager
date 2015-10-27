@@ -24,7 +24,8 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
 /**
  * Created by igianhtran on 20/10/2015.
  */
-public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAdapter.LeagueRecyclerHolder> {
+public class LeagueRecyclerAdapter extends
+        RecyclerView.Adapter<LeagueRecyclerAdapter.LeagueRecyclerHolder> {
     List<League> mLeagues = new ArrayList<>();
     LeagueActivity mLeagueActivity;
 
@@ -62,7 +63,7 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
         holder.circleImageViewLeagueLogo.setImageResource(R.drawable.img_league);
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
         holder.edtLeagueName.setVisibility(View.INVISIBLE);
-        mOnCallFootballTeamActivityListener =  mLeagueActivity;
+        mOnCallFootballTeamActivityListener = mLeagueActivity;
 
     }
 
@@ -77,16 +78,20 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
 
         public LeagueRecyclerHolder(View itemView) {
             super(itemView);
-            circleImageViewLeagueLogo = (CircleImageView) itemView.findViewById(R.id.circleImgViewLeagueLogoItem);
+            circleImageViewLeagueLogo =
+                    (CircleImageView) itemView.findViewById(R.id.circleImgViewLeagueLogoItem);
             edtLeagueName = (EditText) itemView.findViewById(R.id.edtLeagueName);
             tvLeagueName = (TextView) itemView.findViewById(R.id.tvLeagueName);
             imgViewSubmitEditLeague = (ImageView) itemView.findViewById(R.id.imgViewSubmitEditLeague);
             imgViewSubmitEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewSubmitEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
+                    imgViewSubmitEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity,
+                            R.anim.abc_popup_enter));
                     if (!edtLeagueName.getText().toString().equals("")) {
-                        mLeagueActivity.editLeague(mLeagues.get(getPosition()), edtLeagueName.getText().toString(), "img_league");
+                        mLeagueActivity.editLeague(mLeagues.get(getPosition()),
+                                edtLeagueName.getText().toString(),
+                                "img_league");
                         enableEdit();
 
                     } else {
@@ -99,7 +104,8 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             imgViewCancelEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewCancelEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
+                    imgViewCancelEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity,
+                            R.anim.abc_popup_enter));
                     enableEdit();
                     updateList(mLeagues);
                 }
@@ -108,7 +114,8 @@ public class LeagueRecyclerAdapter extends RecyclerView.Adapter<LeagueRecyclerAd
             imgViewEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity, R.anim.abc_popup_enter));
+                    imgViewEditLeague.startAnimation(AnimationUtils.loadAnimation(mLeagueActivity,
+                            R.anim.abc_popup_enter));
                     disableEdit();
                 }
             });

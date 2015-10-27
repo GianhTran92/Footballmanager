@@ -26,7 +26,8 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
  * Created by igianhtran on 20/10/2015.
  * Edited by gianhtran on 23/10/2015
  */
-public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
+public class FootballTeamRecyclerAdapter extends
+        RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
     List<FootballTeam> mFootballTeams = new ArrayList<>();
     FootballTeamActivity mFootballTeamActivity;
 
@@ -36,7 +37,8 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
 
     OnCallPlayerActivity mOnCallPlayerActivity;
 
-    public FootballTeamRecyclerAdapter(List<FootballTeam> listData, FootballTeamActivity footballTeamActivity) {
+    public FootballTeamRecyclerAdapter(List<FootballTeam> listData,
+                                       FootballTeamActivity footballTeamActivity) {
         this.mFootballTeamActivity = footballTeamActivity;
         this.mFootballTeams = listData;
     }
@@ -77,16 +79,19 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
 
         public FootballTeamRecyclerHolder(View itemView) {
             super(itemView);
-            circleImgViewFootballTeamLogo = (CircleImageView) itemView.findViewById(R.id.circleImgViewFootballTeamLogo);
+            circleImgViewFootballTeamLogo =
+                    (CircleImageView) itemView.findViewById(R.id.circleImgViewFootballTeamLogo);
             tvFootballTeamName = (TextView) itemView.findViewById(R.id.tvFootballTeamName);
-            tvDescriptionFootballTeam = (TextView) itemView.findViewById(R.id.tvDescriptionFootballTeam);
+            tvDescriptionFootballTeam =
+                    (TextView) itemView.findViewById(R.id.tvDescriptionFootballTeam);
             imgViewEditFootballTeam = (ImageView) itemView.findViewById(R.id.imgViewEditFootballTeam);
             edtDescriptionFootballTeam = (EditText) itemView.findViewById(R.id.edtDescriptionFootballTeam);
             edtFootballTeamName = (EditText) itemView.findViewById(R.id.edtFootballTeamName);
             imgViewEditFootballTeam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity, R.anim.rotate_anim));
+                    imgViewEditFootballTeam.startAnimation(AnimationUtils.loadAnimation(mFootballTeamActivity,
+                            R.anim.rotate_anim));
                     showDialogEditFootballTeam();
 
                 }
@@ -112,10 +117,14 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
             dialog.setContentView(R.layout.dialog_new_football_team);
             dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
 
-            final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
-            final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
-            Button btnCancelAddFootballTeam = (Button) dialog.findViewById(R.id.btnCancelAddFootballTeam);
-            Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
+            final EditText edtAddFootballTeamName =
+                    (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
+            final EditText edtAddDescription =
+                    (EditText) dialog.findViewById(R.id.edtAddDescription);
+            Button btnCancelAddFootballTeam =
+                    (Button) dialog.findViewById(R.id.btnCancelAddFootballTeam);
+            Button btnSubmitAddFootballTeam =
+                    (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
 
             edtAddFootballTeamName.setText(tvFootballTeamName.getText());
             edtAddDescription.setText(tvDescriptionFootballTeam.getText());
@@ -124,7 +133,10 @@ public class FootballTeamRecyclerAdapter extends RecyclerView.Adapter<FootballTe
                 @Override
                 public void onClick(View v) {
                     if (!edtAddFootballTeamName.getText().toString().equals("")) {
-                        mFootballTeamActivity.editFootballTeam(mFootballTeams.get(getPosition()), edtAddFootballTeamName.getText().toString(), edtAddDescription.getText().toString(), "img_mu");
+                        mFootballTeamActivity.editFootballTeam(mFootballTeams.get(getPosition()),
+                                edtAddFootballTeamName.getText().toString(),
+                                edtAddDescription.getText().toString(),
+                                "img_mu");
                         dialog.dismiss();
                     } else {
                         edtAddFootballTeamName.setError(mFootballTeamActivity.getString(R.string.error_field_not_be_empty));

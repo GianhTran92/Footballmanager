@@ -23,4 +23,5 @@
     <dimen name="fragment.player.detail.tvs.margin.left">20dp</dimen>
     <dimen name="custom.league.recycler.margin.left.and.right">1dp</dimen>
     <dimen name="floating.button.action.margin">16dp</dimen>
+    <dimen name="fragment_player_detail_spiner_height">40dp</dimen>
 </resources>

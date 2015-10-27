@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/recycler.item.content.margin"
-        android:src="@drawable/ic_fast_rewind_black_18dp" />
+        android:src="@drawable/ic_navigate_before_black_18dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/circleImgViewCoachAvatarDetail"

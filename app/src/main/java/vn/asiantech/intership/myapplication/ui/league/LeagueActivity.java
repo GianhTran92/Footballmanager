@@ -47,7 +47,8 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
     @Click(R.id.imgViewSet1Line)
     void setLinearLayout() {
-        mImgViewSet1Line.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
+        mImgViewSet1Line.startAnimation(AnimationUtils.loadAnimation(this,
+                R.anim.abc_popup_enter));
         mLayoutManager = new LinearLayoutManager(LeagueActivity.this);
         mImgViewSet1Line.setVisibility(View.INVISIBLE);
         mImgViewSet3Line.setVisibility(View.VISIBLE);
@@ -60,7 +61,10 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     @Click(R.id.imgViewSet3Line)
     void setGridLayout() {
         mImgViewSet3Line.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
-        mLayoutManager = new GridLayoutManager(LeagueActivity.this, 2, LinearLayoutManager.VERTICAL,false);
+        mLayoutManager = new GridLayoutManager(LeagueActivity.this,
+                2,
+                LinearLayoutManager.VERTICAL,
+                false);
         mImgViewSet1Line.setVisibility(View.VISIBLE);
         mImgViewSet3Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
@@ -96,7 +100,9 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         mUpdateLeagueData.execute();
     }
 
-    public void setAdapter(List<League> mLeagues, LeagueActivity leagueActivity, RecyclerView.LayoutManager layoutManager) {
+    public void setAdapter(List<League> mLeagues,
+                           LeagueActivity leagueActivity,
+                           RecyclerView.LayoutManager layoutManager) {
         mRecyclerViewLeague.setLayoutManager(layoutManager);
         mLeagueRecyclerAdapter = new LeagueRecyclerAdapter(mLeagues, leagueActivity);
         mRecyclerViewLeague.setAdapter(mLeagueRecyclerAdapter);
@@ -155,7 +161,8 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         LeagueActivity leagueActivity;
         RecyclerView.LayoutManager layoutManager;
 
-        public LoadLeagueData(LeagueActivity leagueActivity, RecyclerView.LayoutManager layoutManager) {
+        public LoadLeagueData(LeagueActivity leagueActivity,
+                              RecyclerView.LayoutManager layoutManager) {
             this.leagueActivity = leagueActivity;
             this.layoutManager = layoutManager;
         }

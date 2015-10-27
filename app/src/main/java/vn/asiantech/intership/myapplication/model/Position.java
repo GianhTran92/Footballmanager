@@ -5,6 +5,23 @@ package vn.asiantech.intership.myapplication.model;
  */
 public class Position {
     public enum POSITISON {
-        GoalKeeper,CentreBack,RightBack,LeftBack,CentreMidfield,RightMidfield,LeftMidfield,CentreForward
+        GK("GoalKeeper"),
+        CB("CentreBack"),
+        RB("RightBack"),
+        LB("LeftBack"),
+        CM("CentreMidfield"),
+        RM("RightMidfield"),
+        LM("LeftMidfield"),
+        CF("CentreForward");
+        private String thePosition;
+
+        POSITISON(String aState) {
+            thePosition = aState;
+        }
+
+        @Override public String toString() {
+            return thePosition;
+        }
+
     }
 }

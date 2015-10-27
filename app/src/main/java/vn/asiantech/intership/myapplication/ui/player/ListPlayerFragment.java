@@ -34,7 +34,7 @@ import vn.asiantech.intership.myapplication.model.Position;
  */
 
 @EFragment(R.layout.fragment_list_player)
-public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface{
+public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface,PlayerRecyclerAdapter.OnCallPlayerDetail {
     RecyclerView.LayoutManager mLayoutManager;
     PlayerRecyclerAdapter mPlayerRecyclerAdapter;
     Context mContext = getActivity();
@@ -51,7 +51,7 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
     TextView test;
 
     @Click(R.id.fLoatingBtnAddPlayer)
-    void addPlayer(){
+    void addPlayer() {
 
     }
 
@@ -62,7 +62,8 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         mFootballTeamId = playerActivity.getFootballTeamId();
         test.setText(mFootballTeamId + "");
 
-        LoadListDataPlayerByFootballTeamId loadListDataPlayerByFootballTeamId = new LoadListDataPlayerByFootballTeamId(mFootballTeamId);
+        LoadListDataPlayerByFootballTeamId loadListDataPlayerByFootballTeamId
+                = new LoadListDataPlayerByFootballTeamId(mFootballTeamId);
         loadListDataPlayerByFootballTeamId.delegate = this;
         loadListDataPlayerByFootballTeamId.execute();
 
@@ -71,7 +72,7 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
     public void setAdapter(List<Player> players) {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewPlayer.setLayoutManager(mLayoutManager);
-        mPlayerRecyclerAdapter = new PlayerRecyclerAdapter(players, mContext,listPlayerFragment);
+        mPlayerRecyclerAdapter = new PlayerRecyclerAdapter(players, mContext, listPlayerFragment);
         mRecyclerViewPlayer.setAdapter(mPlayerRecyclerAdapter);
     }
 
@@ -80,20 +81,35 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         setAdapter(players);
     }
 
+    @Override
+    public void processSuccess(long playerId) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(Common.KEY_PLAYER_ID, playerId);
+        PlayerDetailFragment_ playerDetailFragment_ = new PlayerDetailFragment_();
+        playerDetailFragment_.setArguments(bundle);
+        this.replaceFragment(R.id.frameContain,
+                playerDetailFragment_,
+                "PlayerDetailFragment_",
+                null);
+    }
+
     /**
      * Using AsyncTask to load data
      */
 
-    public class LoadListDataPlayerByFootballTeamId extends AsyncTask<Void,Void,List<Player>> {
+    public class LoadListDataPlayerByFootballTeamId extends AsyncTask<Void, Void, List<Player>> {
         long mFootballTeamId;
         LoadLayerInterface delegate = null;
+
         public LoadListDataPlayerByFootballTeamId(long id) {
             this.mFootballTeamId = id;
         }
 
         @Override
         protected List<Player> doInBackground(Void... params) {
-            List<Player> players = Player.find(Player.class,"teamId=?",String.valueOf(mFootballTeamId));
+            List<Player> players = Player.find(Player.class,
+                    "teamId=?",
+                    String.valueOf(mFootballTeamId));
             return players;
         }
 

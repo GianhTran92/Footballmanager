@@ -13,43 +13,49 @@
         android:src="@drawable/img_messi"
         app:civ_border_color="@android:color/background_light"
         app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
     <RelativeLayout
         android:id="@+id/rlPlayerContentInfor"
-        android:layout_toRightOf="@+id/circleImgViewAvatar"
-        android:layout_centerInParent="true"
-        android:padding="5dp"
-        android:background="@drawable/custom_shape_white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/circleImgViewAvatar"
+        android:background="@drawable/custom_shape_white"
+        android:padding="5dp">
+
         <TextView
             android:id="@+id/tvPlayerName"
-            android:text="Leonal Messi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/tvPlayerOld"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvPlayerName"
-            android:text="24"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tvPlayerName" />
+
         <TextView
             android:id="@+id/tvPlayerPosition"
-            android:text="Centre Forward"
-            android:textAllCaps="true"
-            android:textColor="@android:color/holo_red_light"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imgViewPlayerDetail"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/dialog.new.league.content.padding"
             android:layout_marginRight="@dimen/dialog.new.league.content.padding"
-            android:layout_height="wrap_content" />
+            android:layout_toLeftOf="@+id/imgViewPlayerDetail"
+            android:layout_toStartOf="@+id/imgViewPlayerDetail"
+            android:textAllCaps="true"
+            android:textColor="@android:color/holo_red_light" />
+
         <ImageView
             android:id="@+id/imgViewPlayerDetail"
-            android:src="@drawable/ico_next_hd"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/hello_world"
+            android:src="@drawable/ico_next_hd" />
 
     </RelativeLayout>
 
