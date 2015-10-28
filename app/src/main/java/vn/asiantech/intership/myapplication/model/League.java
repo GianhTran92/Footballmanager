@@ -17,7 +17,6 @@ public class League extends SugarRecord {
     String logo;
 
     public League() {
-
     }
 
     public League(String name, String logo) {

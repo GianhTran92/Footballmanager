@@ -28,7 +28,9 @@ import vn.asiantech.intership.myapplication.model.Coach;
 @EFragment(R.layout.fragment_edit_coach)
 public class EditCoachFragment extends BaseFragment {
     Coach mCoach;
+
     String mCoachCountry;
+
     @ViewById(R.id.spnCoachCountry)
     Spinner mSpnCoachCountry;
 
@@ -56,13 +58,10 @@ public class EditCoachFragment extends BaseFragment {
             replaceFragment(R.id.rlContentCoachInfor,
                     CoachDetailFragment_.builder().build()
                     , "CoachDetailFragment_", null);
-
-
         } else {
             //TODO using @String
             mEdtEditCoachName.setError("erer");
         }
-
     }
 
     @AfterViews
@@ -71,14 +70,11 @@ public class EditCoachFragment extends BaseFragment {
         setSpinerAdapter();
         mEdtEditCoachName.setText(mCoach.getName());
         mEdtEditCoachBirthday.setText(mCoach.getBirthday());
-
-
     }
 
     public Coach getCoach() {
         PlayerActivity playerActivity = (PlayerActivity) getActivity();
         return playerActivity.getCoach();
-
     }
 
     public void setSpinerAdapter() {
@@ -109,8 +105,11 @@ public class EditCoachFragment extends BaseFragment {
      */
     public class SaveCoach extends AsyncTask<Void, Void, Void> {
         Coach mCoach;
+
         String mName;
+
         String mBirth;
+
         String mCountry;
 
         public SaveCoach(Coach coach, String name, String birth, String country) {

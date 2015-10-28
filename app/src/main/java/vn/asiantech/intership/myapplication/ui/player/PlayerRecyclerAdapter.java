@@ -25,9 +25,13 @@ public class PlayerRecyclerAdapter extends
     public interface OnCallPlayerDetail {
         void processSuccess(long playerId);
     }
+
     OnCallPlayerDetail delegate;
+
     List<Player> mPlayers = new ArrayList<>();
+
     Context mContext;
+    
     ListPlayerFragment mListPlayerFragment;
 
     public PlayerRecyclerAdapter(List<Player> listData,

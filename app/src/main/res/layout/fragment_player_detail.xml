@@ -78,6 +78,8 @@
 
             <EditText
                 android:id="@+id/tvPlayerBirthday"
+                android:focusable="false"
+                android:editable="false"
                 android:layout_width="wrap_content"
                 android:inputType="date"
                 android:layout_height="wrap_content"
@@ -185,13 +187,11 @@
                 android:layout_height="wrap_content">
 
             </Spinner>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
                 android:text="@string/fragment.player.detail.tv.number" />
-
             <EditText
                 android:id="@+id/tvPlayerNumber"
                 android:inputType="number"

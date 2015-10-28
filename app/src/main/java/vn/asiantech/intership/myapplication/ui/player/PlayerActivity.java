@@ -29,8 +29,8 @@ import vn.asiantech.intership.myapplication.model.FootballTeam;
  */
 @EActivity(R.layout.activity_player)
 public class PlayerActivity extends AppCompatActivity implements CoachFragment.OnSendCoachData{
-
     Coach mCoach;
+
     long mFootballTeamId;
 
     @ViewById(R.id.circleImgViewFootballTeamLogoPlayer)
@@ -50,10 +50,8 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
         getDataFromLeagueActivity();
         Bundle bundle = new Bundle();
         bundle.putLong(Common.KEY_FOOTBALL_TEAM_ID, mFootballTeamId);
-        // dend data using bundle
         ListPlayerFragment_.builder().build().setArguments(bundle);
         addFragment(R.id.frameContain, ListPlayerFragment_.builder().build(), "ListPlayerFragment");
-        // send data truc tiep toi using method getFootballTeamId
         addFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment");
     }
 
@@ -93,7 +91,6 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
                 .add(containerViewId, fragment, fragmentTag)
                 .disallowAddToBackStack()
                 .commit();
-
     }
 
     @Override
@@ -104,7 +101,6 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
     /**
      * Using AsyncTask to load FootballTeam by ID and show on UI
      */
-
     public class LoadFootballTeamById extends AsyncTask<Void, Void, FootballTeam> {
         long mFootballTeamId;
         PlayerActivity mPlayerActivity;

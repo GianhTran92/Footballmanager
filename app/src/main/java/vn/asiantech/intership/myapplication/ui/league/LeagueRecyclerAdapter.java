@@ -75,7 +75,6 @@ public class LeagueRecyclerAdapter extends
         ImageView imgViewCancelEditLeague;
         TextView tvLeagueName;
 
-
         public LeagueRecyclerHolder(View itemView) {
             super(itemView);
             circleImageViewLeagueLogo =

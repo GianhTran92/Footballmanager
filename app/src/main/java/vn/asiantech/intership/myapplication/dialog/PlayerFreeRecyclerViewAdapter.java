@@ -24,20 +24,15 @@ public class PlayerFreeRecyclerViewAdapter extends
     public interface OnChoicePlayerListener{
         void getPlayerSuccess(Player player);
     }
-    OnChoicePlayerListener delegate;
 
+    OnChoicePlayerListener delegate;
 
     List<Player> mPlayers;
 
     public PlayerFreeRecyclerViewAdapter(List<Player> listData) {
         this.mPlayers = listData;
-
     }
 
-    public void updateList(List<Player> players) {
-        this.mPlayers = players;
-        notifyDataSetChanged();
-    }
     @Override
     public PlayerFreeRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -80,5 +75,4 @@ public class PlayerFreeRecyclerViewAdapter extends
             });
         }
     }
-
 }

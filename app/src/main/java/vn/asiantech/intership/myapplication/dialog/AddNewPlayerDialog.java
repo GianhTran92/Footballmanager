@@ -117,7 +117,6 @@ public class AddNewPlayerDialog extends Dialog implements LoadLayerInterface,Pla
                 mBtnAddNewPlayer.setVisibility(View.GONE);
             }
         });
-
     }
 
     public void setSpinerAdapter() {

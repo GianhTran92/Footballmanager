@@ -42,10 +42,13 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
     @ViewById(R.id.recyclerViewLeague)
     RecyclerView mRecyclerViewLeague;
+
     @ViewById(R.id.imgViewSet3Line)
     ImageView mImgViewSet3Line;
+
     @ViewById(R.id.imgViewSet1Line)
     ImageView mImgViewSet1Line;
+
     @ViewById(R.id.fLoatingBtnAddLeague)
     FloatingActionButton mFLoatingBtnAddLeague;
 

@@ -35,9 +35,13 @@ import vn.asiantech.intership.myapplication.model.Position;
 @EFragment(R.layout.fragment_list_player)
 public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface, PlayerRecyclerAdapter.OnCallPlayerDetail,AddNewPlayerDialog.OnSendPlayerListener {
     RecyclerView.LayoutManager mLayoutManager;
+
     PlayerRecyclerAdapter mPlayerRecyclerAdapter;
+
     Context mContext = getActivity();
+
     ListPlayerFragment listPlayerFragment = this;
+
     long mFootballTeamId;
 
     @ViewById(R.id.recyclerViewPlayer)
@@ -60,9 +64,7 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         PlayerActivity playerActivity = (PlayerActivity) getActivity();
         mFootballTeamId = playerActivity.getFootballTeamId();
         test.setText(mFootballTeamId + "");
-
         LoadAsyncTask();
-
     }
 
     public void LoadAsyncTask() {
@@ -170,13 +172,9 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
                     LoadAsyncTask();
                 } else
                     dialog.setEror();
-
             }
         });
-
-
         dialog.show();
-
     }
 
     /**
@@ -211,12 +209,10 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
             player.save();
             return null;
         }
-
     }
 
     public void saveNewPlayer(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
         NewPlayer newPlayer = new NewPlayer(teamId, name, weight, height, bird, number, positison, country, avatar);
         newPlayer.execute();
     }
-
 }

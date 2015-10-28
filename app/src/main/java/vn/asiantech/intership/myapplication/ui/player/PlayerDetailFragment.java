@@ -37,10 +37,15 @@ import vn.asiantech.intership.myapplication.model.Position;
 @EFragment(R.layout.fragment_player_detail)
 public class PlayerDetailFragment extends BaseFragment implements LoadPlayerByIdInterface {
     String mPlayerCountry;
+
     boolean isEdit;
+
     long mPlayerId;
+
     Player mPlayer;
+
     Position.POSITISON mPlayerPosition;
+
     @ViewById(R.id.tvInformationText)
     TextView mTvInformationText;
 
@@ -92,31 +97,26 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
                 R.anim.abc_popup_enter));
         if (isEdit) {
             showDialogCofirmBack();
-
         } else {
             this.replaceFragment(R.id.frameContain,
                     ListPlayerFragment_.builder().build(),
                     "ListPlayerFragment_",
                     null);
         }
-
     }
 
     @Click(R.id.imgViewEditPlayer)
     void doEditPlayer() {
         enableEditPlayer();
         setAdapter();
-
     }
 
     @Click(R.id.imgViewDeletePlayer)
     void doDeletePlayer() {
-
     }
 
     @Click(R.id.imgViewCheckoutPlayer)
     void doCheckoutPlayer() {
-
     }
 
     @Click(R.id.imgViewSubmitEditPlayer)
@@ -134,10 +134,7 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
                     ListPlayerFragment_.builder().build(),
                     "ListPlayerFragment_",
                     null);
-
-
         }
-
     }
 
     @AfterViews
@@ -287,7 +284,14 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
                            Float height,
                            int number,
                            Position.POSITISON positison) {
-        EditPlayer editPlayer = new EditPlayer(player, name, birth, country, weight, height, number, positison);
+        EditPlayer editPlayer = new EditPlayer(player,
+                name,
+                birth,
+                country,
+                weight,
+                height,
+                number,
+                positison);
         editPlayer.execute();
     }
 
@@ -400,6 +404,4 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         });
         dialog.show();
     }
-
-
 }

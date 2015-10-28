@@ -26,12 +26,14 @@ import java.util.List;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.model.Coach;
 import vn.asiantech.intership.myapplication.model.FootballTeam;
 import vn.asiantech.intership.myapplication.model.League;
+import vn.asiantech.intership.myapplication.model.Player;
 import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 
 @EActivity(R.layout.activity_football_team)
-public class FootballTeamActivity extends AppCompatActivity implements FootballTeamRecyclerAdapter.OnCallPlayerActivity{
+public class FootballTeamActivity extends AppCompatActivity implements FootballTeamRecyclerAdapter.OnCallPlayerActivity {
     FootballTeamRecyclerAdapter mFootballTeamRecyclerAdapter;
 
     RecyclerView.LayoutManager mLayoutManager;
@@ -40,10 +42,13 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
 
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
+
     @ViewById(R.id.fLoatingBtnAddFootballTeam)
     FloatingActionButton mFLoatingBtnAddFootballTeam;
+
     @ViewById(R.id.rlFootballTeamTop)
     RelativeLayout mRlFootballTeamTop;
+
     @ViewById(R.id.imgViewBackFromFootballTeam)
     ImageView mImgViewBackFromFootballTeam;
 
@@ -55,7 +60,7 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
     @Click(R.id.imgViewBackFromFootballTeam)
     void doBack() {
         mImgViewBackFromFootballTeam.startAnimation(AnimationUtils.loadAnimation(this,
-                                                                                 R.anim.abc_popup_enter));
+                R.anim.abc_popup_enter));
         this.finish();
     }
 
@@ -75,7 +80,7 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
     public void getDataFromLeagueActivity() {
         Intent intent = getIntent();
         mLeagueId = intent.getLongExtra(Common.KEY_LEAGUE_ID, 0l);
-        LoadLeagueById loadLeagueById = new LoadLeagueById(mLeagueId,this);
+        LoadLeagueById loadLeagueById = new LoadLeagueById(mLeagueId, this);
         loadLeagueById.execute();
     }
 
@@ -93,7 +98,7 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
     @Override
     public void onCall(FootballTeam footballTeam) {
         PlayerActivity_.intent(this)
-                .extra(Common.KEY_FOOTBALL_TEAM_ID,footballTeam.getId())
+                .extra(Common.KEY_FOOTBALL_TEAM_ID, footballTeam.getId())
                 .start();
     }
 
@@ -104,14 +109,14 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         long mLeagueId;
         FootballTeamActivity mFootballTeamActivity;
 
-        public LoadLeagueById(long leagueId,FootballTeamActivity footballTeamActivity) {
+        public LoadLeagueById(long leagueId, FootballTeamActivity footballTeamActivity) {
             this.mLeagueId = leagueId;
             this.mFootballTeamActivity = footballTeamActivity;
         }
 
         @Override
         protected League doInBackground(Void... params) {
-            return League.findById(League.class,mLeagueId);
+            return League.findById(League.class, mLeagueId);
         }
 
         @Override
@@ -138,8 +143,8 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
             List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class,
-                                                                 "leagueId = ?",
-                                                                 String.valueOf(mLeagueId));
+                    "leagueId = ?",
+                    String.valueOf(mLeagueId));
             return footballTeams;
         }
 
@@ -165,8 +170,8 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
             List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class,
-                                                                 "leagueId=?",
-                                                                 String.valueOf(mLeagueId));
+                    "leagueId=?",
+                    String.valueOf(mLeagueId));
             return footballTeams;
         }
 
@@ -191,7 +196,8 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
     }
 
     public void deleteFootballTeam(FootballTeam footballTeam) {
-        footballTeam.delete();
+        PutFreeZoneByTeamId putFreeZoneByTeamId = new PutFreeZoneByTeamId(footballTeam);
+        putFreeZoneByTeamId.execute();
         updateData();
     }
 
@@ -225,9 +231,9 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
             public void onClick(View v) {
                 if (!edtAddFootballTeamName.getText().toString().equals("")) {
                     FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(),
-                                                                 mLeagueId,
-                                                                 edtAddDescription.getText().toString(),
-                                                                 "img_mu");
+                            mLeagueId,
+                            edtAddDescription.getText().toString(),
+                            "img_mu");
                     footballTeam.save();
                     updateData();
                     dialog.dismiss();
@@ -245,5 +251,32 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
             }
         });
         dialog.show();
+    }
+
+    /**
+     * Using AsyncTask to put player and coach into freeZone when delete footballTeam
+     */
+    public class PutFreeZoneByTeamId extends AsyncTask<Void, Void, Void> {
+        FootballTeam mFootballTeam;
+
+        public PutFreeZoneByTeamId(FootballTeam mFootballTeam) {
+            this.mFootballTeam = mFootballTeam;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            List<Player> players = Player.find(Player.class, "teamId=?", String.valueOf(mFootballTeam.getId()));
+            List<Coach> coaches = Coach.find(Coach.class, "teamId=?", String.valueOf(mFootballTeam.getId()));
+            for (Player player : players) {
+                player.setTeamId(-1l);
+                player.save();
+            }
+            for (Coach coach : coaches) {
+                coach.setTeamId(-1l);
+                coach.save();
+            }
+            mFootballTeam.delete();
+            return null;
+        }
     }
 }

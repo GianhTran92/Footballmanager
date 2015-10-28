@@ -41,13 +41,18 @@ public class CoachDetailFragment extends BaseFragment {
 
     @Click(R.id.imgViewBackFromCoachDetailFragment)
     void doBack() {
-        replaceFragment(R.id.rlContentCoachInfor, CoachFragment_.builder().build(), "CoachFragment", null);
+        replaceFragment(R.id.rlContentCoachInfor,
+                CoachFragment_.builder().build(),
+                "CoachFragment",
+                null);
     }
 
     @Click(R.id.imgViewEditCoach)
     void doEdit() {
-        replaceFragment(R.id.rlContentCoachInfor, EditCoachFragment_.builder().build(), "EditCoachFragment", null);
-
+        replaceFragment(R.id.rlContentCoachInfor,
+                EditCoachFragment_.builder().build(),
+                "EditCoachFragment",
+                null);
     }
 
     @AfterViews
