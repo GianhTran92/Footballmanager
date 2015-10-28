@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -19,12 +18,12 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
 import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.dialog.AddNewPlayerDialog;
 import vn.asiantech.intership.myapplication.model.Player;
 import vn.asiantech.intership.myapplication.model.Position;
 
@@ -34,7 +33,7 @@ import vn.asiantech.intership.myapplication.model.Position;
  */
 
 @EFragment(R.layout.fragment_list_player)
-public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface,PlayerRecyclerAdapter.OnCallPlayerDetail {
+public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface, PlayerRecyclerAdapter.OnCallPlayerDetail,AddNewPlayerDialog.OnSendPlayerListener {
     RecyclerView.LayoutManager mLayoutManager;
     PlayerRecyclerAdapter mPlayerRecyclerAdapter;
     Context mContext = getActivity();
@@ -52,7 +51,7 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
 
     @Click(R.id.fLoatingBtnAddPlayer)
     void addPlayer() {
-
+        showDialogAddNewPlayer(getActivity());
     }
 
     @AfterViews
@@ -62,11 +61,15 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         mFootballTeamId = playerActivity.getFootballTeamId();
         test.setText(mFootballTeamId + "");
 
+        LoadAsyncTask();
+
+    }
+
+    public void LoadAsyncTask() {
         LoadListDataPlayerByFootballTeamId loadListDataPlayerByFootballTeamId
                 = new LoadListDataPlayerByFootballTeamId(mFootballTeamId);
         loadListDataPlayerByFootballTeamId.delegate = this;
         loadListDataPlayerByFootballTeamId.execute();
-
     }
 
     public void setAdapter(List<Player> players) {
@@ -91,6 +94,32 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
                 playerDetailFragment_,
                 "PlayerDetailFragment_",
                 null);
+    }
+
+    @Override
+    public void sendSuccess(Player player) {
+        SavePlayerInFreezoneToTeam savePlayerInFreezoneToTeam = new SavePlayerInFreezoneToTeam(player,mFootballTeamId);
+        savePlayerInFreezoneToTeam.execute();
+        LoadAsyncTask();
+    }
+
+    /**
+     * Using AsyncTask to add a player in freeZone to team
+     */
+    public class SavePlayerInFreezoneToTeam extends AsyncTask<Void,Void,Void> {
+        Player mPlayer;
+        long mTeamId;
+        public SavePlayerInFreezoneToTeam(Player player, long id) {
+            this.mPlayer = player;
+            this.mTeamId = id;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mPlayer.setTeamId(mTeamId);
+            mPlayer.save();
+            return null;
+        }
     }
 
     /**
@@ -119,4 +148,75 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
             delegate.processFinish(players);
         }
     }
+
+    public void showDialogAddNewPlayer(Context context) {
+        final AddNewPlayerDialog dialog = new AddNewPlayerDialog(context);
+        dialog.setDelegate(this);
+        Button mBtnSubmitNewPlayer = (Button) dialog.findViewById(R.id.btnSubmitNewPlayer);
+        Button mBtnCancelNewPlayer = (Button) dialog.findViewById(R.id.btnCancelNewPlayer);
+        dialog.setSpinerAdapter();
+        mBtnCancelNewPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        mBtnSubmitNewPlayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!dialog.getName().equals("")) {
+                    saveNewPlayer(mFootballTeamId, dialog.getName(), dialog.getWeight(), dialog.getHeight(), dialog.getBirthday(), dialog.getNumber(), dialog.getPosition(), dialog.getCountry(), "img_messi");
+                    dialog.dismiss();
+                    LoadAsyncTask();
+                } else
+                    dialog.setEror();
+
+            }
+        });
+
+
+        dialog.show();
+
+    }
+
+    /**
+     * Using SyncTask to save new player
+     */
+    public class NewPlayer extends AsyncTask<Void, Void, Void> {
+        String mName;
+        Float mWeight;
+        Float mHeight;
+        String mBirthday;
+        int mNumber;
+        Position.POSITISON mPositison;
+        String mCountry;
+        String mAvatar;
+        long mTeamId;
+
+        public NewPlayer(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
+            this.mName = name;
+            this.mTeamId = teamId;
+            this.mWeight = weight;
+            this.mHeight = height;
+            this.mBirthday = bird;
+            this.mNumber = number;
+            this.mPositison = positison;
+            this.mCountry = country;
+            this.mAvatar = avatar;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Player player = new Player(mTeamId, mName, mWeight, mHeight, mBirthday, mNumber, mPositison, mCountry, mAvatar);
+            player.save();
+            return null;
+        }
+
+    }
+
+    public void saveNewPlayer(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
+        NewPlayer newPlayer = new NewPlayer(teamId, name, weight, height, bird, number, positison, country, avatar);
+        newPlayer.execute();
+    }
+
 }

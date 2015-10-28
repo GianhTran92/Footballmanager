@@ -29,13 +29,14 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 public class FootballTeamRecyclerAdapter extends
         RecyclerView.Adapter<FootballTeamRecyclerAdapter.FootballTeamRecyclerHolder> {
     List<FootballTeam> mFootballTeams = new ArrayList<>();
+
     FootballTeamActivity mFootballTeamActivity;
+
+    OnCallPlayerActivity mOnCallPlayerActivity;
 
     public interface OnCallPlayerActivity {
         void onCall(FootballTeam footballTeam);
     }
-
-    OnCallPlayerActivity mOnCallPlayerActivity;
 
     public FootballTeamRecyclerAdapter(List<FootballTeam> listData,
                                        FootballTeamActivity footballTeamActivity) {
@@ -71,9 +72,12 @@ public class FootballTeamRecyclerAdapter extends
 
     public class FootballTeamRecyclerHolder extends RecyclerView.ViewHolder {
         CircleImageView circleImgViewFootballTeamLogo;
+
         TextView tvFootballTeamName;
         TextView tvDescriptionFootballTeam;
+
         ImageView imgViewEditFootballTeam;
+
         EditText edtDescriptionFootballTeam;
         EditText edtFootballTeamName;
 
@@ -151,6 +155,7 @@ public class FootballTeamRecyclerAdapter extends
             });
             dialog.show();
         }
+
         public void showDialogConfirmDelete(final FootballTeam footballTeam) {
             final Dialog dialog = new Dialog(mFootballTeamActivity);
             dialog.setContentView(R.layout.dialog_confirm_delete);

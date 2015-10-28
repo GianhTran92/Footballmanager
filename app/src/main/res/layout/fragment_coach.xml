@@ -14,6 +14,24 @@
         app:civ_border_color="@android:color/holo_red_light"
         app:civ_border_width="@dimen/recycler.item.league.logo.border" />
 
+    <ImageView
+        android:id="@+id/imgViewChangeCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_cached_black_18dp" />
+
+    <ImageView
+        android:id="@+id/imgViewNewCoach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:contentDescription="@string/hello_world"
+        android:src="@drawable/ic_add_circle_black_18dp" />
+
     <TextView
         android:id="@+id/tvCoachName"
         android:layout_width="wrap_content"
@@ -35,8 +53,8 @@
         android:id="@+id/imgViewCoachDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/recycler.item.content.margin"
         android:contentDescription="@string/hello_world"

@@ -33,29 +33,29 @@ import vn.asiantech.intership.myapplication.ui.player.PlayerActivity_;
 @EActivity(R.layout.activity_football_team)
 public class FootballTeamActivity extends AppCompatActivity implements FootballTeamRecyclerAdapter.OnCallPlayerActivity{
     FootballTeamRecyclerAdapter mFootballTeamRecyclerAdapter;
-    League mLeague;
+
     RecyclerView.LayoutManager mLayoutManager;
+
     long mLeagueId;
 
     @ViewById(R.id.recyclerViewFootballTeam)
     RecyclerView mRecyclerViewFootballTeam;
     @ViewById(R.id.fLoatingBtnAddFootballTeam)
     FloatingActionButton mFLoatingBtnAddFootballTeam;
+    @ViewById(R.id.rlFootballTeamTop)
+    RelativeLayout mRlFootballTeamTop;
+    @ViewById(R.id.imgViewBackFromFootballTeam)
+    ImageView mImgViewBackFromFootballTeam;
 
     @Click(R.id.fLoatingBtnAddFootballTeam)
     void addNewFootballTeam() {
         showDialogAddNewFootballTeam();
     }
 
-    @ViewById(R.id.rlFootballTeamTop)
-    RelativeLayout mRlFootballTeamTop;
-
-    @ViewById(R.id.imgViewBackFromFootballTeam)
-    ImageView mImgViewBackFromFootballTeam;
-
     @Click(R.id.imgViewBackFromFootballTeam)
     void doBack() {
-        mImgViewBackFromFootballTeam.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
+        mImgViewBackFromFootballTeam.startAnimation(AnimationUtils.loadAnimation(this,
+                                                                                 R.anim.abc_popup_enter));
         this.finish();
     }
 
@@ -83,7 +83,6 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         mFootballTeamRecyclerAdapter = new FootballTeamRecyclerAdapter(footballTeams, this);
         mRecyclerViewFootballTeam.setAdapter(mFootballTeamRecyclerAdapter);
     }
-
 
     public void reSizeHeader() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
@@ -138,7 +137,9 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId = ?", String.valueOf(mLeagueId));
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class,
+                                                                 "leagueId = ?",
+                                                                 String.valueOf(mLeagueId));
             return footballTeams;
         }
 
@@ -163,7 +164,9 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
 
         @Override
         protected List<FootballTeam> doInBackground(Void... params) {
-            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?", String.valueOf(mLeagueId));
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class,
+                                                                 "leagueId=?",
+                                                                 String.valueOf(mLeagueId));
             return footballTeams;
         }
 
@@ -192,7 +195,10 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         updateData();
     }
 
-    public void editFootballTeam(FootballTeam footballTeam, String name, String description, String logo) {
+    public void editFootballTeam(FootballTeam footballTeam,
+                                 String name,
+                                 String description,
+                                 String logo) {
         footballTeam.setName(name);
         footballTeam.setLogo(logo);
         footballTeam.setDescripstion(description);
@@ -207,6 +213,8 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_new_football_team);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        View v = dialog.getWindow().getDecorView();
+        v.setBackgroundResource(android.R.color.transparent);
         final EditText edtAddFootballTeamName = (EditText) dialog.findViewById(R.id.edtAddFootballTeamName);
         final EditText edtAddDescription = (EditText) dialog.findViewById(R.id.edtAddDescription);
         Button btnSubmitAddFootballTeam = (Button) dialog.findViewById(R.id.btnSubmitAddFootballTeam);
@@ -216,7 +224,10 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
             @Override
             public void onClick(View v) {
                 if (!edtAddFootballTeamName.getText().toString().equals("")) {
-                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(), mLeagueId, edtAddDescription.getText().toString(), "img_mu");
+                    FootballTeam footballTeam = new FootballTeam(edtAddFootballTeamName.getText().toString(),
+                                                                 mLeagueId,
+                                                                 edtAddDescription.getText().toString(),
+                                                                 "img_mu");
                     footballTeam.save();
                     updateData();
                     dialog.dismiss();

@@ -37,13 +37,17 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
 @EActivity(R.layout.activity_league)
 public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener {
     LeagueRecyclerAdapter mLeagueRecyclerAdapter;
+
     RecyclerView.LayoutManager mLayoutManager;
 
     @ViewById(R.id.recyclerViewLeague)
     RecyclerView mRecyclerViewLeague;
-
+    @ViewById(R.id.imgViewSet3Line)
+    ImageView mImgViewSet3Line;
     @ViewById(R.id.imgViewSet1Line)
     ImageView mImgViewSet1Line;
+    @ViewById(R.id.fLoatingBtnAddLeague)
+    FloatingActionButton mFLoatingBtnAddLeague;
 
     @Click(R.id.imgViewSet1Line)
     void setLinearLayout() {
@@ -54,9 +58,6 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         mImgViewSet3Line.setVisibility(View.VISIBLE);
         loadDataByLayout(mLayoutManager);
     }
-
-    @ViewById(R.id.imgViewSet3Line)
-    ImageView mImgViewSet3Line;
 
     @Click(R.id.imgViewSet3Line)
     void setGridLayout() {
@@ -69,9 +70,6 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         mImgViewSet3Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
     }
-
-    @ViewById(R.id.fLoatingBtnAddLeague)
-    FloatingActionButton mFLoatingBtnAddLeague;
 
     @Click(R.id.fLoatingBtnAddLeague)
     void addNewLeague() {
@@ -117,7 +115,8 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         final Dialog dialog = new Dialog(this.getContext());
         dialog.setContentView(R.layout.dialog_new_league);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-
+        View v = dialog.getWindow().getDecorView();
+        v.setBackgroundResource(android.R.color.transparent);
         final EditText edtLeagueName = (EditText) dialog.findViewById(R.id.edtLeagueName);
         Button btnSubmit = (Button) dialog.findViewById(R.id.btnSubmitAddLeague);
         btnSubmit.setOnClickListener(new View.OnClickListener() {

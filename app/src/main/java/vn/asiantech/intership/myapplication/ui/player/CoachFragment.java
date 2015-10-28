@@ -4,6 +4,8 @@ package vn.asiantech.intership.myapplication.ui.player;
 import android.os.AsyncTask;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -32,6 +34,13 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
 
     OnSendCoachData delegate;
 
+    Boolean mIsHaveCoach = true;
+    @ViewById(R.id.imgViewChangeCoach)
+    ImageView mImgViewChangeCoach;
+    @ViewById(R.id.imgViewNewCoach)
+    ImageView mImgViewNewCoach;
+    @ViewById(R.id.imgViewCoachDetail)
+    ImageView mImgViewCoachDetail;
     @ViewById(R.id.circleImgViewCoachAvatar)
     CircleImageView mCircleImgViewCoachAvatar;
     @ViewById(R.id.tvCoachName)
@@ -47,6 +56,7 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
     @AfterViews
     void afterView() {
         delegate = (PlayerActivity) getActivity();
+
         PlayerActivity playerActivity = (PlayerActivity) getActivity();
         LoadDataByFootBallTeamId loadDataByFootBallTeamId = new LoadDataByFootBallTeamId(playerActivity.getFootballTeamId());
         loadDataByFootBallTeamId.delegate = this;
@@ -56,7 +66,23 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
     @Override
     public void processFinish(Coach output) {
         mCoach = output;
-        mTvCoachName.setText(mCoach.getName());
+        if (mCoach.getName().toString().equals("no")){
+            mIsHaveCoach = false;
+            mTvCoachName.setText("this team have no coach yet");
+            mImgViewCoachDetail.setVisibility(View.GONE);
+            mCircleImgViewCoachAvatar.setVisibility(View.GONE);
+            mImgViewChangeCoach.setVisibility(View.GONE);
+            mImgViewNewCoach.setVisibility(View.VISIBLE);
+
+        }else {
+            mIsHaveCoach = true;
+            mTvCoachName.setText(mCoach.getName());
+            mImgViewCoachDetail.setVisibility(View.VISIBLE);
+            mCircleImgViewCoachAvatar.setVisibility(View.VISIBLE);
+            mImgViewChangeCoach.setVisibility(View.VISIBLE);
+            mImgViewNewCoach.setVisibility(View.GONE);
+        }
+
     }
 
     /**
@@ -80,7 +106,12 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
         @Override
         protected void onPostExecute(List<Coach> coaches) {
             super.onPostExecute(coaches);
-            delegate.processFinish(coaches.get(0));
+            if (coaches.size() == 0) {
+                delegate.processFinish(new Coach("no",null,0l,null,null));
+            } else {
+                delegate.processFinish(coaches.get(0));
+            }
+
         }
     }
 
