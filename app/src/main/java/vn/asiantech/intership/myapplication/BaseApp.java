@@ -85,7 +85,7 @@ public class BaseApp extends SugarApp {
 
     @Override
     public void onCreate() {
-         super.onCreate();
+        super.onCreate();
 //        createDummyLeagueData();
 //        createDummyFootballTeamData();
 //        createDummyPeopleData();

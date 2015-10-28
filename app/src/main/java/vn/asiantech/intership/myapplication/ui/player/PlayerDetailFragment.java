@@ -1,6 +1,7 @@
 package vn.asiantech.intership.myapplication.ui.player;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -107,20 +108,30 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
 
     @Click(R.id.imgViewEditPlayer)
     void doEditPlayer() {
+        mImgViewEditPlayer.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+                R.anim.abc_popup_enter));
         enableEditPlayer();
         setAdapter();
     }
 
     @Click(R.id.imgViewDeletePlayer)
     void doDeletePlayer() {
+        mImgViewDeletePlayer.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+                R.anim.abc_popup_enter));
+        showDialogCofirmDeletePlayer();
     }
 
     @Click(R.id.imgViewCheckoutPlayer)
     void doCheckoutPlayer() {
+        mImgViewCheckoutPlayer.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+                R.anim.abc_popup_enter));
+        showDialogConfirmDismissalPlayer();
     }
 
     @Click(R.id.imgViewSubmitEditPlayer)
     void doEdit() {
+        mImgViewSubmitEditPlayer.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+                R.anim.abc_popup_enter));
         if (!mTvPlayerNameDetail.getText().toString().equals("")) {
             editPlayer(mPlayer,
                     mTvPlayerNameDetail.getText().toString(),
@@ -134,6 +145,8 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
                     ListPlayerFragment_.builder().build(),
                     "ListPlayerFragment_",
                     null);
+        } else {
+            mTvPlayerNameDetail.setError(getActivity().getString(R.string.error_field_not_be_empty));
         }
     }
 
@@ -157,39 +170,19 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
 
     public void enableEditPlayer() {
         mTvInformationText.setText("EDIT INFORMATION");
+
         isEdit = true;
 
         mTvPlayerNameDetail.setEnabled(true);
-        mTvPlayerNameDetail.setClickable(true);
-        mTvPlayerNameDetail.setFocusable(true);
-
         mTvPlayerBirthday.setEnabled(true);
-        mTvPlayerBirthday.setClickable(true);
-        mTvPlayerBirthday.setFocusable(true);
-
         mTvPlayerWeight.setEnabled(true);
-        mTvPlayerWeight.setClickable(true);
-        mTvPlayerWeight.setFocusable(true);
-
         mTvPlayerHeight.setEnabled(true);
-        mTvPlayerHeight.setClickable(true);
-        mTvPlayerHeight.setFocusable(true);
-
         mTvPlayerNumber.setEnabled(true);
-        mTvPlayerNumber.setClickable(true);
-        mTvPlayerNumber.setFocusable(true);
-
         mTvPlayerCountry.setEnabled(true);
-        mTvPlayerCountry.setClickable(true);
-        mTvPlayerCountry.setFocusable(true);
-
         mTvPlayerPositionDetail.setEnabled(true);
-        mTvPlayerPositionDetail.setClickable(true);
-        mTvPlayerPositionDetail.setFocusable(true);
 
         mTvPlayerCountry.setVisibility(View.GONE);
         mTvPlayerPositionDetail.setVisibility(View.GONE);
-
         mSpnPlayerCountry.setVisibility(View.VISIBLE);
         mSpnPlayerPosition.setVisibility(View.VISIBLE);
         mImgViewCheckoutPlayer.setVisibility(View.GONE);
@@ -203,39 +196,17 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         isEdit = false;
 
         mTvPlayerNameDetail.setEnabled(false);
-        mTvPlayerNameDetail.setClickable(false);
-        mTvPlayerNameDetail.setFocusable(false);
-
         mTvPlayerBirthday.setEnabled(false);
-        mTvPlayerBirthday.setClickable(false);
-        mTvPlayerBirthday.setFocusable(false);
-
         mTvPlayerWeight.setEnabled(false);
-        mTvPlayerWeight.setClickable(false);
-        mTvPlayerWeight.setFocusable(false);
-
         mTvPlayerHeight.setEnabled(false);
-        mTvPlayerHeight.setClickable(false);
-        mTvPlayerHeight.setFocusable(false);
-
         mTvPlayerNumber.setEnabled(false);
-        mTvPlayerNumber.setClickable(false);
-        mTvPlayerNumber.setFocusable(false);
-
         mTvPlayerCountry.setEnabled(false);
-        mTvPlayerCountry.setClickable(false);
-        mTvPlayerCountry.setFocusable(false);
-
         mTvPlayerPositionDetail.setEnabled(false);
-        mTvPlayerPositionDetail.setClickable(false);
-        mTvPlayerPositionDetail.setFocusable(false);
 
         mTvPlayerCountry.setVisibility(View.VISIBLE);
         mTvPlayerPositionDetail.setVisibility(View.VISIBLE);
-
         mSpnPlayerCountry.setVisibility(View.GONE);
         mSpnPlayerPosition.setVisibility(View.GONE);
-
         mImgViewCheckoutPlayer.setVisibility(View.VISIBLE);
         mImgViewDeletePlayer.setVisibility(View.VISIBLE);
         mImgViewEditPlayer.setVisibility(View.VISIBLE);
@@ -388,6 +359,109 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         btnSubmitDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                replaceFragment(R.id.frameContain,
+                        ListPlayerFragment_.builder().build(),
+                        "ListPlayerFragment_",
+                        null);
+                dialog.dismiss();
+            }
+        });
+        btnCancelDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * Using AsyncTask to delete player
+     */
+    public class DeletePlayer extends AsyncTask<Void,Void,Void> {
+        Player mPlayer;
+
+        public DeletePlayer(Player player) {
+            this.mPlayer = player;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mPlayer.delete();
+            return null;
+        }
+    }
+
+    /**
+     * Using AsyncTask to move player to free zone
+     */
+    public class DismissalPlayer extends  AsyncTask<Void,Void,Void> {
+        Player mPlayer;
+
+        public DismissalPlayer(Player player) {
+            this.mPlayer = player;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mPlayer.setTeamId(-1l);
+            mPlayer.save();
+            return null;
+        }
+    }
+
+    public void deletePlayer(Player player){
+        DeletePlayer deletePlayer = new DeletePlayer(player);
+        deletePlayer.execute();
+    }
+
+    public void dismissalPlayer(Player player){
+        DismissalPlayer dismissalPlayer = new DismissalPlayer(player);
+        dismissalPlayer.execute();
+    }
+
+    public void showDialogCofirmDeletePlayer(){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_confirm_delete);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.setTitle("are you sure to delete this player ?");
+
+        Button btnSubmitDelete = (Button) dialog.findViewById(R.id.btnSubmitDelete);
+        Button btnCancelDelete = (Button) dialog.findViewById(R.id.btnCancelDelete);
+        btnSubmitDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletePlayer(mPlayer);
+                replaceFragment(R.id.frameContain,
+                        ListPlayerFragment_.builder().build(),
+                        "ListPlayerFragment_",
+                        null);
+                dialog.dismiss();
+            }
+        });
+        btnCancelDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
+    }
+
+    public void showDialogConfirmDismissalPlayer(){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_confirm_delete);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.setTitle("are you sure to dismissal this player ?");
+
+        Button btnSubmitDelete = (Button) dialog.findViewById(R.id.btnSubmitDelete);
+        Button btnCancelDelete = (Button) dialog.findViewById(R.id.btnCancelDelete);
+        btnSubmitDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismissalPlayer(mPlayer);
                 replaceFragment(R.id.frameContain,
                         ListPlayerFragment_.builder().build(),
                         "ListPlayerFragment_",
