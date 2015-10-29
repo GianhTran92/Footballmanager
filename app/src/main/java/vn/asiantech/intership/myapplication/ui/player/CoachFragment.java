@@ -105,6 +105,9 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
         loadCoachToUI();
     }
 
+    /**
+     * method to load coach information and show it in UI
+     */
     public void loadCoachToUI(){
         mPlayerActivity = (PlayerActivity) getActivity();
         LoadDataByFootBallTeamId loadDataByFootBallTeamId = new LoadDataByFootBallTeamId(mPlayerActivity.getFootballTeamId());
@@ -112,6 +115,10 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
         loadDataByFootBallTeamId.execute();
     }
 
+    /**
+     * method implement LoadCoachAsyncResponse
+     * @param output coach object result from LoadDataByFootBallTeamId AsyncTask class
+     */
     @Override
     public void processFinish(Coach output) {
         mCoach = output;

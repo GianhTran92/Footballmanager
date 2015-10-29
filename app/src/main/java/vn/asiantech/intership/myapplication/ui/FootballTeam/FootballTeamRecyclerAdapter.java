@@ -34,6 +34,9 @@ public class FootballTeamRecyclerAdapter extends
 
     OnCallPlayerActivity mOnCallPlayerActivity;
 
+    /**
+     * Call method onCall when click item of Recycler view in FootballTeam Activity
+     */
     public interface OnCallPlayerActivity {
         void onCall(FootballTeam footballTeam);
     }
@@ -116,6 +119,9 @@ public class FootballTeamRecyclerAdapter extends
             });
         }
 
+        /**
+         * method to show dialog when click edit football team
+         */
         public void showDialogEditFootballTeam() {
             final Dialog dialog = new Dialog(mFootballTeamActivity);
             dialog.setContentView(R.layout.dialog_new_football_team);
@@ -156,6 +162,10 @@ public class FootballTeamRecyclerAdapter extends
             dialog.show();
         }
 
+        /**
+         * method to show dialog confirm when delete football team
+         * @param footballTeam: object must delete
+         */
         public void showDialogConfirmDelete(final FootballTeam footballTeam) {
             final Dialog dialog = new Dialog(mFootballTeamActivity);
             dialog.setContentView(R.layout.dialog_confirm_delete);

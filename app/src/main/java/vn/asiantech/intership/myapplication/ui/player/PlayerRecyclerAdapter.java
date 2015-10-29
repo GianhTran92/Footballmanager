@@ -31,7 +31,7 @@ public class PlayerRecyclerAdapter extends
     List<Player> mPlayers = new ArrayList<>();
 
     Context mContext;
-    
+
     ListPlayerFragment mListPlayerFragment;
 
     public PlayerRecyclerAdapter(List<Player> listData,
@@ -57,7 +57,6 @@ public class PlayerRecyclerAdapter extends
     @Override
     public void onBindViewHolder(PlayerRecyclerHolder holder, int i) {
         holder.tvPlayerName.setText(mPlayers.get(i).getName().toString());
-        //TODO get old from birthday
         holder.tvPlayerOld.setText(String.valueOf(mPlayers.get(i).getNumber()));
         holder.tvPlayerPosition.setText(mPlayers.get(i).getPositison().name().toString());
         delegate = mListPlayerFragment;
@@ -85,10 +84,9 @@ public class PlayerRecyclerAdapter extends
             imgViewPlayerDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO used interface to move another fragment
                     imgViewPlayerDetail.startAnimation(AnimationUtils.loadAnimation(mListPlayerFragment.getActivity(),
                             R.anim.abc_popup_enter));
-                  delegate.processSuccess(mPlayers.get(getPosition()).getId());
+                    delegate.processSuccess(mPlayers.get(getPosition()).getId());
                 }
             });
 

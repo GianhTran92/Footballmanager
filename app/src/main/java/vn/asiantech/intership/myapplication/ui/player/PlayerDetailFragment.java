@@ -1,14 +1,10 @@
 package vn.asiantech.intership.myapplication.ui.player;
 
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.View;;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,13 +13,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Text;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
@@ -168,6 +162,9 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         loadPlayerById.execute();
     }
 
+    /**
+     * method to enable edit player mode
+     */
     public void enableEditPlayer() {
         mTvInformationText.setText("EDIT INFORMATION");
 
@@ -191,6 +188,9 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         mImgViewSubmitEditPlayer.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * method to disable edit player mode
+     */
     public void disableEditPlayer() {
         mTvInformationText.setText("INFORMATION");
         isEdit = false;
@@ -213,6 +213,9 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         mImgViewSubmitEditPlayer.setVisibility(View.GONE);
     }
 
+    /**
+     * method set adapter for country spinner and position spinner
+     */
     public void setAdapter() {
         ArrayAdapter<String> spinerCountryAdapter = new ArrayAdapter<>
                 (
@@ -266,6 +269,10 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         editPlayer.execute();
     }
 
+    /**
+     * method implement LoadPlayerById interface
+     * @param player object result from asyncTask LoadPlayerById
+     */
     @Override
     public void processSuccess(Player player) {
         mTvPlayerNameDetail.setText(player.getName());
@@ -379,7 +386,7 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
     /**
      * Using AsyncTask to delete player
      */
-    public class DeletePlayer extends AsyncTask<Void,Void,Void> {
+    public class DeletePlayer extends AsyncTask<Void, Void, Void> {
         Player mPlayer;
 
         public DeletePlayer(Player player) {
@@ -396,7 +403,7 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
     /**
      * Using AsyncTask to move player to free zone
      */
-    public class DismissalPlayer extends  AsyncTask<Void,Void,Void> {
+    public class DismissalPlayer extends AsyncTask<Void, Void, Void> {
         Player mPlayer;
 
         public DismissalPlayer(Player player) {
@@ -411,17 +418,17 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         }
     }
 
-    public void deletePlayer(Player player){
+    public void deletePlayer(Player player) {
         DeletePlayer deletePlayer = new DeletePlayer(player);
         deletePlayer.execute();
     }
 
-    public void dismissalPlayer(Player player){
+    public void dismissalPlayer(Player player) {
         DismissalPlayer dismissalPlayer = new DismissalPlayer(player);
         dismissalPlayer.execute();
     }
 
-    public void showDialogCofirmDeletePlayer(){
+    public void showDialogCofirmDeletePlayer() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_confirm_delete);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
@@ -450,7 +457,7 @@ public class PlayerDetailFragment extends BaseFragment implements LoadPlayerById
         dialog.show();
     }
 
-    public void showDialogConfirmDismissalPlayer(){
+    public void showDialogConfirmDismissalPlayer() {
         final Dialog dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_confirm_delete);
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;

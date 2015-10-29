@@ -25,7 +25,7 @@ public class RecyclerViewCoachInFreeZoneAdapter extends RecyclerView.Adapter<Rec
     @Override
     public RecyclerViewCoachInFreeZoneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.custom_player_recycler, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.custom_coach_in_freezone_recycler, parent, false);
         return new RecyclerViewCoachInFreeZoneViewHolder(itemView);
     }
 
@@ -39,7 +39,6 @@ public class RecyclerViewCoachInFreeZoneAdapter extends RecyclerView.Adapter<Rec
         holder.mTvCoachInFreeZoneName.setText(mCoaches.get(position).getName());
         holder.mTvCoachInFreeZoneBirthday.setText(mCoaches.get(position).getBirthday());
         holder.mTvCoachInFreeZoneCountry.setText(mCoaches.get(position).getCountry());
-
     }
 
     public class RecyclerViewCoachInFreeZoneViewHolder extends RecyclerView.ViewHolder {

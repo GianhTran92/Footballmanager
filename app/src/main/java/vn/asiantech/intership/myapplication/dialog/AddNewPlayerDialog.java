@@ -52,7 +52,6 @@ public class AddNewPlayerDialog extends Dialog implements LoadLayerInterface,Pla
 
     Context context;
 
-
     String mPlayerCountry;
 
     Position.POSITISON mPlayerPosition;
@@ -196,10 +195,14 @@ public class AddNewPlayerDialog extends Dialog implements LoadLayerInterface,Pla
 
     @Override
     public void processFinish(List<Player> players) {
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        RecyclerView.LayoutManager mLayoutManager =
+                new LinearLayoutManager(context);
+
         mRecyclerViewPlayerFree.setLayoutManager(mLayoutManager);
-        PlayerFreeRecyclerViewAdapter playerFreeRecyclerViewAdapter = new PlayerFreeRecyclerViewAdapter(players);
+        PlayerFreeRecyclerViewAdapter playerFreeRecyclerViewAdapter =
+                new PlayerFreeRecyclerViewAdapter(players);
         playerFreeRecyclerViewAdapter.delegate = this;
+
         mRecyclerViewPlayerFree.setAdapter(playerFreeRecyclerViewAdapter);
     }
 

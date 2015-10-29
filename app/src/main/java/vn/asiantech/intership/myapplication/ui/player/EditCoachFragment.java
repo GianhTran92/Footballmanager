@@ -72,11 +72,18 @@ public class EditCoachFragment extends BaseFragment {
         mEdtEditCoachBirthday.setText(mCoach.getBirthday());
     }
 
+    /**
+     * get Coach from Activity content using method get
+     * @return coach object
+     */
     public Coach getCoach() {
         PlayerActivity playerActivity = (PlayerActivity) getActivity();
         return playerActivity.getCoach();
     }
 
+    /**
+     * set adapter for spiner country and position
+     */
     public void setSpinerAdapter() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (

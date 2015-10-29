@@ -127,11 +127,9 @@ public class LeagueRecyclerAdapter extends
                      */
                     League league = mLeagues.get(getPosition());
                     showDialogConfirmDelete(league);
-
                     return false;
                 }
             });
-
         }
 
         public void showDialogConfirmDelete(final League league) {
@@ -181,9 +179,5 @@ public class LeagueRecyclerAdapter extends
             edtLeagueName.setVisibility(View.VISIBLE);
             edtLeagueName.setText(tvLeagueName.getText().toString());
         }
-
-
     }
-
-
 }

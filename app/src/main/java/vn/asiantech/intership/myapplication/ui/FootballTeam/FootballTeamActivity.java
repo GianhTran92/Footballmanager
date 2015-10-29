@@ -84,17 +84,28 @@ public class FootballTeamActivity extends AppCompatActivity implements FootballT
         loadLeagueById.execute();
     }
 
+    /**
+     * method to set adapter for football team recycler view
+     * @param footballTeams: list of football team
+     */
     public void setAdapter(List<FootballTeam> footballTeams) {
         mFootballTeamRecyclerAdapter = new FootballTeamRecyclerAdapter(footballTeams, this);
         mRecyclerViewFootballTeam.setAdapter(mFootballTeamRecyclerAdapter);
     }
 
+    /**
+     * method resize header with scale 2 : 1
+     */
     public void reSizeHeader() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mRlFootballTeamTop.getLayoutParams();
         params.height = getResources().getDisplayMetrics().widthPixels / 4 * 2;
         mRlFootballTeamTop.setLayoutParams(params);
     }
 
+    /**
+     * method of interface inside FootballTeamRecyclerAdapter to call PlayerActivity
+     * @param footballTeam object, to get id and send to PlayerActivity
+     */
     @Override
     public void onCall(FootballTeam footballTeam) {
         PlayerActivity_.intent(this)

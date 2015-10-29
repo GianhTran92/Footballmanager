@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
@@ -50,6 +49,7 @@ public class NewCoachDialog extends Dialog {
             public void onClick(View v) {
                 CoachInFreeZoneListDialog coachInFreeZoneListDialog = new CoachInFreeZoneListDialog(mContext);
                 coachInFreeZoneListDialog.show();
+                dismiss();
             }
         });
     }

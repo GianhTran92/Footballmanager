@@ -41,7 +41,8 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
 
     @Click(R.id.imgViewBackFromPlayer)
     void doBack() {
-        mImgViewBackFromPlayer.startAnimation(AnimationUtils.loadAnimation(this, R.anim.abc_popup_enter));
+        mImgViewBackFromPlayer.startAnimation(AnimationUtils.loadAnimation(this,
+                R.anim.abc_popup_enter));
         this.finish();
     }
 
@@ -65,9 +66,8 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
 
     /**
      * Fragment can access this method to get coach object
-     * @return
+     * @return coach
      */
-
     public Coach getCoach(){
         return mCoach;
     }
@@ -103,6 +103,7 @@ public class PlayerActivity extends AppCompatActivity implements CoachFragment.O
      */
     public class LoadFootballTeamById extends AsyncTask<Void, Void, FootballTeam> {
         long mFootballTeamId;
+
         PlayerActivity mPlayerActivity;
 
         public LoadFootballTeamById(long id, PlayerActivity playerActivity) {

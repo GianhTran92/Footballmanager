@@ -87,10 +87,15 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         loadDataByLayout(mLayoutManager);
     }
 
+    /**
+     * method load list league by LinearLayout or GridLayout
+     * @param layoutManager LinearLayout or GridLayout
+     */
     public void loadDataByLayout(RecyclerView.LayoutManager layoutManager) {
         LoadLeagueData mLoadLeagueData = new LoadLeagueData(this, layoutManager);
         mLoadLeagueData.execute();
     }
+
 
     public Context getContext() {
         return this;
@@ -112,7 +117,6 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     /**
      * method show dialog to add new league
      */
-
     public void showDialogAddNewLeague() {
 
         final Dialog dialog = new Dialog(this.getContext());
@@ -206,15 +210,55 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     }
 
     public void deleteLeague(League league) {
-        league.delete();
+        DeleteLeague deleteLeague = new DeleteLeague(league);
+        deleteLeague.execute();
         updateData();
     }
 
     public void editLeague(League league, String name, String logo) {
-        league.setName(name);
-        league.setLogo(logo);
-        league.save();
+        EditLeague editLeague = new EditLeague(league,name,logo);
+        editLeague.execute();
         updateData();
+    }
+
+    /**
+     * Using AsyncTask to edit league
+     */
+    public class EditLeague extends AsyncTask<Void,Void,Void> {
+        League mLeague;
+        String mName;
+        String mLogo;
+
+        public EditLeague(League league, String name, String logo) {
+            this.mLeague = league;
+            this.mName = name;
+            this.mLogo = logo;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mLeague.setName(mName);
+            mLeague.setLogo(mLogo);
+            mLeague.save();
+            return null;
+        }
+    }
+
+    /**
+     * Using AsyncTask to delete league
+     */
+    public class DeleteLeague extends AsyncTask<Void,Void,Void>{
+        League mLeague;
+
+        public DeleteLeague(League league) {
+            this.mLeague = league;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mLeague.delete();
+            return null;
+        }
     }
 
 }

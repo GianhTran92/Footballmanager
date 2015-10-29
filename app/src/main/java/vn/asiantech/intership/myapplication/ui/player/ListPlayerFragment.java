@@ -33,7 +33,9 @@ import vn.asiantech.intership.myapplication.model.Position;
  */
 
 @EFragment(R.layout.fragment_list_player)
-public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface, PlayerRecyclerAdapter.OnCallPlayerDetail,AddNewPlayerDialog.OnSendPlayerListener {
+public class ListPlayerFragment extends BaseFragment implements LoadLayerInterface,
+        PlayerRecyclerAdapter.OnCallPlayerDetail,
+        AddNewPlayerDialog.OnSendPlayerListener {
     RecyclerView.LayoutManager mLayoutManager;
 
     PlayerRecyclerAdapter mPlayerRecyclerAdapter;
@@ -81,11 +83,21 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         mRecyclerViewPlayer.setAdapter(mPlayerRecyclerAdapter);
     }
 
+    /**
+     * method implement LoadLayerInterface
+     *
+     * @param players object is result from LoadListDataPlayerByFootballTeamId AsyncTask classs
+     */
     @Override
     public void processFinish(List<Player> players) {
         setAdapter(players);
     }
 
+    /**
+     * method implement PlayerRecyclerAdapter.OnCallPlayerDetail interface
+     *
+     * @param playerId id of player is result when click Detail button on item of recycler view
+     */
     @Override
     public void processSuccess(long playerId) {
         Bundle bundle = new Bundle();
@@ -98,9 +110,14 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
                 null);
     }
 
+    /**
+     * method implement AddNewPlayerDialog.OnSendPlayerListener interface
+     *
+     * @param player object is result from dialog when click add on item of recycler view
+     */
     @Override
     public void sendSuccess(Player player) {
-        SavePlayerInFreezoneToTeam savePlayerInFreezoneToTeam = new SavePlayerInFreezoneToTeam(player,mFootballTeamId);
+        SavePlayerInFreezoneToTeam savePlayerInFreezoneToTeam = new SavePlayerInFreezoneToTeam(player, mFootballTeamId);
         savePlayerInFreezoneToTeam.execute();
         LoadAsyncTask();
     }
@@ -108,9 +125,10 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
     /**
      * Using AsyncTask to add a player in freeZone to team
      */
-    public class SavePlayerInFreezoneToTeam extends AsyncTask<Void,Void,Void> {
+    public class SavePlayerInFreezoneToTeam extends AsyncTask<Void, Void, Void> {
         Player mPlayer;
         long mTeamId;
+
         public SavePlayerInFreezoneToTeam(Player player, long id) {
             this.mPlayer = player;
             this.mTeamId = id;
@@ -151,6 +169,11 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
         }
     }
 
+    /**
+     * method to show dialog add new player with event save new player when click submit
+     *
+     * @param context content to show dialog
+     */
     public void showDialogAddNewPlayer(Context context) {
         final AddNewPlayerDialog dialog = new AddNewPlayerDialog(context);
         dialog.setDelegate(this);
@@ -182,16 +205,28 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
      */
     public class NewPlayer extends AsyncTask<Void, Void, Void> {
         String mName;
-        Float mWeight;
-        Float mHeight;
         String mBirthday;
-        int mNumber;
-        Position.POSITISON mPositison;
         String mCountry;
         String mAvatar;
+
+        Float mWeight;
+        Float mHeight;
+
+        int mNumber;
+
+        Position.POSITISON mPositison;
+
         long mTeamId;
 
-        public NewPlayer(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
+        public NewPlayer(long teamId,
+                         String name,
+                         Float weight,
+                         Float height,
+                         String bird,
+                         int number,
+                         Position.POSITISON positison,
+                         String country,
+                         String avatar) {
             this.mName = name;
             this.mTeamId = teamId;
             this.mWeight = weight;
@@ -205,14 +240,38 @@ public class ListPlayerFragment extends BaseFragment implements LoadLayerInterfa
 
         @Override
         protected Void doInBackground(Void... params) {
-            Player player = new Player(mTeamId, mName, mWeight, mHeight, mBirthday, mNumber, mPositison, mCountry, mAvatar);
+            Player player = new Player(mTeamId,
+                    mName,
+                    mWeight,
+                    mHeight,
+                    mBirthday,
+                    mNumber,
+                    mPositison,
+                    mCountry,
+                    mAvatar);
             player.save();
             return null;
         }
     }
 
-    public void saveNewPlayer(long teamId, String name, Float weight, Float height, String bird, int number, Position.POSITISON positison, String country, String avatar) {
-        NewPlayer newPlayer = new NewPlayer(teamId, name, weight, height, bird, number, positison, country, avatar);
+    public void saveNewPlayer(long teamId,
+                              String name,
+                              Float weight,
+                              Float height,
+                              String bird,
+                              int number,
+                              Position.POSITISON positison,
+                              String country,
+                              String avatar) {
+        NewPlayer newPlayer = new NewPlayer(teamId,
+                name,
+                weight,
+                height,
+                bird,
+                number,
+                positison,
+                country,
+                avatar);
         newPlayer.execute();
     }
 }
