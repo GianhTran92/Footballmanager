@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.dialog.dialog.CoachInFreeZone.CoachInFreeZoneListDialog;
 
 /**
  * Created by igianhtran on 28/10/2015.
@@ -43,6 +44,14 @@ public class NewCoachDialog extends Dialog {
 
         mSpnNewCoachCountry = (Spinner) findViewById(R.id.spnNewCoachCountry);
         setSpinerAdapter();
+
+        mBtnChoiceCoach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CoachInFreeZoneListDialog coachInFreeZoneListDialog = new CoachInFreeZoneListDialog(mContext);
+                coachInFreeZoneListDialog.show();
+            }
+        });
     }
 
     public void setSpinerAdapter() {

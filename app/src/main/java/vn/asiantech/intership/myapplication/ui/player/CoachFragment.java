@@ -1,6 +1,7 @@
 package vn.asiantech.intership.myapplication.ui.player;
 
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 import android.app.Fragment;
 import android.view.View;
@@ -19,7 +20,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
 import vn.asiantech.intership.myapplication.dialog.NewCoach.NewCoachDialog;
-import vn.asiantech.intership.myapplication.dialog.dialog.CoachInFreeZone.CoachInFreeZoneListDialog;
 import vn.asiantech.intership.myapplication.model.Coach;
 
 /**
@@ -57,8 +57,7 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
 
     @Click(R.id.imgViewChangeCoach)
     void showChoiceCoachDialog() {
-        final CoachInFreeZoneListDialog coachInFreeZoneListDialog = new CoachInFreeZoneListDialog(getActivity());
-        coachInFreeZoneListDialog.show();
+        showDialogConfirmDeleteCoach();
     }
 
     @Click(R.id.imgViewNewCoach)
@@ -187,5 +186,51 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
             coach.save();
             return null;
         }
+    }
+    /**
+     * Using AsyncTask to delete coach
+     */
+    public class DeleteCoach extends AsyncTask<Void,Void,Void> {
+        Coach mCoach;
+        public DeleteCoach(Coach coach) {
+            this.mCoach = coach;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mCoach.delete();
+            return null;
+        }
+    }
+
+    public void deleteCoach(Coach coach) {
+        DeleteCoach deleteCoach = new DeleteCoach(coach);
+        deleteCoach.execute();
+    }
+
+    public void showDialogConfirmDeleteCoach(){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_confirm_delete);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.setTitle("are you sure to delete this coach ?");
+
+        Button btnSubmitDelete = (Button) dialog.findViewById(R.id.btnSubmitDelete);
+        Button btnCancelDelete = (Button) dialog.findViewById(R.id.btnCancelDelete);
+        btnSubmitDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCoach(mCoach);
+                loadCoachToUI();
+                dialog.dismiss();
+            }
+        });
+        btnCancelDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 }

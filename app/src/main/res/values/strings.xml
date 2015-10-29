@@ -35,4 +35,5 @@
     <string name="please.wait">please wait ... </string>
     <string name="button.new.player.text">New Player</string>
     <string name="button.choice.player.text">CHOICE PLAYER</string>
+    <string name="Dialog.title.edit">"EDIT INFORMATION"</string>
 </resources>
