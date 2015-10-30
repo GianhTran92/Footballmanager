@@ -17,12 +17,23 @@
         app:civ_border_width="@dimen/recycler.item.league.logo.border" />
     <TextView
         android:id="@+id/tvLeagueName"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/activity_league_text_view_name_margin_top"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvTeamNumber"
+        android:textColor="@android:color/background_light"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvLeagueName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/edtLeagueName"
+        android:visibility="gone"
         android:layout_width="@dimen/custom.league.item.weight"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

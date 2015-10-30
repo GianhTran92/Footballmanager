@@ -1,5 +1,6 @@
 package vn.asiantech.intership.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import org.androidannotations.annotations.EActivity;
 import vn.asiantech.intership.myapplication.ui.league.LeagueActivity_;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     Context mContext = this;
 
     @AfterViews
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     LeagueActivity_.intent(mContext)
                             .start();
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

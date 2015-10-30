@@ -44,7 +44,7 @@
             android:id="@+id/tvDescriptionPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFootballTeamNamePlayer"
+            android:layout_below="@+id/circleImgViewFootballTeamLogoPlayer"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/background_light"
             android:textStyle="italic" />

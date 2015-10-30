@@ -24,4 +24,5 @@
     <dimen name="custom.league.recycler.margin.left.and.right">1dp</dimen>
     <dimen name="floating.button.action.margin">16dp</dimen>
     <dimen name="fragment_player_detail_spiner_height">40dp</dimen>
+    <dimen name="activity_league_text_view_name_margin_top">10dp</dimen>
 </resources>

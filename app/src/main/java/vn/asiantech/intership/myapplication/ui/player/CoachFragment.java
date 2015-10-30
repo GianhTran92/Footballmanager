@@ -19,6 +19,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
+import vn.asiantech.intership.myapplication.dialog.CoachInFreeZone.CoachInFreeZoneListDialog;
 import vn.asiantech.intership.myapplication.dialog.NewCoach.NewCoachDialog;
 import vn.asiantech.intership.myapplication.model.Coach;
 
@@ -57,7 +58,9 @@ public class CoachFragment extends BaseFragment implements LoadCoachAsyncRespons
 
     @Click(R.id.imgViewChangeCoach)
     void showChoiceCoachDialog() {
-        showDialogConfirmDeleteCoach();
+        CoachInFreeZoneListDialog coachInFreeZoneListDialog = new CoachInFreeZoneListDialog(getActivity());
+        coachInFreeZoneListDialog.show();
+//        showDialogConfirmDeleteCoach();
     }
 
     @Click(R.id.imgViewNewCoach)

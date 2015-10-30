@@ -27,7 +27,11 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
 public class LeagueRecyclerAdapter extends
         RecyclerView.Adapter<LeagueRecyclerAdapter.LeagueRecyclerHolder> {
     List<League> mLeagues = new ArrayList<>();
+
     LeagueActivity mLeagueActivity;
+
+    List<String> mListNumberTeam = new ArrayList<>();
+
 
     public interface OnCallFootballTeamActivityListener {
         void onCall(League league);
@@ -35,9 +39,10 @@ public class LeagueRecyclerAdapter extends
 
     OnCallFootballTeamActivityListener mOnCallFootballTeamActivityListener;
 
-    public LeagueRecyclerAdapter(List<League> listData, LeagueActivity leagueActivity) {
+    public LeagueRecyclerAdapter(List<League> listData, LeagueActivity leagueActivity, List<String> listNumberTeam) {
         this.mLeagues = listData;
         this.mLeagueActivity = leagueActivity;
+        this.mListNumberTeam = listNumberTeam;
     }
 
     public void updateList(List<League> listData) {
@@ -63,17 +68,25 @@ public class LeagueRecyclerAdapter extends
         holder.circleImageViewLeagueLogo.setImageResource(R.drawable.img_league);
         holder.tvLeagueName.setText(mLeagues.get(position).getName());
         holder.edtLeagueName.setVisibility(View.INVISIBLE);
+        for (int i = 0; i < mListNumberTeam.size(); i++) {
+            if (mLeagues.get(position).getName().equals(mListNumberTeam.get(i))) {
+                holder.tvTeamNumber.setText(mListNumberTeam.get(i + 1));
+            }
+        }
         mOnCallFootballTeamActivityListener = mLeagueActivity;
-
     }
 
     public class LeagueRecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CircleImageView circleImageViewLeagueLogo;
+
         EditText edtLeagueName;
+
         ImageView imgViewEditLeague;
         ImageView imgViewSubmitEditLeague;
         ImageView imgViewCancelEditLeague;
+
         TextView tvLeagueName;
+        TextView tvTeamNumber;
 
         public LeagueRecyclerHolder(View itemView) {
             super(itemView);
@@ -81,6 +94,7 @@ public class LeagueRecyclerAdapter extends
                     (CircleImageView) itemView.findViewById(R.id.circleImgViewLeagueLogoItem);
             edtLeagueName = (EditText) itemView.findViewById(R.id.edtLeagueName);
             tvLeagueName = (TextView) itemView.findViewById(R.id.tvLeagueName);
+            tvTeamNumber = (TextView) itemView.findViewById(R.id.tvTeamNumber);
             imgViewSubmitEditLeague = (ImageView) itemView.findViewById(R.id.imgViewSubmitEditLeague);
             imgViewSubmitEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,12 +108,14 @@ public class LeagueRecyclerAdapter extends
                         enableEdit();
 
                     } else {
-                        edtLeagueName.setError(mLeagueActivity.getString(R.string.error_field_not_be_empty1));
+                        edtLeagueName.setError(mLeagueActivity
+                                .getString(R.string.error_field_not_be_empty1));
                     }
 
                 }
             });
-            imgViewCancelEditLeague = (ImageView) itemView.findViewById(R.id.imgViewCancelEditLeague);
+            imgViewCancelEditLeague = (ImageView) itemView
+                    .findViewById(R.id.imgViewCancelEditLeague);
             imgViewCancelEditLeague.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,5 +195,6 @@ public class LeagueRecyclerAdapter extends
             edtLeagueName.setVisibility(View.VISIBLE);
             edtLeagueName.setText(tvLeagueName.getText().toString());
         }
+
     }
 }

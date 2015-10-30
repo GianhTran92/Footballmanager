@@ -23,7 +23,7 @@ import java.util.List;
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.BaseFragment;
 import vn.asiantech.intership.myapplication.common.Common;
-import vn.asiantech.intership.myapplication.dialog.AddNewPlayerDialog;
+import vn.asiantech.intership.myapplication.dialog.NewPlayer.AddNewPlayerDialog;
 import vn.asiantech.intership.myapplication.model.Player;
 import vn.asiantech.intership.myapplication.model.Position;
 

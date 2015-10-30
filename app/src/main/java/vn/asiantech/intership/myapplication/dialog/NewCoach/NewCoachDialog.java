@@ -11,7 +11,7 @@ import android.widget.Spinner;
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
-import vn.asiantech.intership.myapplication.dialog.dialog.CoachInFreeZone.CoachInFreeZoneListDialog;
+import vn.asiantech.intership.myapplication.dialog.CoachInFreeZone.CoachInFreeZoneListDialog;
 
 /**
  * Created by igianhtran on 28/10/2015.
@@ -47,9 +47,10 @@ public class NewCoachDialog extends Dialog {
         mBtnChoiceCoach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dismiss();
                 CoachInFreeZoneListDialog coachInFreeZoneListDialog = new CoachInFreeZoneListDialog(mContext);
                 coachInFreeZoneListDialog.show();
-                dismiss();
+
             }
         });
     }

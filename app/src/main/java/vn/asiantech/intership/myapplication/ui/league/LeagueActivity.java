@@ -2,11 +2,17 @@ package vn.asiantech.intership.myapplication.ui.league;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -22,12 +28,19 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import vn.asiantech.intership.myapplication.R;
 import vn.asiantech.intership.myapplication.common.Common;
+import vn.asiantech.intership.myapplication.model.Coach;
+import vn.asiantech.intership.myapplication.model.FootballTeam;
 import vn.asiantech.intership.myapplication.model.League;
+import vn.asiantech.intership.myapplication.model.Player;
 import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity_;
 
 /**
@@ -35,10 +48,18 @@ import vn.asiantech.intership.myapplication.ui.FootballTeam.FootballTeamActivity
  */
 
 @EActivity(R.layout.activity_league)
-public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerAdapter.OnCallFootballTeamActivityListener {
+public class LeagueActivity extends AppCompatActivity implements
+        LeagueRecyclerAdapter.OnCallFootballTeamActivityListener,GetListNumberofTeamInterface {
     LeagueRecyclerAdapter mLeagueRecyclerAdapter;
 
+    Boolean isLoadListNumberTeamSuccess = false;
+
+    List<String> mListNumberTeam = new ArrayList<>();
+
     RecyclerView.LayoutManager mLayoutManager;
+
+    @ViewById(R.id.tvTest)
+    TextView mTvTest;
 
     @ViewById(R.id.recyclerViewLeague)
     RecyclerView mRecyclerViewLeague;
@@ -81,21 +102,24 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
     @AfterViews
     void afterView() {
+        getListNumberTeam();
         mFLoatingBtnAddLeague.attachToRecyclerView(mRecyclerViewLeague);
         mLayoutManager = new LinearLayoutManager(LeagueActivity.this);
         mImgViewSet1Line.setVisibility(View.INVISIBLE);
         loadDataByLayout(mLayoutManager);
+
+        mTvTest.setText(String.valueOf(isLoadListNumberTeamSuccess));
     }
 
     /**
      * method load list league by LinearLayout or GridLayout
+     *
      * @param layoutManager LinearLayout or GridLayout
      */
     public void loadDataByLayout(RecyclerView.LayoutManager layoutManager) {
         LoadLeagueData mLoadLeagueData = new LoadLeagueData(this, layoutManager);
         mLoadLeagueData.execute();
     }
-
 
     public Context getContext() {
         return this;
@@ -110,7 +134,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
                            LeagueActivity leagueActivity,
                            RecyclerView.LayoutManager layoutManager) {
         mRecyclerViewLeague.setLayoutManager(layoutManager);
-        mLeagueRecyclerAdapter = new LeagueRecyclerAdapter(mLeagues, leagueActivity);
+        mLeagueRecyclerAdapter = new LeagueRecyclerAdapter(mLeagues, leagueActivity, mListNumberTeam);
         mRecyclerViewLeague.setAdapter(mLeagueRecyclerAdapter);
     }
 
@@ -157,6 +181,41 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
         FootballTeamActivity_.intent(this)
                 .extra(Common.KEY_LEAGUE_ID, league.getId())
                 .start();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getListNumberTeam();
+        updateData();
+    }
+
+    /**
+     * method get image from gala
+     *
+     * @param requestCode code request
+     * @param resultCode  sode result
+     * @param data uri
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Common.RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            try {
+                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+//                imageView.setImageBitmap(bm);
+            } catch (FileNotFoundException e) {
+                //TODO
+            } catch (IOException e) {
+                //TODO
+            }
+        }
+    }
+
+    @Override
+    public void getSuccess(List<String> list) {
+        isLoadListNumberTeamSuccess = true;
     }
 
     /**
@@ -216,7 +275,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     }
 
     public void editLeague(League league, String name, String logo) {
-        EditLeague editLeague = new EditLeague(league,name,logo);
+        EditLeague editLeague = new EditLeague(league, name, logo);
         editLeague.execute();
         updateData();
     }
@@ -224,7 +283,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     /**
      * Using AsyncTask to edit league
      */
-    public class EditLeague extends AsyncTask<Void,Void,Void> {
+    public class EditLeague extends AsyncTask<Void, Void, Void> {
         League mLeague;
         String mName;
         String mLogo;
@@ -247,7 +306,7 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
     /**
      * Using AsyncTask to delete league
      */
-    public class DeleteLeague extends AsyncTask<Void,Void,Void>{
+    public class DeleteLeague extends AsyncTask<Void, Void, Void> {
         League mLeague;
 
         public DeleteLeague(League league) {
@@ -256,9 +315,92 @@ public class LeagueActivity extends AppCompatActivity implements LeagueRecyclerA
 
         @Override
         protected Void doInBackground(Void... params) {
+
+            List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class, "leagueId=?", String.valueOf(mLeague.getId()));
+            for (FootballTeam footballTeam : footballTeams) {
+                List<Player> players = Player.find(Player.class, "teamId=?", String.valueOf(footballTeam.getId()));
+                for (Player player : players) {
+                    player.setTeamId(-1);
+                    player.save();
+                }
+                List<Coach> coaches = Coach.find(Coach.class, "teamId=?", String.valueOf(footballTeam.getId()));
+                for (Coach coach : coaches) {
+                    coach.setTeamId(-1);
+                    coach.save();
+                }
+                footballTeam.setLeagueId(-1);
+                footballTeam.save();
+            }
             mLeague.delete();
             return null;
         }
     }
 
+    public void LoadImage() {
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, Common.RESULT_LOAD_IMAGE);
+    }
+
+    public String BitMapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
+    }
+
+    /**
+     * @param encodedString
+     * @return bitmap (from given string)
+     */
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    /**
+     * Using AsyncTask to loaf Team number of league
+     */
+    public class LoadTeamNumber extends AsyncTask<Void,Void,List<String>> {
+        List<String> mList = new ArrayList<>();
+
+        GetListNumberofTeamInterface delegate;
+
+        public LoadTeamNumber() {
+            super();
+        }
+
+        @Override
+        protected List<String> doInBackground(Void... params) {
+            List<League> leagues = League.listAll(League.class);
+            for (League league : leagues) {
+                List<FootballTeam> footballTeams = FootballTeam.find(FootballTeam.class,
+                        "leagueId=?",String.valueOf(league.getId()));
+                mList.add(league.getName());
+                mList.add(String.valueOf(footballTeams.size()));
+            }
+            return mList;
+        }
+
+        @Override
+        protected void onPostExecute(List<String> strings) {
+            super.onPostExecute(strings);
+            delegate.getSuccess(strings);
+        }
+    }
+
+    public void getListNumberTeam(){
+        LoadTeamNumber loadTeamNumber = new LoadTeamNumber();
+        loadTeamNumber.delegate = this;
+        loadTeamNumber.execute();
+    }
 }

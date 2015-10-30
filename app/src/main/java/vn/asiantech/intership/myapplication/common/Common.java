@@ -9,4 +9,5 @@ public class Common {
     public static final String KEY_FOOTBALL_TEAM_ID = "football_team_id";
     public static final String ARR[]={"Viet Nam", "Lao", "Campuchia"};
     public static final String KEY_PLAYER_ID = "player_id";
+    public static int RESULT_LOAD_IMAGE = 1;
 }
