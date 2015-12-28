@@ -20,16 +20,14 @@
             app:civ_border_color="@android:color/holo_red_light"
             app:civ_border_width="@dimen/recycler.item.league.logo.border"></de.hdodenhof.circleimageview.CircleImageView>
 
-        <TextView
+        <EditText
             android:id="@+id/tvPlayerNameDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_football_team_top_padding"
             android:background="@drawable/custom_banner"
             android:layout_centerInParent="true"
-            android:text="Leonal Messi"
-            android:textSize="@dimen/activity_player_team_name_text_size"
-            android:textStyle="bold" />
+            android:textSize="@dimen/activity_player_team_name_text_size" />
 
         <ImageView
             android:id="@+id/imgViewBackFromPlayerDetail"
@@ -78,26 +76,36 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fragment.player.detail.tv.birth" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerBirthday"
+                android:focusable="false"
+                android:editable="false"
                 android:layout_width="wrap_content"
+                android:inputType="date"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:background="@color/transparent"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="20/10/20" />
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
                 android:text="@string/fragment.player.detail.tv.country" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerCountry"
                 android:layout_width="wrap_content"
+                android:inputType="text"
+                android:background="@color/transparent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="america" />
+                />
+            <Spinner
+                android:id="@+id/spnPlayerCountry"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
         </LinearLayout>
 
         <TextView
@@ -120,13 +128,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fragment.player.detail.tv.weight" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerWeight"
+                android:inputType="number"
+                android:background="@color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="100kg" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -134,13 +143,14 @@
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
                 android:text="@string/fragment.player.detail.tv.height" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerHeight"
+                android:inputType="number"
+                android:background="@color/transparent"
                 android:layout_width="wrap_content"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="180cm" />
+                 />
         </LinearLayout>
         <TextView
             android:id="@+id/tvLine3"
@@ -161,27 +171,35 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fragment.player.detail.tv.position" />
 
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerPostionDetail"
                 android:layout_width="wrap_content"
+                android:background="@color/transparent"
+                android:inputType="text"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="CoachKeeper" />
+                 />
+            <Spinner
+                android:id="@+id/spnPlayerPosition"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
 
+            </Spinner>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
                 android:text="@string/fragment.player.detail.tv.number" />
-
-            <TextView
+            <EditText
                 android:id="@+id/tvPlayerNumber"
+                android:inputType="number"
+                android:background="@color/transparent"
                 android:layout_width="wrap_content"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
-                android:text="10" />
+                />
         </LinearLayout>
         <TextView
             android:id="@+id/tvLine4"
@@ -192,6 +210,7 @@
             android:background="@android:color/background_dark" />
         <ImageView
             android:id="@+id/imgViewEditPlayer"
+            android:contentDescription="@string/hello_world"
             android:src="@drawable/ic_settings_black_18dp"
             android:layout_below="@id/tvLine4"
             android:layout_marginLeft="@dimen/fragment.player.detail.tvs.margin.left"
@@ -202,9 +221,28 @@
             android:src="@drawable/ic_delete_black_18dp"
             android:layout_below="@+id/tvLine4"
             android:layout_alignParentRight="true"
+            android:contentDescription="@string/hello_world"
             android:layout_marginRight="@dimen/fragment.player.detail.tvs.margin.left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imgViewCheckoutPlayer"
+            android:src="@drawable/ic_cached_black_18dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/hello_world"
+            android:layout_below="@+id/tvLine4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imgViewSubmitEditPlayer"
+            android:contentDescription="@string/hello_world"
+            android:src="@drawable/abc_btn_check_to_on_mtrl_015"
+            android:layout_below="@+id/tvLine4"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
     </RelativeLayout>
 </RelativeLayout>

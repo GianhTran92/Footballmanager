@@ -9,6 +9,10 @@
         android:background="@android:color/holo_red_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/imgViewSet1Line"
             android:src="@drawable/ic_reorder_black_24dp"

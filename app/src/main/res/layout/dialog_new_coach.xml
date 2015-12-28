@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btnChoiceCoach"
+        android:text="Choice Coach in FreeZone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/circleImgViewNewCoachAvatar"
+        android:layout_below="@+id/btnChoiceCoach"
+        android:layout_width="@dimen/activity_player_coach_avatar_size"
+        android:layout_height="@dimen/activity_player_coach_avatar_size"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:src="@drawable/img_coach"
+        app:civ_border_color="@android:color/holo_red_light"
+        app:civ_border_width="@dimen/recycler.item.league.logo.border" />
+
+    <EditText
+        android:id="@+id/edtNewCoachName"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/circleImgViewNewCoachAvatar"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/background_light"
+        android:layout_marginTop="@dimen/recycler.item.content.margin"
+        android:gravity="center"
+        android:hint="@string/edt.edit.coach.birth" />
+
+
+    <EditText
+        android:id="@+id/edtNewCoachBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/background_light"
+        android:layout_below="@+id/edtNewCoachName"
+        android:layout_marginTop="@dimen/recycler.item.content.margin"
+        android:gravity="center"
+        android:hint="@string/edt.edit.coach.name"
+        android:inputType="date"
+        android:textSize="@dimen/abc_text_size_small_material" />
+
+    <Spinner
+        android:id="@+id/spnNewCoachCountry"
+        android:layout_below="@+id/edtNewCoachBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSubmitAddCoach"
+        android:layout_below="@+id/spnNewCoachCountry"
+        android:text="@string/button.submit"
+        android:background="@drawable/custom_shape_pink"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnCancelAddCoach"
+        android:text="@string/button.cancel"
+        android:background="@drawable/custom_shape"
+        android:layout_margin="@dimen/recycler.item.content.margin"
+        android:layout_below="@+id/btnSubmitAddCoach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

@@ -20,12 +20,23 @@ import vn.asiantech.intership.myapplication.model.Player;
  * Created by igianhtran on 21/10/2015.
  * Edited by gianhtran on 22/10/2015
  */
-public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAdapter.PlayerRecyclerHolder> {
+public class PlayerRecyclerAdapter extends
+        RecyclerView.Adapter<PlayerRecyclerAdapter.PlayerRecyclerHolder> {
+    public interface OnCallPlayerDetail {
+        void processSuccess(long playerId);
+    }
+
+    OnCallPlayerDetail delegate;
+
     List<Player> mPlayers = new ArrayList<>();
+
     Context mContext;
+
     ListPlayerFragment mListPlayerFragment;
 
-    public PlayerRecyclerAdapter(List<Player> listData, Context context, ListPlayerFragment listPlayerFragment) {
+    public PlayerRecyclerAdapter(List<Player> listData,
+                                 Context context,
+                                 ListPlayerFragment listPlayerFragment) {
         this.mPlayers = listData;
         this.mContext = context;
         this.mListPlayerFragment = listPlayerFragment;
@@ -45,10 +56,10 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
 
     @Override
     public void onBindViewHolder(PlayerRecyclerHolder holder, int i) {
-        holder.tvPlayerName.setText(mPlayers.get(i).getName());
-        //TODO get old from birthday
-        holder.tvPlayerOld.setText(mPlayers.get(i).getBird());
-        holder.tvPlayerPosition.setText(mPlayers.get(i).getPositison().toString());
+        holder.tvPlayerName.setText(mPlayers.get(i).getName().toString());
+        holder.tvPlayerOld.setText(String.valueOf(mPlayers.get(i).getNumber()));
+        holder.tvPlayerPosition.setText(mPlayers.get(i).getPositison().name().toString());
+        delegate = mListPlayerFragment;
     }
 
     @Override
@@ -73,9 +84,9 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
             imgViewPlayerDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO used interface to move another activity
-                    imgViewPlayerDetail.startAnimation(AnimationUtils.loadAnimation(mListPlayerFragment.getActivity(), R.anim.abc_popup_enter));
-                    mListPlayerFragment.replaceFragment(R.id.frameContain, PlayerDetailFragment_.builder().build(), "PlayerDetailFragment_", null);
+                    imgViewPlayerDetail.startAnimation(AnimationUtils.loadAnimation(mListPlayerFragment.getActivity(),
+                            R.anim.abc_popup_enter));
+                    delegate.processSuccess(mPlayers.get(getPosition()).getId());
                 }
             });
 
